@@ -3,6 +3,9 @@
 #pragma once
 #include <iostream>
 #include "../include/ray.h"
+#include "../include/glm/glm.hpp"
+
+
 
 
 int main()

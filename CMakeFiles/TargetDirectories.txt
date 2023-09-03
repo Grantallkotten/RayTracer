@@ -1,0 +1,3 @@
+C:/Users/Wille/Documents/GitHub/RayTracer/CMakeFiles/Raytracing.dir
+C:/Users/Wille/Documents/GitHub/RayTracer/CMakeFiles/ALL_BUILD.dir
+C:/Users/Wille/Documents/GitHub/RayTracer/CMakeFiles/ZERO_CHECK.dir
