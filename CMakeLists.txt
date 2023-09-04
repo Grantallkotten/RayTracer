@@ -27,6 +27,7 @@ add_executable(Raytracing
 		#src/Cube.cpp
 
     	include/Ray.h 
+		include/colorRGB.h
 		#include/Camera.h 
 		#include/Pixel.h 
 		#include/ColorDBL.h 
