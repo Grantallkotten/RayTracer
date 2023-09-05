@@ -4,7 +4,6 @@
 #include <iostream>
 #include "../include/ray.h"
 #include "../include/colorRGB.h"
-//#include "../include/vec3.h"
 #include "../include/glm/glm.hpp"
 
 // https://www.youtube.com/watch?v=gfW1Fhd9u9Q&list=PLlrATfBNZ98edc5GshdBtREv5asFW3yXl
@@ -14,10 +13,8 @@ int main()
 {
     std::cout << "Hello World!\n";
     
-    ray myRay;
-    myRay.test();
-    
-    glm::vec3 myVec1 = glm::vec3(1.f, 1.f, 1.f);
+    ColorRGB myColor(255.0, -255.0, 1000.0);
+    std::cout << myColor;
 }
 
 

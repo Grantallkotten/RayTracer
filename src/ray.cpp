@@ -1,9 +1,9 @@
 #pragma once
-#include "../include/ray.h"
+#include "../include/Ray.h"
 
-ray::ray() {}
+Ray::Ray() {}
 
-void ray::test() {
+void Ray::test() {
 	std::cout << "This is a test-function!" << std::endl;
 }
 
