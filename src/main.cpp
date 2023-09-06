@@ -13,7 +13,7 @@ int main()
 {
     std::cout << "Hello World!\n";
     
-    ColorRGB myColor(255.0, -255.0, 1000.0);
+    ColorRGB myColor(100.0/255.0, -220.0/255.0, 1000.0/255.0);
     std::cout << myColor;
 }
 

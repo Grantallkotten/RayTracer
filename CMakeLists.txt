@@ -16,7 +16,7 @@ add_executable(Raytracing
 		src/Ray.cpp 
 		#src/Camera.cpp 
 		#src/Pixel.cpp
-		#src/ColorDBL.cpp 
+		src/ColorDBL.cpp 
 		#src/Polygon.cpp 
 		#src/Rectangle.cpp 
 		#src/Triangle.cpp 
@@ -27,10 +27,9 @@ add_executable(Raytracing
 		#src/Cube.cpp
 
     	include/Ray.h 
-		include/colorRGB.h
 		#include/Camera.h 
 		#include/Pixel.h 
-		#include/ColorDBL.h 
+		include/ColorDBL.h 
 		#include/Polygon.h 
 		#include/Rectangle.h 
 		#include/Triangle.h 
