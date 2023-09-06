@@ -18,9 +18,14 @@ public:
 
 	Ray(const glm::vec3& origin, const glm::vec3& direction) : orig(origin), dir(direction) {}
 
+	glm::vec3 at(float t) const {
+		return orig + t * dir;
+	}
 
 	ColorDBL getColor() { return color; }
 
-	void rayColor() { std::cout << color; };
+	void rayColor() { 
+		std::cout << color; 
+	};
 };
 
