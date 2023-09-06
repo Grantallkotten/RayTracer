@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include "../include/colorRGB.h"
+#include "../include/ColorDBL.h"
 #include "../include/glm/glm.hpp"
 
 class Ray {
@@ -11,7 +11,7 @@ private:
 	Ray* surf = nullptr; // sould be a pointer to the surfes of the objekt the ray is going to
 	Ray* prev = nullptr;
 	Ray* next = nullptr;
-	ColorRGB color = ColorRGB(255.0, 0.0, 0.0);
+	ColorDBL color = ColorDBL(255.0, 0.0, 0.0);
 
 public:
 	Ray() {};
@@ -19,7 +19,7 @@ public:
 	Ray(const glm::vec3& origin, const glm::vec3& direction) : orig(origin), dir(direction) {}
 
 
-	ColorRGB getColor() { return color; }
+	ColorDBL getColor() { return color; }
 
 	void rayColor() { std::cout << color; };
 };
