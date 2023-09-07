@@ -17,9 +17,9 @@ void Camera::writePPM() {
 
     int counter = 0;
 
-    for (std::vector<Pixel> widthVec : CameraPlane) {
+    for (const std::vector<Pixel>& widthVec : CameraPlane) {
         counter = 0;
-        for (Pixel p : widthVec) {;
+        for (const Pixel& p : widthVec) {;
             #if 0
             outFile << p;// Write the pixel data to the file
             #endif  

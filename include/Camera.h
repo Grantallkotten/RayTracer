@@ -17,8 +17,8 @@ private:
 
 public:
 
-	Camera(const int& w  = 800, const int& h = 800) : 
-		CameraPlane{ std::vector<std::vector<Pixel>>(w,std::vector<Pixel>(h)) }, width{ w }, height{h}
+	Camera(const glm::vec3& p = glm::vec3(-1.0f, 0.0f, 0.0f), const int& w = 800, const int& h = 800) :
+		CameraPlane{ std::vector<std::vector<Pixel>>(w,std::vector<Pixel>(h)) }, width{ w }, height{ h }, position{p}
 	{};
 
 
