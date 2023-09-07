@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <vector>
+#include <fstream>// Write a file
 #include "../include/ColorDBL.h"
 #include "../include/glm/glm.hpp"
 #include "../include/Pixel.h"
@@ -9,11 +10,19 @@
 class Camera {
 private:
 	std::vector<std::vector<Pixel>> CameraPlane;
+	int width;
+	int height;
+	const int maxColorValue = 255;
 
 public:
-	Camera(const float& width, const float& height) : 
-		CameraPlane{ std::vector<std::vector<Pixel>>(width,std::vector<Pixel>(height, Pixel()))} 
+
+	Camera(const int& w  = 800, const int& h = 800) : 
+		CameraPlane{ std::vector<std::vector<Pixel>>(w,std::vector<Pixel>(h)) }, width{ w }, height{h}
 	{};
+
+
+	void writePPM();
+
 
 	/*
 	1. Loop through all pixels.

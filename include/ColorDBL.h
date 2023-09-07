@@ -29,7 +29,7 @@ public:
 	void setB(const float& b) { B = b; }
 
 	friend std::ostream& operator<<(std::ostream& os, const ColorDBL& c) {
-		os << "[ " << c.R * 255.0 << ", " << c.G * 255 << ", " << c.B * 255.0 << " ] / 255\n";
+		os << c.R * 255.0 << " " << c.G * 255 << " " << c.B * 255.0 << "\n";
 		return os;
 	}
 

@@ -4,6 +4,7 @@
 #include <iostream>
 #include "../include/ray.h"
 #include "../include/ColorDBL.h"
+#include "../include/Camera.h"
 #include "../include/glm/glm.hpp"
 
 // https://www.youtube.com/watch?v=gfW1Fhd9u9Q&list=PLlrATfBNZ98edc5GshdBtREv5asFW3yXl
@@ -16,6 +17,10 @@ int main()
     
     ColorDBL myColor(100.0/255.0, -220.0/255.0, 1000.0/255.0);
     std::cout << myColor;
+
+    Camera c;
+
+    c.writePPM();
 }
 
 
