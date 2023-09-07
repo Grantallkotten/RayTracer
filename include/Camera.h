@@ -13,6 +13,7 @@ private:
 	int width;
 	int height;
 	const int maxColorValue = 255;
+	glm::vec3 position;
 
 public:
 
