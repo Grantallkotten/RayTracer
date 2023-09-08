@@ -18,12 +18,8 @@ int main()
     ColorDBL myColor(100.0/255.0, -220.0/255.0, 1000.0/255.0);
     std::cout << myColor;
 
-    Camera c;
+    Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 800, 800);
 
     c.writePPM();
 }
-
-
-// To do
-// *
 
