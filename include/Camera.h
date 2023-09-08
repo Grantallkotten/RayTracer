@@ -13,13 +13,18 @@ private:
 	int width;
 	int height;
 	const int maxColorValue = 255;
-	glm::vec3 position;
-
+	glm::vec3 positionCamera;
+	glm::vec3 positionPlaneCenter;
+	//@TODO lägg till fov 
 public:
 
 	Camera(const glm::vec3& p = glm::vec3(-1.0f, 0.0f, 0.0f), const int& w = 800, const int& h = 800) :
-		CameraPlane{ std::vector<std::vector<Pixel>>(w,std::vector<Pixel>(h)) }, width{ w }, height{ h }, position{p}
-	{};
+		CameraPlane{ std::vector<std::vector<Pixel>>(w,std::vector<Pixel>(h)) }, width{ w }, height{ h }, positionCamera{p}
+	{
+	
+	
+	
+	};
 
 
 	void writePPM();
