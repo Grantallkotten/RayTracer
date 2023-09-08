@@ -6,14 +6,13 @@
 
 class Ray {
 private:
-	glm::vec3 orig = glm::vec3();// point of light sorce for photon. Often used symbol: po or ps
-	glm::vec3 end = glm::vec3(); // Often used symbol: pe
-	glm::vec3 dir = glm::vec3(); // pixels postion in the plane - camaras position
+	glm::vec3 orig = glm::vec3(0.0f, 0.0f, 0.0f);// point of light sorce for photon
+	glm::vec3 dir = glm::vec3(0.0f, 0.0f, 0.0f);
 	Ray* surf = nullptr; // sould be a pointer to the surfes of the objekt the ray is going to
 	Ray* prev = nullptr;
 	Ray* next = nullptr;
 	ColorDBL color = ColorDBL(255.0, 0.0, 0.0);
-	// Remember to normilaze all directions!
+
 public:
 	Ray() {};
 

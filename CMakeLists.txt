@@ -30,8 +30,8 @@ add_executable(Raytracing
         include/Polygon.h 
         include/Triangle.h 
 	#include/Rectangle.h 
-        #include/Scene.h 
-        #include/Material.h 
+        include/Scene.h 
+        include/Material.h 
         #include/Sphere.h 
         #include/Tetrahedron.h 
         #include/functions.h 
