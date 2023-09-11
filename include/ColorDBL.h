@@ -28,6 +28,13 @@ public:
 
 	void setB(const double& b) { B = b; }
 
+	friend bool operator==(const ColorDBL& c1, const ColorDBL& c2) {
+		if (c1.R == c2.R && c1.G == c2.G && c1.B == c2.B) {
+			return true;
+		}
+		return false;
+	}
+
 	friend std::ostream& operator<<(std::ostream& os, const ColorDBL& c) {
 		os << c.R * 255.0 << " " << c.G * 255 << " " << c.B * 255.0 << "\n";
 		return os;

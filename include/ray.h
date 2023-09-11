@@ -23,6 +23,8 @@ public:
 		return orig + t * dir;
 	}
 
+	//@TODO gör en rekursiv formel som retunerar en ray (next) och tar in en ray (prev)
+
 	ColorDBL getColor() { return color; }
 
 	void rayColor() { 
