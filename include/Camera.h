@@ -10,22 +10,19 @@
 class Camera {
 private:
 	std::vector<std::vector<Pixel>> CameraPlane;
-	int width;
-	int height;
+	float pixelLength;
+	int size;
 	const int maxColorValue = 255;
 	glm::vec3 positionCamera;
 	glm::vec3 positionPlaneCenter;
-	//@TODO lägg till fov 
 public:
 
-	Camera(const glm::vec3& p = glm::vec3(-1.0f, 0.0f, 0.0f), const int& w = 800, const int& h = 800) :
-		CameraPlane{ std::vector<std::vector<Pixel>>(w,std::vector<Pixel>(h)) }, width{ w }, height{ h }, positionCamera{p}
+	Camera(const glm::vec3& p = glm::vec3(-1.0f, 0.0f, 0.0f), const int& s = 800) :
+		CameraPlane{ std::vector<std::vector<Pixel>>(s,std::vector<Pixel>(s)) }, size{ s }, positionCamera{ p }, positionPlaneCenter{ p + glm::vec3(1.0f, 0.0f, 0.0f), }, pixelLength{2/float(s-1)}
 	{
-	
-	
-	
 	};
 
+	void castRayes();
 
 	void writePPM();
 
