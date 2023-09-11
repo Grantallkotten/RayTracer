@@ -1,6 +1,21 @@
 #pragma once
 #include "../include/Camera.h"
 
+void Camera::castRayes() {
+    glm::vec3 pixelPosition = positionCamera + glm::vec3(1.0f, -1.0f, -1.0f);
+
+    for (const std::vector<Pixel>& widthVec : CameraPlane) {
+        pixelPosition.z = -1.0f;
+        for (const Pixel& p : widthVec) {
+
+            //@TODO Skjut ray som ger tillbaka en ray vars färg man ger till pixeln p
+            pixelPosition.z += pixelLength;
+        }
+        pixelPosition.y += pixelLength;
+    }
+}
+
+
 void Camera::writePPM() {
     std::cout << "Generating PPM image..." << std::endl;
 
@@ -12,7 +27,7 @@ void Camera::writePPM() {
     }
 
     outFile << "P3\n"; // P3 indicates ASCII PPM format
-    outFile << width << " " << height << "\n";
+    outFile << size << " " << size << "\n";
     outFile << maxColorValue << "\n";
 
     int counter = 0;
@@ -46,7 +61,7 @@ void Camera::writePPM() {
             // ========================================================
             int red = 25;
             int green = 100;
-            int blue = counter * maxColorValue / width;
+            int blue = counter * maxColorValue / size;
             counter++;
 
             outFile << red << " " << green << " " << blue << "\n";
