@@ -1,14 +1,37 @@
 #pragma once
 #include "../include/Triangle.h"
 
-glm::vec3 Triangle::getNormal() {
+void Triangle::calcNormal() {
+    glm::vec3 edge1 = point1 - point0;
+    glm::vec3 edge2 = point2 - point0;
 
-    glm::vec3 vertex0 = point1;
-    glm::vec3 vertex1 = point2;
-    glm::vec3 vertex2 = point3;
-    glm::vec3 edge1 = vertex1 - vertex0;
-    glm::vec3 edge2 = vertex2 - vertex0;
-
-    return glm::normalize(glm::cross(edge1, edge2));
+    normal = glm::cross(edge1, edge2);
 }
 
+bool Triangle::Collistion(const Ray* ray, glm::vec3& intersectionPoint) {
+    const float EPSILON = 0.0000001f;
+
+    if (glm::dot((*ray).getDir(), normal) > -EPSILON) {// If the scalarproduct betwen the ray and normal is positiv
+        return false;    
+        // Vad händer om den aldrig kolliderar, vad retunerar den?
+    }
+    // Möller time!
+    // ps = ray orig
+    // v0 = point0
+    // v1 = point1
+    // v2 = point2
+    // Barycentric coordinates Triangel(u, v) with u >= 0, v >= 0 and u + v <= 1.
+    glm::vec3 T = (*ray).getOrig() - point0;
+    glm::vec3 E1 = point1 - point0;
+    glm::vec3 E2 = point2 - point0;
+    glm::vec3 D = (*ray).getDir();
+    glm::vec3 P = glm::cross(D, E2);
+    glm::vec3 Q = glm::cross(T, E1);
+
+    float t = (glm::dot(Q,E2)/ glm::dot(P,E1));
+
+    // Kolla så u >= 0, v >= 0 och u + v <=1
+
+
+    return false;
+}

@@ -23,6 +23,10 @@ public:
 		return orig + t * dir;
 	}
 
+	glm::vec3 getDir() const { return dir; }
+
+	glm::vec3 getOrig() const { return orig; }
+
 	//@TODO gör en rekursiv formel som retunerar en ray (next) och tar in en ray (prev)
 
 	ColorDBL getColor() { return color; }

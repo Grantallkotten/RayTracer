@@ -7,8 +7,13 @@
 class Object {
   private:
   public:
+
   Object() {};
-  virtual glm::vec3 Normal();
+
+  virtual glm::vec3 getNormal();
+
   virtual ColorDBL Color();
-  virtual glm::vec3 Collistion(const Ray* ray);
+
+  virtual bool Collistion(const Ray* ray, glm::vec3& intersectionPoint);
+
 };
