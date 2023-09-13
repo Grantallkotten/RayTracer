@@ -9,4 +9,6 @@ private:
 	std::vector<Object*> theScene;
 public:
   Scene(std::vector<Object*> objects) : theScene{objects}{};
+
+  std::vector<Object*> getoObjects() { return theScene; }
 };

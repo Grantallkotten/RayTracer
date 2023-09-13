@@ -28,6 +28,18 @@ public:
 
 	void setB(const double& b) { B = b; }
 
+	friend void operator*=(ColorDBL& c1, const ColorDBL& c2) {
+		c1.R *= c2.R;
+		c1.G *= c2.G;
+		c1.B *= c2.B;
+	}
+
+	friend void operator+=(ColorDBL& c1, const ColorDBL& c2) {
+		c1.R += c2.R;
+		c1.G += c2.G;
+		c1.B += c2.B;
+	}
+
 	friend bool operator==(const ColorDBL& c1, const ColorDBL& c2) {
 		if (c1.R == c2.R && c1.G == c2.G && c1.B == c2.B) {
 			return true;

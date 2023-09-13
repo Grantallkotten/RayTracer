@@ -1,8 +1,10 @@
 #pragma once
 #include <iostream>
 #include <vector>
-#include "../include/ColorDBL.h"
-#include "../include/glm/glm.hpp"
+#include "ColorDBL.h"
+#include "glm/glm.hpp"
+#include "Scene.h"
+
 
 class Ray {
 private:
@@ -12,22 +14,23 @@ private:
 	Ray* surf = nullptr; // sould be a pointer to the surfes of the objekt the ray is going to
 	Ray* prev = nullptr;
 	Ray* next = nullptr;
-	ColorDBL color = ColorDBL(255.0, 0.0, 0.0);
+	ColorDBL color = ColorDBL(0.0, 0.0, 0.0);
 	// Remember to normilaze all directions!
 public:
 	Ray() {};
 
 	Ray(const glm::vec3& origin, const glm::vec3& direction) : orig(origin), dir(direction) {}
-
+	/*
 	glm::vec3 at(float t) const {
 		return orig + t * dir;
 	}
+	*/
 
 	glm::vec3 getDir() const { return dir; }
 
 	glm::vec3 getOrig() const { return orig; }
 
-	//@TODO gör en rekursiv formel som retunerar en ray (next) och tar in en ray (prev)
+	Ray* castRay(Scene* theScene, Ray* prevRay, bool lastRay);
 
 	ColorDBL getColor() { return color; }
 

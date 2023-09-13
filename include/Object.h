@@ -8,12 +8,12 @@ class Object {
   private:
   public:
 
-  Object() {};
+  //Object() {};
 
-  virtual glm::vec3 getNormal();
+  virtual glm::vec3 getNormal() = 0;
 
-  virtual ColorDBL Color();
+  virtual ColorDBL getColor() = 0;
 
-  virtual bool Collistion(const Ray* ray, glm::vec3& intersectionPoint);
+  virtual bool Collistion(const Ray* ray, glm::vec3& intersectionPoint, float& dist) = 0;
 
 };

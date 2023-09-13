@@ -23,8 +23,8 @@ public:
 
 	void calcNormal();
 
-	ColorDBL Color() override { return color; }
+	ColorDBL getColor() override { return color; }
 
-	bool Collistion(const Ray* ray, glm::vec3& intersectionPoint) override;
+	bool Collistion(const Ray* ray, glm::vec3& intersectionPoint, float& dist) override;
 
 };
