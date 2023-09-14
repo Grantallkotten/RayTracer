@@ -5,7 +5,7 @@
 // Behöver kanske ändra så färger är mellan 0 och 1 för att det ska funka med programeringen
 class ColorDBL {
 private:
-	double R = 0.0;
+	double R = 1.0;
 	double G = 0.0;
 	double B = 0.0;
 

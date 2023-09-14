@@ -16,7 +16,7 @@ private:
 	Object* obj = nullptr; // sould be a pointer to the surfes of the objekt the ray is going to
 	Ray* prev = nullptr;
 	Ray* next = nullptr;
-	ColorDBL color = ColorDBL(0.0, 0.0, 0.0);
+	ColorDBL color;
 	// Remember to normilaze all directions!
 public:
 	Ray() {};
