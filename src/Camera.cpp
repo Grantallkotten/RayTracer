@@ -24,7 +24,7 @@ void Camera::castRays(Scene* scene) {
 void Camera::writePPM() {
     std::cout << "Generating PPM image..." << std::endl;
 
-    std::ofstream outFile("../output.ppm");
+    std::ofstream outFile("../outPPM/output.ppm");
 
     if (!outFile) {
         std::cout << "Failed to open output.ppm" << std::endl;

@@ -23,6 +23,7 @@ ColorDBL Ray::castRay(Scene* theScene, Ray* prevRay, float deathProbability) {
 		hitsObject = aObject->Collistion(this, intersectionPoint);
 		
 		if (hitsObject) {
+
 			if (newDist < minDist) {
 				minDist = newDist;
 				intersectionPoint = newIntersectionPoint;

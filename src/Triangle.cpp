@@ -14,6 +14,7 @@ bool Triangle::Collistion(Ray* ray, glm::vec3& intersectionPoint) {
     if (glm::dot(ray->getDir(), normal) > -EPSILON) {// If the scalarproduct betwen the ray and normal is positiv
         return false;    
     }
+
     // Time for the Möller Trumbore algorithm 
     // ps = ray orig
     // v0 = point0
