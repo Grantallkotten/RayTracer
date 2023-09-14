@@ -40,7 +40,6 @@ int main()
     std::vector<Object*> myObjects;
     myObjects.push_back(myTriangle);
     Scene myScene = Scene(myObjects, c);
-
     //c.writePPM();
 }
 

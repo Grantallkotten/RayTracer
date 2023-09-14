@@ -1,6 +1,4 @@
 #pragma once
-#include <iostream>
-#include <vector>
 #include "Object.h"
 #include "ColorDBL.h"
 #include "glm/glm.hpp"
@@ -12,13 +10,12 @@ private:
 	Camera camera;
 public:
 
-	Scene(std::vector<Object*> o, Camera c) : theScene{ o }, camera{c} {
+  const ColorDBL SKYBOXCOLOR = ColorDBL(0.21, 0.32, 0.36);
+
+	Scene(std::vector<Object*> o, Camera c) : theScene{ o }, camera{ c } {
 		camera.castRays(this);
 		camera.writePPM();
 	};
 
-  const ColorDBL SKYBOXCOLOR = ColorDBL(0.21, 0.32, 0.36);
-
-
-  std::vector<Object*> getoObjects() { return theScene; }
+  std::vector<Object*> getObjects() { return theScene; }
 };

@@ -4,9 +4,8 @@
 #include "ColorDBL.h"
 #include "glm/glm.hpp"
 
-class Scene;
 class Object;
-
+class Scene;
 
 class Ray {
 private:

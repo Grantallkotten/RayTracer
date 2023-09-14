@@ -8,7 +8,7 @@ void Camera::castRays(Scene* scene) {
         pixelPosition.z = -1.0f;
         for (Pixel& p : widthVec) {
 
-            //@TODO Skjut ray som ger tillbaka en ray vars färg man ger till pixeln p
+            //@TODO Skjut ray som ger tillbaka en ray vars fÃ¤rg man ger till pixeln p
                 //Ray(const glm::vec3& origin, const glm::vec3& direction) : orig(origin), dir(direction) {}
 
             Ray r = Ray(positionCamera, glm::normalize(pixelPosition - positionCamera));
@@ -54,9 +54,9 @@ void Camera::writePPM() {
             When looking for hits, loop thrugh all possible objects
             A hit van be confirmed by comparing normal an direction dir.dot(N) < 0 --> possible hit
 
-            Sist hitta max rgb färgen bland pixlarna och dela sen alla pixlar på det värdet för att sen köra * 255
+            Sist hitta max rgb fÃ¤rgen bland pixlarna och dela sen alla pixlar pÃ¥ det vÃ¤rdet fÃ¶r att sen kÃ¶ra * 255
             maybe devide by sqrt(max)
-            Möller finns i wikipedia färdigimplementerad i C++
+            MÃ¶ller finns i wikipedia fÃ¤rdigimplementerad i C++
             */
             outFile << p;// Write the pixel data to the file
             #endif  

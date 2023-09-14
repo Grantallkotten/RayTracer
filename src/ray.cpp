@@ -3,9 +3,9 @@
 #include "../include/Scene.h"
 #include "../include/Object.h"
 
-ColorDBL Ray::castRay(Scene* theScene, Ray* prevRay, float deathProbability) {
 
-	//@TODO kolla igenom denna för optimering och förbättring
+ColorDBL Ray::castRay(Scene* theScene, Ray* prevRay, float deathProbability) {
+	//@TODO kolla igenom denna fÃ¶r optimering och fÃ¶rbÃ¤ttring
 	// Loop for collision
 	// If no collision return and set color to skybox
 	// Calc nev ray
@@ -19,9 +19,10 @@ ColorDBL Ray::castRay(Scene* theScene, Ray* prevRay, float deathProbability) {
 	glm::vec3 newIntersectionPoint;
 
 
+
 	for (Object* aObject : theScene->getoObjects()) {
 		hitsObject = aObject->Collistion(this, intersectionPoint);
-		
+
 		if (hitsObject) {
 			if (newDist < minDist) {
 				minDist = newDist;
@@ -34,13 +35,13 @@ ColorDBL Ray::castRay(Scene* theScene, Ray* prevRay, float deathProbability) {
 		return theScene->SKYBOXCOLOR;
 	}
 
+
 	if (((double)rand() / (RAND_MAX)) + 1 <= deathProbability) {
-		return obj->getMaterial().getColor(); //@TODO * imortance sen och räkna med speculäritet
+		return obj->getMaterial().getColor(); //@TODO * imortance sen och rÃ¤kna med speculÃ¤ritet
 	}
 
 
 	// Calc new dir
-
 
 	/*
 	// Test collision
@@ -51,10 +52,10 @@ ColorDBL Ray::castRay(Scene* theScene, Ray* prevRay, float deathProbability) {
 	Ray nextRay = Ray(newOrig, newDir);
 
 	if (false) {// lastRay == false
-		next = nextRay.castRay(theScene, this, true);
+		//next = *nextRay->castRay(theScene, this, true);
 	}
-	*/
-
+	
+ */
 	return ColorDBL(0.0f, 0.0f, 0.2f);
 }
 
