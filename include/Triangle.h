@@ -1,9 +1,9 @@
 #pragma once
-#include <iostream>
-#include <vector>
-#include "ColorDBL.h"
-#include "glm/glm.hpp"
 #include "Object.h"
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 class Triangle : public Object {
 private:

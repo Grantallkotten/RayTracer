@@ -30,9 +30,20 @@ int main()
     ColorDBL myColor(100.0/255.0, -220.0/255.0, 1000.0/255.0);
     std::cout << myColor;
 
+<<<<<<< Updated upstream
     Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 80);
     
     c.castRayes();
+=======
+
+    Triangle* myTriangle = new Triangle(glm::vec3(10.0f, 0.0f, 0.0f), glm::vec3(10.0f, 1.0f, 0.0f), glm::vec3(10.0f, 0.0f, 1.0f));
+    Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 80);
+    std::vector<Object*> myObjects;
+    myObjects.push_back(myTriangle);
+    Scene myScene = Scene(myObjects, c);
+    
+
+>>>>>>> Stashed changes
     //c.writePPM();
 }
 
