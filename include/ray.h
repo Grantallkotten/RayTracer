@@ -3,7 +3,9 @@
 #include <vector>
 #include "ColorDBL.h"
 #include "glm/glm.hpp"
-#include "Scene.h"
+
+class Scene;
+class Object;
 
 
 class Ray {

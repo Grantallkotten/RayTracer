@@ -4,15 +4,15 @@
 void Camera::castRays(Scene* scene) {
     glm::vec3 pixelPosition = positionCamera + glm::vec3(1.0f, -1.0f, -1.0f);
 
-    for (const std::vector<Pixel>& widthVec : CameraPlane) {
+    for (std::vector<Pixel>& widthVec : CameraPlane) {
         pixelPosition.z = -1.0f;
-        for (const Pixel& p : widthVec) {
+        for (Pixel& p : widthVec) {
 
             //@TODO Skjut ray som ger tillbaka en ray vars färg man ger till pixeln p
                 //Ray(const glm::vec3& origin, const glm::vec3& direction) : orig(origin), dir(direction) {}
 
             Ray r = Ray(positionCamera, glm::normalize(pixelPosition - positionCamera));
-            r.castRay(scene, nullptr, 1.0);
+            p.setColor(r.castRay(scene, nullptr, 1.0));
 
             pixelPosition.z += pixelLength;
         }
@@ -41,7 +41,7 @@ void Camera::writePPM() {
         counter = 0;
         for (const Pixel& p : widthVec) {
 
-            #if 0
+            #if 1
             /*@TODO
             1. Loop through all pixels.
             2. Shoot a ray through each pixel.
@@ -61,7 +61,7 @@ void Camera::writePPM() {
             outFile << p;// Write the pixel data to the file
             #endif  
 
-            #if 1
+            #if 0
             // PPM file test code
             // ========================================================
             int red = 25;

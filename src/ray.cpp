@@ -1,5 +1,7 @@
 #pragma once
 #include "../include/Ray.h"
+#include "../include/Scene.h"
+#include "../include/Object.h"
 
 ColorDBL Ray::castRay(Scene* theScene, Ray* prevRay, float deathProbability) {
 
