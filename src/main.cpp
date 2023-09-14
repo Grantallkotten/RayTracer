@@ -19,12 +19,12 @@ int main()
 {
     std::cout << "Hello World!\n";
 
-    Triangle* myTriangle = new Triangle(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f, 1.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    Triangle* myTriangle = new Triangle(glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(2.0f, -1.0f, 1.0f), glm::vec3(2.0f, 0.0f, 1.0f));
 
-    Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 80);
+    Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 1800);
 
     std::vector<Object*> myObjects;
-    myObjects.push_back(myTriangle);
+    //myObjects.push_back(myTriangle);
     Scene myScene = Scene(myObjects, c);
     
 

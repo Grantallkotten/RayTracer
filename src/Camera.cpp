@@ -2,18 +2,27 @@
 #include "../include/Camera.h"
 
 void Camera::castRays(Scene* scene) {
-    glm::vec3 pixelPosition = positionCamera + glm::vec3(1.0f, -1.0f, -1.0f);
+    glm::vec3 pixelPosition = positionCamera + glm::vec3(1.0f, 1.0f, 1.0f);
 
     for (std::vector<Pixel>& widthVec : CameraPlane) {
-        pixelPosition.z = -1.0f;
+        pixelPosition.y = 1.0f;
         for (Pixel& p : widthVec) {
 
             Ray r = Ray(positionCamera, glm::normalize(pixelPosition - positionCamera));
             p.setColor(r.castRay(scene, nullptr, 1.0));
-
-            pixelPosition.z += pixelLength;
+#if 0
+            if (pixelPosition.z > 0.9) {
+                std::cout << "positive z-axis direction black\n";
+                p.setColor(ColorDBL(0.0, 0.0, 0.0));
+            }
+            if (pixelPosition.y > 0.9) {
+                std::cout << "positive y-axis direction white\n";
+                p.setColor(ColorDBL(1.0, 1.0, 1.0));
+            }
+#endif
+            pixelPosition.y -= pixelLength;
         }
-        pixelPosition.y += pixelLength;
+        pixelPosition.z  -= pixelLength;
     }
 }
 
