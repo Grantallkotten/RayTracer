@@ -1,9 +1,6 @@
 #pragma once
 #include "Object.h"
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
+#include "Material.h"
 
 class Triangle : public Object {
 private:
@@ -11,20 +8,22 @@ private:
 	glm::vec3 point1;
 	glm::vec3 point2;
 	glm::vec3 normal;
-	ColorDBL color;
+	Material material;
 	float roughness = 1.0f;
 	float emission = 0.0f;
 
 public:
 
-	Triangle(const glm::vec3& p0, const glm::vec3& p1, const glm::vec3& p2, const ColorDBL& c = ColorDBL(1.0, 0.0, 0.0)) :
-		point0{ p0 }, point1{ p1 }, point2{ p2 }, normal{getNormal()}// Måste kolla så alla points lägger sig med högerhandsregeln
-	{}
+	Triangle(const glm::vec3& p0, const glm::vec3& p1, const glm::vec3& p2, const Material& m = Material(1.0, 0.0, 0.0, ColorDBL(255.0, 0.0, 0.0))) :
+		point0{ p0 }, point1{ p1 }, point2{ p2 }, material{ m }// MÃ¥ste kolla sÃ¥ alla points lÃ¤gger sig med hÃ¶gerhandsregeln 
+	{ calcNormal(); }
 
 	void calcNormal();
 
-	ColorDBL getColor() override { return color; }
+	glm::vec3 getNormal() override{ return normal; }
 
-	bool Collistion(const Ray* ray, glm::vec3& intersectionPoint, float& dist) override;
+	Material getMaterial() override { return material; }
+
+	bool Collistion(Ray* ray, glm::vec3& intersectionPoint) override;
 
 };

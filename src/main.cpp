@@ -6,6 +6,11 @@
 #include "../include/ColorDBL.h"
 #include "../include/Camera.h"
 #include "../include/glm/glm.hpp"
+#include "../include/Scene.h"
+#include "../include/Triangle.h"
+
+
+
 
 // https://www.youtube.com/watch?v=gfW1Fhd9u9Q&list=PLlrATfBNZ98edc5GshdBtREv5asFW3yXl
 // https://raytracing.github.io/books/RayTracingInOneWeekend.html
@@ -27,23 +32,14 @@ int main()
 {
     std::cout << "Hello World!\n";
     
-    ColorDBL myColor(100.0/255.0, -220.0/255.0, 1000.0/255.0);
-    std::cout << myColor;
-
-<<<<<<< Updated upstream
-    Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 80);
-    
-    c.castRayes();
-=======
+    //ColorDBL myColor(100.0/255.0, -220.0/255.0, 1000.0/255.0);
+    //std::cout << myColor;
 
     Triangle* myTriangle = new Triangle(glm::vec3(10.0f, 0.0f, 0.0f), glm::vec3(10.0f, 1.0f, 0.0f), glm::vec3(10.0f, 0.0f, 1.0f));
     Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 80);
     std::vector<Object*> myObjects;
     myObjects.push_back(myTriangle);
     Scene myScene = Scene(myObjects, c);
-    
-
->>>>>>> Stashed changes
     //c.writePPM();
 }
 
