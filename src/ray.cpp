@@ -18,9 +18,7 @@ ColorDBL Ray::castRay(Scene* theScene, Ray* prevRay, float deathProbability) {
 	glm::vec3 intersectionPoint;
 	glm::vec3 newIntersectionPoint;
 
-
-
-	for (Object* aObject : theScene->getoObjects()) {
+	for (Object* aObject : theScene->getObjects()) {
 		hitsObject = aObject->Collistion(this, intersectionPoint);
 
 		if (hitsObject) {
