@@ -8,7 +8,7 @@ void Triangle::calcNormal() {
     normal = glm::normalize(glm::cross(u, v));
 }
 
-bool Triangle::Collistion(Ray* ray, glm::vec3& intersectionPoint) {
+bool Triangle::Collision(Ray* ray, glm::vec3& intersectionPoint) {
     const float EPSILON = 0.0000001f;
 
     if (glm::dot(ray->getDir(), normal) < -EPSILON) {// If the scalarproduct betwen the ray and normal is positiv

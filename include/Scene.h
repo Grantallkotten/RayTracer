@@ -13,6 +13,7 @@ private:
     std::vector<Object*> theScene;
     Camera camera;
 
+    // Draw an image and call all corners "pointX", then you can easy creat a room in theScene
     std::vector<glm::vec3> points{
         glm::vec3( 0.0f,  6.0f, 5.0f),   //p0  
         glm::vec3(10.0f,  6.0f, 5.0f),   //p1 
@@ -53,19 +54,19 @@ public:
         theScene.push_back(new Triangle(points[2], points[3], points[8], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.0, 1.0))));
         theScene.push_back(new Triangle(points[3], points[9], points[8], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.0, 1.0))));
         
-        // Floor 1
-        theScene.push_back(new Triangle(points[1], points[3], points[2], Material(1.0, 0.0, 0.0, ColorDBL(0.2, 0.2, 0.4))));
+        // Roof 1
+        theScene.push_back(new Triangle(points[1], points[3], points[2], Material(1.0, 0.0, 0.0, ColorDBL(0.1, 0.0, 0.2))));
 
         // Wall 4
         theScene.push_back(new Triangle(points[3], points[4], points[9], Material(1.0, 0.0, 0.0, ColorDBL(1.0, 0.0, 0.6))));
         theScene.push_back(new Triangle(points[4], points[10], points[9], Material(1.0, 0.0, 0.0, ColorDBL(1.0, 0.0, 0.6))));
 
-        // Floor 2
-        theScene.push_back(new Triangle(points[0], points[4], points[1], Material(1.0, 0.0, 0.0, ColorDBL(0.2, 0.2, 0.4))));
-        theScene.push_back(new Triangle(points[1], points[4], points[3], Material(1.0, 0.0, 0.0, ColorDBL(0.2, 0.2, 0.4))));
+        // Roof 2
+        theScene.push_back(new Triangle(points[0], points[4], points[1], Material(1.0, 0.0, 0.0, ColorDBL(0.1, 0.0, 0.2))));
+        theScene.push_back(new Triangle(points[1], points[4], points[3], Material(1.0, 0.0, 0.0, ColorDBL(0.1, 0.0, 0.2))));
 
-        // Floor 3
-        theScene.push_back(new Triangle(points[10], points[5], points[4], Material(1.0, 0.0, 0.0, ColorDBL(0.2, 0.2, 0.4))));
+        // Roof 3
+        theScene.push_back(new Triangle(points[10], points[5], points[4], Material(1.0, 0.0, 0.0, ColorDBL(0.1, 0.0, 0.2))));
 
         // Wall 5
         theScene.push_back(new Triangle(points[4], points[5], points[10], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.0, 1.0))));
@@ -75,15 +76,15 @@ public:
         theScene.push_back(new Triangle(points[0], points[11], points[5], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.8, 0.2))));
         theScene.push_back(new Triangle(points[0], points[6], points[11], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.8, 0.2))));
 
-        // Roof 1
-        theScene.push_back(new Triangle(points[7], points[8], points[9], Material(1.0, 0.0, 0.0, ColorDBL(0.3, 0.2, 0.5))));
+        // Floor 1
+        theScene.push_back(new Triangle(points[7], points[8], points[9], Material(1.0, 0.0, 0.0, ColorDBL(0.2, 0.2, 0.4))));
 
-        // Roof 2      
-        theScene.push_back(new Triangle(points[7], points[9], points[10], Material(1.0, 0.0, 0.0, ColorDBL(0.3, 0.2, 0.5))));
-        theScene.push_back(new Triangle(points[7], points[10], points[6], Material(1.0, 0.0, 0.0, ColorDBL(0.3, 0.2, 0.5))));
+        // Floor 2      
+        theScene.push_back(new Triangle(points[7], points[9], points[10], Material(1.0, 0.0, 0.0, ColorDBL(0.2, 0.2, 0.4))));
+        theScene.push_back(new Triangle(points[7], points[10], points[6], Material(1.0, 0.0, 0.0, ColorDBL(0.2, 0.2, 0.4))));
 
-        // Roof 3
-        theScene.push_back(new Triangle(points[6], points[10], points[11], Material(1.0, 0.0, 0.0, ColorDBL(0.3, 0.2, 0.5))));
+        // Floor 3
+        theScene.push_back(new Triangle(points[6], points[10], points[11], Material(1.0, 0.0, 0.0, ColorDBL(0.2, 0.2, 0.4))));
 
         theScene.push_back(new Triangle(glm::vec3(10.0f, 5.0f, 1.0f), glm::vec3(10.0f, 4.0f, 0.0f), glm::vec3(10.0f, 6.0f, 0.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.5, 0.5, 0.0))));
         theScene.push_back(new Triangle(glm::vec3(10.0f, 3.0f, 1.0f), glm::vec3(10.0f, 2.0f, 0.0f), glm::vec3(10.0f, 4.0f, 0.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.5, 0.5, 0.0))));

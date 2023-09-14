@@ -2,6 +2,7 @@
 #include "../include/Camera.h"
 
 void Camera::castRays(Scene* scene) {
+    std::cout << "Casting rays...\n";
     glm::vec3 pixelPosition = positionCamera + glm::vec3(1.0f, 1.0f, 1.0f);
 
     for (std::vector<Pixel>& widthVec : CameraPlane) {
