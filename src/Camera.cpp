@@ -1,7 +1,7 @@
 #pragma once
 #include "../include/Camera.h"
 
-void Camera::castRayes() {
+void Camera::castRays(Scene* scene) {
     glm::vec3 pixelPosition = positionCamera + glm::vec3(1.0f, -1.0f, -1.0f);
 
     for (const std::vector<Pixel>& widthVec : CameraPlane) {
@@ -9,6 +9,11 @@ void Camera::castRayes() {
         for (const Pixel& p : widthVec) {
 
             //@TODO Skjut ray som ger tillbaka en ray vars färg man ger till pixeln p
+                //Ray(const glm::vec3& origin, const glm::vec3& direction) : orig(origin), dir(direction) {}
+
+            Ray r = Ray(positionCamera, glm::normalize(pixelPosition - positionCamera));
+            r.castRay(scene, nullptr, 1.0);
+
             pixelPosition.z += pixelLength;
         }
         pixelPosition.y += pixelLength;

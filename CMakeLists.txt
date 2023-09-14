@@ -21,7 +21,7 @@ add_executable(Raytracing
 	src/Triangle.cpp 
         #src/Rectangle.cpp 
         #src/Cube.cpp
-
+	
         include/Ray.h 
         include/Camera.h 
         include/Pixel.h 
