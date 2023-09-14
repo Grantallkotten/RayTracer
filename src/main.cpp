@@ -21,7 +21,7 @@ int main()
 
     Triangle* myTriangle = new Triangle(glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(2.0f, -1.0f, 1.0f), glm::vec3(2.0f, 0.0f, 1.0f));
 
-    Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 1800);
+    Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 80);
 
     std::vector<Object*> myObjects;
     //myObjects.push_back(myTriangle);

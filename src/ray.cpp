@@ -22,7 +22,7 @@ ColorDBL Ray::castRay(Scene* theScene, Ray* prevRay, float deathProbability) {
 	std::vector<Object*> theObjects = theScene->getoObjects();
 
 	for (Object* aObject : theObjects) {
-		if (aObject->Collistion(this, newIntersectionPoint)) {
+		if (aObject->Collision(this, newIntersectionPoint)) {
 			hitsObject = true;
 
 			newDist = std::abs(glm::length(newIntersectionPoint - orig));

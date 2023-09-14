@@ -29,7 +29,7 @@ public:
 
 	Material getMaterial() override { return material; }
 
-	bool Collistion(Ray* ray, glm::vec3& intersectionPoint) override;
+	bool Collision(Ray* ray, glm::vec3& intersectionPoint) override;
 
 };
 
