@@ -14,6 +14,6 @@ class Object {
 
   virtual Material getMaterial() = 0;
 
-  virtual bool Collistion(Ray *ray, glm::vec3& intersectionPoint) = 0;
+  virtual bool Collision(Ray *ray, glm::vec3& intersectionPoint) = 0;
 
 };

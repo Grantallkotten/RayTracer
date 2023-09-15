@@ -2,18 +2,19 @@
 #include "../include/Triangle.h"
 
 void Triangle::calcNormal() {
-    glm::vec3 edge1 = point1 - point0;
-    glm::vec3 edge2 = point2 - point0;
+    glm::vec3 u = point1 - point0;
+    glm::vec3 v = point2 - point0;
 
-    normal = glm::cross(edge1, edge2);
+    normal = glm::normalize(glm::cross(u, v));
 }
 
-bool Triangle::Collistion(Ray* ray, glm::vec3& intersectionPoint) {
+bool Triangle::Collision(Ray* ray, glm::vec3& intersectionPoint) {
     const float EPSILON = 0.0000001f;
 
-    if (glm::dot(ray->getDir(), normal) > -EPSILON) {// If the scalarproduct betwen the ray and normal is positiv
+    if (glm::dot(ray->getDir(), normal) < -EPSILON) {// If the scalarproduct betwen the ray and normal is positiv
         return false;    
     }
+
     // Time for the Möller Trumbore algorithm 
     // ps = ray orig
     // v0 = point0

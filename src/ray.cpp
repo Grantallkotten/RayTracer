@@ -14,25 +14,31 @@ ColorDBL Ray::castRay(Scene* theScene, Ray* prevRay, float deathProbability) {
 	float minDist = std::numeric_limits<float>::max();
 	float newDist = std::numeric_limits<float>::max();
 	bool hitsObject = false;
+	bool oneHit = false;
 
-	glm::vec3 intersectionPoint;
-	glm::vec3 newIntersectionPoint;
+	glm::vec3 intersectionPoint = glm::vec3();
+	glm::vec3 newIntersectionPoint = glm::vec3();
 
-	for (Object* aObject : theScene->getObjects()) {
-		hitsObject = aObject->Collistion(this, intersectionPoint);
+	std::vector<Object*> theObjects = theScene->getoObjects();
 
-		if (hitsObject) {
-			if (newDist < minDist) {
+	for (Object* aObject : theObjects) {
+		if (aObject->Collision(this, newIntersectionPoint)) {
+			hitsObject = true;
+
+			newDist = std::abs(glm::length(newIntersectionPoint - orig));
+			
+			if (newDist <= minDist) {
+
 				minDist = newDist;
 				intersectionPoint = newIntersectionPoint;
 				obj = aObject;
+
 			}
 		}
 	}
 	if (!hitsObject) {
 		return theScene->SKYBOXCOLOR;
 	}
-
 
 	if (((double)rand() / (RAND_MAX)) + 1 <= deathProbability) {
 		return obj->getMaterial().getColor(); //@TODO * imortance sen och räkna med speculäritet
