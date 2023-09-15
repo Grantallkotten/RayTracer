@@ -40,7 +40,7 @@ ColorDBL Ray::castRay(Scene* theScene, Ray* prevRay, float deathProbability) {
 		return theScene->SKYBOXCOLOR;
 	}
 
-	if (((double)rand() / (RAND_MAX)) + 1 <= deathProbability) {
+	if (((double)rand() / (RAND_MAX)) <= deathProbability) {
 		return obj->getMaterial().getColor(); //@TODO * imortance sen och räkna med speculäritet
 	}
 
