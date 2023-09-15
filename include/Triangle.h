@@ -1,11 +1,6 @@
 #pragma once
-#include <iostream>
-#include <vector>
-#include "ColorDBL.h"
-#include "glm/glm.hpp"
 #include "Object.h"
 #include "Material.h"
-
 
 class Triangle : public Object {
 private:
@@ -20,7 +15,7 @@ private:
 public:
 
 	Triangle(const glm::vec3& p0, const glm::vec3& p1, const glm::vec3& p2, const Material& m = Material(1.0, 0.0, 0.0, ColorDBL(1.0, 0.0, 0.0))) :
-		point0{ p0 }, point1{ p1 }, point2{ p2 }, material{ m }// Måste kolla så alla points lägger sig med högerhandsregeln 
+		point0{ p0 }, point1{ p1 }, point2{ p2 }, material{ m }// MÃ¥ste kolla sÃ¥ alla points lÃ¤gger sig med hÃ¶gerhandsregeln 
 	{ calcNormal(); }
 
 	void calcNormal();

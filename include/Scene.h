@@ -1,6 +1,4 @@
 #pragma once
-#include <iostream>
-#include <vector>
 #include "Object.h"
 #include "ColorDBL.h"
 #include "glm/glm.hpp"
