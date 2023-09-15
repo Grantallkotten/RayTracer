@@ -2,12 +2,8 @@
 
 #pragma once
 #include <iostream>
-#include "../include/ray.h"
-#include "../include/ColorDBL.h"
-#include "../include/Camera.h"
-#include "../include/glm/glm.hpp"
 #include "../include/Scene.h"
-#include "../include/Triangle.h"
+
 
 
 
@@ -19,13 +15,7 @@ int main()
 {
     std::cout << "Hello World!\n";
 
-    Triangle* myTriangle = new Triangle(glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(2.0f, -1.0f, 1.0f), glm::vec3(2.0f, 0.0f, 1.0f));
-
-    Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 80);
-
-    std::vector<Object*> myObjects;
-    //myObjects.push_back(myTriangle);
-    Scene myScene = Scene(myObjects, c);
+    Scene();
     
 
     //c.writePPM();

@@ -30,10 +30,9 @@ private:
 public:
     const ColorDBL SKYBOXCOLOR = ColorDBL(0.21, 0.32, 0.56);
 
-
-	Scene(std::vector<Object*> o, Camera c) : theScene{ o }, camera{c} {
+	Scene( Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 800), std::vector<Object*> o = std::vector<Object*>()) : theScene{ o }, camera{c} {
         standardScene();
-		camera.castRays(this);
+        camera.castRays(this);
 		camera.writePPM();
 	};
 
