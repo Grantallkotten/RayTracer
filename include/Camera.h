@@ -28,5 +28,9 @@ public:
 
 	void castRays(Scene* scene);
 
+	void RenderRangeOfColums(Scene* scene, int start_row, int end_row);
+
+	void Render(Scene* scene);
+
 };
 

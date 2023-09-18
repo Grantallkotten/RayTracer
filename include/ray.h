@@ -26,7 +26,7 @@ public:
 
 	glm::vec3 getOrig() const { return orig; }
 
-	ColorDBL castRay(Scene* theScene, Ray* prevRay, float deathProbability);
+	ColorDBL castRay(Scene* scene, Ray* prevRay, float deathProbability);
 
 	ColorDBL getColor() { return color; }
 

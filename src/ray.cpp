@@ -4,7 +4,7 @@
 #include "../include/Object.h"
 
 
-ColorDBL Ray::castRay(Scene* theScene, Ray* prevRay, float deathProbability) {
+ColorDBL Ray::castRay(Scene* scene, Ray* prevRay, float deathProbability) {
 	// Är prevRay nödvändig?
 
 	float minDist = std::numeric_limits<float>::max();
@@ -14,9 +14,7 @@ ColorDBL Ray::castRay(Scene* theScene, Ray* prevRay, float deathProbability) {
 	glm::vec3 intersectionPoint = glm::vec3();
 	glm::vec3 newIntersectionPoint = glm::vec3();
 
-	std::vector<Object*> theObjects = theScene->getoObjects();
-
-	for (Object* aObject : theObjects) {
+	for (Object* aObject : scene->Objects) {
 		if (aObject->Collision(this, newIntersectionPoint)) {
 			hitsObject = true;
 
@@ -32,7 +30,7 @@ ColorDBL Ray::castRay(Scene* theScene, Ray* prevRay, float deathProbability) {
 		}
 	}
 	if (!hitsObject) {
-		return theScene->SKYBOXCOLOR;
+		return scene->SKYBOXCOLOR;
 	}
 
 	if (((double)rand() / (RAND_MAX)) <= deathProbability) {

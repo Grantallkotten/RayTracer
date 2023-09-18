@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/Raytracing.dir/src/main.cpp.o CMakeFiles/Raytracing.dir/src/Ray.cpp.o CMakeFiles/Raytracing.dir/src/Camera.cpp.o CMakeFiles/Raytracing.dir/src/Pixel.cpp.o CMakeFiles/Raytracing.dir/src/ColorDBL.cpp.o CMakeFiles/Raytracing.dir/src/Triangle.cpp.o  -o Raytracing 

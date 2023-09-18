@@ -1,9 +1,12 @@
 #pragma once
 #include "../include/Camera.h"
+#include <thread>
+#include <time.h>
 
 void Camera::castRays(Scene* scene) {
     std::cout << "Casting rays...\n";
     glm::vec3 pixelPosition = positionCamera + glm::vec3(1.0f, 1.0f, 1.0f);
+
 
     for (std::vector<Pixel>& widthVec : CameraPlane) {
         pixelPosition.y = 1.0f;
@@ -24,6 +27,36 @@ void Camera::castRays(Scene* scene) {
             pixelPosition.y -= pixelLength;
         }
         pixelPosition.z  -= pixelLength;
+    }
+}
+
+void Camera::RenderRangeOfColums(Scene* scene, int start_colum, int end_colum) {
+    glm::vec3 pixelPosition = positionCamera + glm::vec3(1.0f, 1.0f, 1.0f);
+    pixelPosition.z -= pixelLength * start_colum;
+    for (int colum = start_colum; colum < end_colum; colum++) {
+        pixelPosition.y = 1.0f;
+        for (Pixel& p : CameraPlane[colum]) {
+            Ray r = Ray(positionCamera, glm::normalize(pixelPosition - positionCamera));
+            p.setColor(r.castRay(scene, nullptr, 1.0));
+            pixelPosition.y -= pixelLength;
+        }
+        pixelPosition.z -= pixelLength;
+    }
+}
+
+void Camera::Render(Scene* scene) {
+    unsigned int num_threads = std::thread::hardware_concurrency();
+    std::cout << "Rendering using " << num_threads << " threads \n";
+    std::vector<std::thread> threads(num_threads);
+    int colums_per_thread = CameraPlane.size() / num_threads;
+    int start_colum = 0;
+    for (int i = 0; i < num_threads; i++) {
+        threads[i] = std::thread([=]() {
+            RenderRangeOfColums(scene, i * colums_per_thread, i == num_threads - 1 ? (i + 1) * colums_per_thread : CameraPlane.size());
+            });
+    }
+    for (int i = 0; i < num_threads; i++) {
+        threads[i].join();
     }
 }
 
