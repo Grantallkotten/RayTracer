@@ -28,6 +28,9 @@ private:
         };
 public:
     std::vector<Object*> Objects;
+
+    //std::vector<LightSource*> LightSources;
+
     const ColorDBL SKYBOXCOLOR = ColorDBL(0.21, 0.32, 0.56);
 
 	Scene( Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 800), std::vector<Object*> o = std::vector<Object*>()) : Objects{ o }, camera{c} {
@@ -84,12 +87,13 @@ public:
         // Floor 3
         Objects.push_back(new Triangle(points[6], points[10], points[11], Material(1.0, 0.0, 0.0, ColorDBL(0.2, 0.2, 0.4))));
 
-        Objects.push_back(new Triangle(glm::vec3(10.0f, 5.0f, 1.0f), glm::vec3(10.0f, 4.0f, 0.0f), glm::vec3(10.0f, 6.0f, 0.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.5, 0.5, 0.0))));
-        Objects.push_back(new Triangle(glm::vec3(10.0f, 3.0f, 1.0f), glm::vec3(10.0f, 2.0f, 0.0f), glm::vec3(10.0f, 4.0f, 0.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.5, 0.5, 0.0))));
-        Objects.push_back(new Triangle(glm::vec3(10.0f, 4.0f, 2.0f), glm::vec3(10.0f, 3.0f, 1.0f), glm::vec3(10.0f, 5.0f, 1.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.5, 0.5, 0.0))));
+        // Triforce
+        Objects.push_back(new Triangle(glm::vec3(10.0f, 4.8f, 1.0f), glm::vec3(10.0f, 3.8f, 0.0f), glm::vec3(10.0f, 5.8f, 0.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.0))));
+        Objects.push_back(new Triangle(glm::vec3(10.0f, 2.8f, 1.0f), glm::vec3(10.0f, 1.8f, 0.0f), glm::vec3(10.0f, 3.8f, 0.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.0))));
+        Objects.push_back(new Triangle(glm::vec3(10.0f, 3.8f, 2.0f), glm::vec3(10.0f, 2.8f, 1.0f), glm::vec3(10.0f, 4.8f, 1.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.0))));
 
         // Roof lamp
-        Objects.push_back(new Triangle(glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), glm::vec3(9.0f, 0.5f, 4.9f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.9))));
-        Objects.push_back(new Triangle(glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), glm::vec3(5.0f, 0.5f, 4.9f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.9))));
+        //LightSources.push_back(new LightSource(glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), glm::vec3(9.0f, 0.5f, 4.9f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.9))));
+        //LightSources.push_back(new LightSource(glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), glm::vec3(5.0f, 0.5f, 4.9f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.9))));
     }
 };

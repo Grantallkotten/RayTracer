@@ -2,6 +2,7 @@
 #include "../include/Ray.h"
 #include "../include/Scene.h"
 #include "../include/Object.h"
+//#include "../include/LightSource.h"
 
 
 ColorDBL Ray::castRay(Scene* scene, Ray* prevRay, float deathProbability) {
@@ -34,6 +35,11 @@ ColorDBL Ray::castRay(Scene* scene, Ray* prevRay, float deathProbability) {
 	}
 
 	if (((double)rand() / (RAND_MAX)) <= deathProbability) {
+		/*
+		for (LightSource* aLightSource : scene->LightSources) {
+			aLightSource->CheckShadowRays(obj, intersectionPoint);
+		}
+		*/
 		return obj->getMaterial().getColor(); //@TODO * imortance sen och räkna med speculäritet
 	}
 

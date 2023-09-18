@@ -1,10 +1,7 @@
 // main.cpp : This file contains the 'main' function. Program execution begins and ends there.
-
 #pragma once
 #include <iostream>
 #include "../include/Scene.h"
-
-
 
 
 // https://www.youtube.com/watch?v=gfW1Fhd9u9Q&list=PLlrATfBNZ98edc5GshdBtREv5asFW3yXl
