@@ -2,7 +2,7 @@
 #include "../include/Ray.h"
 #include "../include/Scene.h"
 #include "../include/Object.h"
-//#include "../include/LightSource.h"
+class LightSource;
 
 
 ColorDBL Ray::castRay(Scene* scene, Ray* prevRay, float deathProbability) {
@@ -33,14 +33,18 @@ ColorDBL Ray::castRay(Scene* scene, Ray* prevRay, float deathProbability) {
 	if (!hitsObject) {
 		return scene->SKYBOXCOLOR;
 	}
+	double lightContribution = 0.0;
+	ColorDBL returnColor = obj->getMaterial().getColor();
 
 	if (((double)rand() / (RAND_MAX)) <= deathProbability) {
-		/*
+		
 		for (LightSource* aLightSource : scene->LightSources) {
-			aLightSource->CheckShadowRays(obj, intersectionPoint);
+			lightContribution = aLightSource->CheckShadowRays(obj, intersectionPoint);
+			// @TODO sätt lightContribution på färgen av objektet
+			returnColor *= lightContribution;
 		}
-		*/
-		return obj->getMaterial().getColor(); //@TODO * imortance sen och räkna med speculäritet
+		
+		return returnColor; //@TODO * imortance sen och räkna med speculäritet
 	}
 
 	//@TODO Rekursiv formel

@@ -28,6 +28,13 @@ public:
 
 	void setB(const double& b) { B = b; }
 
+	void operator*=(const float& s) {
+		R = std::min(1.0, R*(double)s);
+		G = std::min(1.0, G*(double)s);
+		B = std::min(1.0, B*(double)s);
+
+	}
+
 	friend void operator*=(ColorDBL& c1, const ColorDBL& c2) {
 		c1.R *= c2.R;
 		c1.G *= c2.G;

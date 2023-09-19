@@ -3,7 +3,7 @@
 #include "ColorDBL.h"
 #include "glm/glm.hpp"
 #include "Camera.h"
-#include "Triangle.h"
+#include "LightSource.h"
 
 
 class Scene {
@@ -29,14 +29,14 @@ private:
 public:
     std::vector<Object*> Objects;
 
-    //std::vector<LightSource*> LightSources;
+    std::vector<LightSource*> LightSources;
 
     const ColorDBL SKYBOXCOLOR = ColorDBL(0.21, 0.32, 0.56);
 
 	Scene( Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 800), std::vector<Object*> o = std::vector<Object*>()) : Objects{ o }, camera{c} {
         standardScene();
         //camera.castRays(this);
-        camera.Render(this);
+        camera.render(this);
 		camera.writePPM();
 	};
 
@@ -44,23 +44,23 @@ public:
     void standardScene() {
 
         // Wall 1
-        Objects.push_back(new Triangle(points[1], points[7], points[0], Material(1.0, 0.0, 0.0, ColorDBL(1.0, 0.0, 0.0)) ));
-        Objects.push_back(new Triangle(points[0], points[7], points[6], Material(1.0, 0.0, 0.0, ColorDBL(1.0, 0.0, 0.0)) ));
+        Objects.push_back(new Triangle(points[1], points[7], points[0], Material(1.0, 0.0, 0.0, ColorDBL(0.5, 0.0, 0.0)) ));
+        Objects.push_back(new Triangle(points[0], points[7], points[6], Material(1.0, 0.0, 0.0, ColorDBL(0.5, 0.0, 0.0)) ));
         
         // Wall 2
-        Objects.push_back(new Triangle(points[1], points[2], points[7], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.8, 0.2)) ));
-        Objects.push_back(new Triangle(points[2], points[8], points[7], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.8, 0.2)) ));
+        Objects.push_back(new Triangle(points[1], points[2], points[7], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.5, 0.1)) ));
+        Objects.push_back(new Triangle(points[2], points[8], points[7], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.5, 0.1)) ));
 
         // Wall 3
-        Objects.push_back(new Triangle(points[2], points[3], points[8], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.0, 1.0))));
-        Objects.push_back(new Triangle(points[3], points[9], points[8], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.0, 1.0))));
+        Objects.push_back(new Triangle(points[2], points[3], points[8], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.0, 0.5))));
+        Objects.push_back(new Triangle(points[3], points[9], points[8], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.0, 0.5))));
         
         // Roof 1
         Objects.push_back(new Triangle(points[1], points[3], points[2], Material(1.0, 0.0, 0.0, ColorDBL(0.1, 0.0, 0.2))));
 
         // Wall 4
-        Objects.push_back(new Triangle(points[3], points[4], points[9], Material(1.0, 0.0, 0.0, ColorDBL(1.0, 0.0, 0.6))));
-        Objects.push_back(new Triangle(points[4], points[10], points[9], Material(1.0, 0.0, 0.0, ColorDBL(1.0, 0.0, 0.6))));
+        Objects.push_back(new Triangle(points[3], points[4], points[9], Material(1.0, 0.0, 0.0, ColorDBL(0.5, 0.0, 0.3))));
+        Objects.push_back(new Triangle(points[4], points[10], points[9], Material(1.0, 0.0, 0.0, ColorDBL(0.5, 0.0, 0.3))));
 
         // Roof 2
         Objects.push_back(new Triangle(points[0], points[4], points[1], Material(1.0, 0.0, 0.0, ColorDBL(0.1, 0.0, 0.2))));
@@ -70,8 +70,8 @@ public:
         Objects.push_back(new Triangle(points[10], points[5], points[4], Material(1.0, 0.0, 0.0, ColorDBL(0.1, 0.0, 0.2))));
 
         // Wall 5
-        Objects.push_back(new Triangle(points[4], points[5], points[10], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.0, 1.0))));
-        Objects.push_back(new Triangle(points[5], points[11], points[10], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.0, 1.0))));
+        Objects.push_back(new Triangle(points[4], points[5], points[10], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.0, 0.5))));
+        Objects.push_back(new Triangle(points[5], points[11], points[10], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.0, 0.5))));
 
         // Wall 6
         Objects.push_back(new Triangle(points[0], points[11], points[5], Material(1.0, 0.0, 0.0, ColorDBL(0.0, 0.8, 0.2))));
@@ -88,12 +88,15 @@ public:
         Objects.push_back(new Triangle(points[6], points[10], points[11], Material(1.0, 0.0, 0.0, ColorDBL(0.2, 0.2, 0.4))));
 
         // Triforce
-        Objects.push_back(new Triangle(glm::vec3(10.0f, 4.8f, 1.0f), glm::vec3(10.0f, 3.8f, 0.0f), glm::vec3(10.0f, 5.8f, 0.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.0))));
-        Objects.push_back(new Triangle(glm::vec3(10.0f, 2.8f, 1.0f), glm::vec3(10.0f, 1.8f, 0.0f), glm::vec3(10.0f, 3.8f, 0.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.0))));
-        Objects.push_back(new Triangle(glm::vec3(10.0f, 3.8f, 2.0f), glm::vec3(10.0f, 2.8f, 1.0f), glm::vec3(10.0f, 4.8f, 1.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.0))));
+        //Objects.push_back(new Triangle(glm::vec3(10.0f, 4.8f, 1.0f), glm::vec3(10.0f, 3.8f, 0.0f), glm::vec3(10.0f, 5.8f, 0.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.0))));
+        //Objects.push_back(new Triangle(glm::vec3(10.0f, 2.8f, 1.0f), glm::vec3(10.0f, 1.8f, 0.0f), glm::vec3(10.0f, 3.8f, 0.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.0))));
+        //Objects.push_back(new Triangle(glm::vec3(10.0f, 3.8f, 2.0f), glm::vec3(10.0f, 2.8f, 1.0f), glm::vec3(10.0f, 4.8f, 1.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.0))));
 
         // Roof lamp
-        //LightSources.push_back(new LightSource(glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), glm::vec3(9.0f, 0.5f, 4.9f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.9))));
-        //LightSources.push_back(new LightSource(glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), glm::vec3(5.0f, 0.5f, 4.9f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.9))));
+        LightSources.push_back(new LightSource(glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), glm::vec3(9.0f, 0.5f, 4.9f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.9))));
+        LightSources.push_back(new LightSource(glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), glm::vec3(5.0f, 0.5f, 4.9f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.9))));
+        
+        Objects.push_back(new LightSource(glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), glm::vec3(9.0f, 0.5f, 4.9f), Material(1.0, 0.0, 0.0, ColorDBL(1.0, 1.0, 1.0))));
+        Objects.push_back(new LightSource(glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), glm::vec3(5.0f, 0.5f, 4.9f), Material(1.0, 0.0, 0.0, ColorDBL(1.0, 1.0, 1.0))));
     }
 };

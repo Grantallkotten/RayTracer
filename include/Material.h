@@ -25,6 +25,5 @@ public:
     ColorDBL getColor() { return color;  }
 
 
-
 };
 

@@ -17,6 +17,9 @@ private:
 	const int maxColorValue = 255;
 	glm::vec3 positionCamera;
 	glm::vec3 positionPlaneCenter;
+
+	float percentDone = 0.0f;
+	const int BAR_WIDTH = 20;
 public:
 
 	Camera(const glm::vec3& p = glm::vec3(-1.0f, 0.0f, 0.0f), const int& s = 800) :
@@ -28,9 +31,11 @@ public:
 
 	void castRays(Scene* scene);
 
-	void RenderRangeOfColums(Scene* scene, int start_row, int end_row);
+	void renderRangeOfColums(Scene* scene, int start_row, int end_row);
 
-	void Render(Scene* scene);
+	void render(Scene* scene);
+
+	void progressBar(float percent);
 
 };
 
