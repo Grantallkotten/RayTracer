@@ -12,30 +12,32 @@ $<$<CXX_COMPILER_ID:AppleClang,Clang,GNU>:-Wall -Wextra>
 )
 endfunction()
 
-add_executable(Raytracing 
+add_executable(Raytracing
         src/main.cpp
         src/Ray.cpp 
         src/Camera.cpp 
         src/Pixel.cpp
         src/ColorDBL.cpp 
-	src/Triangle.cpp 
+    	src/Triangle.cpp 
         #src/Rectangle.cpp 
         #src/Cube.cpp
-	src/LightSource.cpp
-	#src/Tetrahedron.h 
-	
+    	src/LightSource.cpp
+    	src/Tetrahedron.cpp
+    
+
         include/Ray.h 
         include/Camera.h 
         include/Pixel.h 
         include/ColorDBL.h 
         include/Object.h 
         include/Triangle.h 
-	#include/Rectangle.h 
+    	#include/Rectangle.h 
         include/Scene.h 
         include/Material.h 
-	include/LightSource.h
+    	include/LightSource.h
+	include/Structure.h
         #include/Sphere.h 
-        #include/Tetrahedron.h 
+        include/Tetrahedron.h 
         #include/functions.h 
         #include/Cube.h
 

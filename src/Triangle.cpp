@@ -4,7 +4,7 @@
 bool Triangle::Collision(Ray* ray, glm::vec3& intersectionPoint) {
     const float EPSILON = 0.0000001f;
 
-    if (glm::dot(ray->getDir(), normal) < -EPSILON) {// If the scalarproduct betwen the ray and normal is positiv
+    if (glm::dot(ray->getDir(), normal) > -EPSILON) {// If the scalarproduct betwen the ray and normal is positiv
         return false;    
     }
 

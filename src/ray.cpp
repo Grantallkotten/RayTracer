@@ -57,7 +57,7 @@ bool Ray::ShadowRay(Scene* scene) {
 	glm::vec3 intersectionPoint;
 	for (Object* obj : scene->Objects) {
 		if (obj->Collision(this, intersectionPoint)) {
-			float dist_x_to_ip = glm::length(intersectionPoint - orig);
+			float dist_x_to_ip = glm::distance(intersectionPoint, orig);
 			if (dist_x_to_ip < dist_x_to_yi) {
 				return false;
 			}

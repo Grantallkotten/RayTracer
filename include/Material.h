@@ -12,7 +12,6 @@ private:
     ColorDBL color;
 
 public:
-
     Material(MaterialProperty property = diffusion, ColorDBL color = ColorDBL(1.0, 0.0, 0.0)) :
         property{ property }, color{color} {
     

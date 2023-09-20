@@ -11,9 +11,7 @@ double LightSource::CheckShadowRays(Scene* scene, Object* objectX, const glm::ve
 
 	float sum = 0.0;
 	int N = 100;
-	glm::vec3 e1 = getP1() - getP0();
-	glm::vec3 e2 = getP2() - getP0();
-	float A = glm::length(e1) * glm::length(e2); //@TODO Devide by 2 since the shape is a triangle?
+	float A = glm::length(E1) * glm::length(E2) / 2;
 	glm::vec3 Ny = getNormal();
 	glm::vec3 Nx = objectX->getNormal();
 
@@ -30,7 +28,7 @@ double LightSource::CheckShadowRays(Scene* scene, Object* objectX, const glm::ve
 			t = 1 - t;
 		}
 
-		glm::vec3 yi = getP0() + s * e1 + t* e2;
+		glm::vec3 yi = getP0() + s * E1 + t* E2;
 		glm::vec3 di = yi - x;
 
 		// @TODO Check if no collission V(x,y_i)
@@ -46,7 +44,6 @@ double LightSource::CheckShadowRays(Scene* scene, Object* objectX, const glm::ve
 	}
 	float BRDF = 1.0f / _PI;
 	sum = (float)(A * BRDF * radiance / N * sum);
-
 
 	return sum;
 }

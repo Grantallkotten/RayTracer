@@ -7,13 +7,14 @@ private:
 	glm::vec3 point0;
 	glm::vec3 point1;
 	glm::vec3 point2;
-	glm::vec3 E1, E2;
 	glm::vec3 normal;
 	Material material;
+protected:
+	glm::vec3 E1, E2;
 public:
 	int test;
 
-	Triangle(const glm::vec3& p0, const glm::vec3& p1, const glm::vec3& p2, const Material& m = Material(Material::diffusion, ColorDBL(1.0, 0.0, 0.0))) :
+	Triangle(const glm::vec3& p0 = glm::vec3(13.0f, 0.0f, 5.0f), const glm::vec3& p1 = glm::vec3(10.0f, -6.0f, 5.0f), const glm::vec3& p2 = glm::vec3(13.0f, 0.0f, -5.0f), const Material& m = Material(Material::diffusion, ColorDBL(1.0, 0.0, 0.0))) :
 		point0{ p0 }, point1{ p1 }, point2{ p2 }, material{ m }// Måste kolla så alla points lägger sig med högerhandsregeln 
 	{
 		E1 = point1 - point0;
