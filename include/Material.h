@@ -5,16 +5,18 @@
 #include "glm/glm.hpp"
 
 class Material {
+public:
+    enum MaterialProperty { diffusion, specularity , translucence };
 private:
-    double diffusion;
-    double specularity;
-    double translucence;
+    MaterialProperty property;
     ColorDBL color;
 
 public:
 
-    Material(double diffusion, double specularity, double translucence, ColorDBL color) : 
-        diffusion{ diffusion }, specularity{ specularity }, translucence{ translucence }, color{ color } {}
+    Material(MaterialProperty property = diffusion, ColorDBL color = ColorDBL(1.0, 0.0, 0.0)) :
+        property{ property }, color{color} {
+    
+    }
 	
     double getDiffusion() { return diffusion; }
 

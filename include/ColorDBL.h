@@ -12,7 +12,7 @@ private:
 public:
 	ColorDBL() {};
 
-	ColorDBL(const double& r, const double& g, const double& b): R{ std::min(std::max(r, 0.0), 1.0) },
+	ColorDBL(double r, double g, double b): R{ std::min(std::max(r, 0.0), 1.0) },
 											G{ std::min(std::max(g, 0.0), 1.0) }, 
 											B{ std::min(std::max(b, 0.0), 1.0) } {}
 

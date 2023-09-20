@@ -22,6 +22,7 @@ add_executable(Raytracing
         #src/Rectangle.cpp 
         #src/Cube.cpp
 	src/LightSource.cpp
+	#src/Tetrahedron.h 
 	
         include/Ray.h 
         include/Camera.h 

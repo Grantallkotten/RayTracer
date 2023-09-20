@@ -13,7 +13,7 @@ private:
 public:
 	int test;
 
-	Triangle(const glm::vec3& p0, const glm::vec3& p1, const glm::vec3& p2, const Material& m = Material(1.0, 0.0, 0.0, ColorDBL(1.0, 0.0, 0.0))) :
+	Triangle(const glm::vec3& p0, const glm::vec3& p1, const glm::vec3& p2, const Material& m = Material(Material::diffusion, ColorDBL(1.0, 0.0, 0.0))) :
 		point0{ p0 }, point1{ p1 }, point2{ p2 }, material{ m }// Måste kolla så alla points lägger sig med högerhandsregeln 
 	{
 		E1 = point1 - point0;
