@@ -7,6 +7,7 @@ private:
 	glm::vec3 point0;
 	glm::vec3 point1;
 	glm::vec3 point2;
+	glm::vec3 E1, E2;
 	glm::vec3 normal;
 	Material material;
 public:
@@ -14,9 +15,12 @@ public:
 
 	Triangle(const glm::vec3& p0, const glm::vec3& p1, const glm::vec3& p2, const Material& m = Material(1.0, 0.0, 0.0, ColorDBL(1.0, 0.0, 0.0))) :
 		point0{ p0 }, point1{ p1 }, point2{ p2 }, material{ m }// Måste kolla så alla points lägger sig med högerhandsregeln 
-	{ calcNormal(); }
+	{
+		E1 = point1 - point0;
+		E2 = point2 - point0;
 
-	void calcNormal();
+		normal = glm::normalize(glm::cross(E1, E2));
+	}
 
 	glm::vec3 getNormal() override{ return normal; }
 

@@ -39,7 +39,7 @@ ColorDBL Ray::castRay(Scene* scene, Ray* prevRay, float deathProbability) {
 	if (((double)rand() / (RAND_MAX)) <= deathProbability) {
 		
 		for (LightSource* aLightSource : scene->LightSources) {
-			lightContribution = aLightSource->CheckShadowRays(obj, intersectionPoint);
+			lightContribution = aLightSource->CheckShadowRays(scene, obj, intersectionPoint);
 			// @TODO sätt lightContribution på färgen av objektet
 			returnColor *= lightContribution;
 		}
@@ -50,6 +50,20 @@ ColorDBL Ray::castRay(Scene* scene, Ray* prevRay, float deathProbability) {
 	//@TODO Rekursiv formel
 
 	return ColorDBL(0.0f, 0.0f, 0.2f);
+}
+
+bool Ray::ShadowRay(Scene* scene) {
+	float dist_x_to_yi = glm::length(dir);
+	glm::vec3 intersectionPoint;
+	for (Object* obj : scene->Objects) {
+		if (obj->Collision(this, intersectionPoint)) {
+			float dist_x_to_ip = glm::length(intersectionPoint - orig);
+			if (dist_x_to_ip < dist_x_to_yi) {
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
 

@@ -88,9 +88,15 @@ public:
         Objects.push_back(new Triangle(points[6], points[10], points[11], Material(1.0, 0.0, 0.0, ColorDBL(0.2, 0.2, 0.4))));
 
         // Triforce
-        //Objects.push_back(new Triangle(glm::vec3(10.0f, 4.8f, 1.0f), glm::vec3(10.0f, 3.8f, 0.0f), glm::vec3(10.0f, 5.8f, 0.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.0))));
-        //Objects.push_back(new Triangle(glm::vec3(10.0f, 2.8f, 1.0f), glm::vec3(10.0f, 1.8f, 0.0f), glm::vec3(10.0f, 3.8f, 0.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.0))));
-        //Objects.push_back(new Triangle(glm::vec3(10.0f, 3.8f, 2.0f), glm::vec3(10.0f, 2.8f, 1.0f), glm::vec3(10.0f, 4.8f, 1.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.0))));
+        // Objects.push_back(new Triangle(glm::vec3(10.0f, 4.8f, 1.0f), glm::vec3(10.0f, 3.8f, 0.0f), glm::vec3(10.0f, 5.8f, 0.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.0))));
+        // Objects.push_back(new Triangle(glm::vec3(10.0f, 2.8f, 1.0f), glm::vec3(10.0f, 1.8f, 0.0f), glm::vec3(10.0f, 3.8f, 0.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.0))));
+        // Objects.push_back(new Triangle(glm::vec3(10.0f, 3.8f, 2.0f), glm::vec3(10.0f, 2.8f, 1.0f), glm::vec3(10.0f, 4.8f, 1.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.0))));
+
+         // Floor over floor
+        Objects.push_back(new Triangle(glm::vec3(10.0f, 6.0f, -0.0f), glm::vec3(13.0f, 0.0f, -0.0f), glm::vec3(10.0f, -6.0f, -0.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.2, 0.2, 0.4))));
+        // Roof over floor
+        Objects.push_back(new Triangle(glm::vec3(10.0f, 6.0f, -0.0f), glm::vec3(10.0f, -6.0f, -0.0f), glm::vec3(13.0f, 0.0f, -0.0f), Material(1.0, 0.0, 0.0, ColorDBL(0.2, 0.2, 0.4))));
+
 
         // Roof lamp
         LightSources.push_back(new LightSource(glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), glm::vec3(9.0f, 0.5f, 4.9f), Material(1.0, 0.0, 0.0, ColorDBL(0.8, 0.8, 0.9))));

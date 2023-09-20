@@ -1,8 +1,7 @@
 #pragma once
 #include "Triangle.h"
-class Object;
 
-
+class scene;
 class LightSource : public Triangle {
 private:
 	double radiance;
@@ -11,7 +10,7 @@ public:
 }
 double getRadiance() { return radiance; }
 
-double CheckShadowRays(Object* objectX, const glm::vec3& x);
+double CheckShadowRays(Scene* scene, Object* objectX, const glm::vec3& x);
 
 };
 

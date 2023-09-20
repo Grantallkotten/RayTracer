@@ -18,8 +18,6 @@ private:
 	ColorDBL color;
 	// Remember to normilaze all directions!
 public:
-	Ray() {};
-
 	Ray(const glm::vec3& origin, const glm::vec3& direction) : orig(origin), dir(direction) {}
 
 	glm::vec3 getDir() const { return dir; }
@@ -27,6 +25,8 @@ public:
 	glm::vec3 getOrig() const { return orig; }
 
 	ColorDBL castRay(Scene* scene, Ray* prevRay, float deathProbability);
+
+	bool ShadowRay(Scene* scene);
 
 	ColorDBL getColor() { return color; }
 
