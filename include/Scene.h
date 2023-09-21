@@ -45,12 +45,12 @@ public:
         auto objs = s.Objects();
         for (int i = 0; i < objs.size(); i++) {
             Objects.push_back(objs[i]);
-            std::cout << objs[i]->getNormal().x << objs[i]->getNormal().y << objs[i]->getNormal().z << std::endl;
         }
     }
 
 
     void standardScene() {
+        add(Tetrahedron(glm::vec3(8.0f, -1.0f, -1.0f), 2.0f, 4.0f));
 
         // Wall 1
         Objects.push_back(new Triangle(points[1], points[0], points[7], Material(Material::diffusion, ColorDBL(0.5, 0.0, 0.0))));
@@ -66,7 +66,6 @@ public:
         
         // Roof 1
         Objects.push_back(new Triangle(points[1], points[2], points[3], Material(Material::diffusion, ColorDBL(0.1, 0.0, 0.2))));
-        std::cout << Objects[Objects.size()-1]->getNormal().x << Objects[Objects.size() - 1]->getNormal().y << Objects[Objects.size()-1]->getNormal().z << std::endl;
 
         // Wall 4
         Objects.push_back(new Triangle(points[3], points[9], points[4], Material(Material::diffusion, ColorDBL(0.5, 0.0, 0.3))));
@@ -102,18 +101,16 @@ public:
         // Objects.push_back(new Triangle(glm::vec3(10.0f, 2.8f, 1.0f), glm::vec3(10.0f, 1.8f, 0.0f), glm::vec3(10.0f, 3.8f, 0.0f), Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.0))));
         // Objects.push_back(new Triangle(glm::vec3(10.0f, 3.8f, 2.0f), glm::vec3(10.0f, 2.8f, 1.0f), glm::vec3(10.0f, 4.8f, 1.0f), Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.0))));
 
-         // Floor over floor
-        Objects.push_back(new Triangle(glm::vec3(10.0f, 6.0f, -3.0f), glm::vec3(13.0f, 0.0f, -3.0f), glm::vec3(10.0f, -6.0f, -3.0f), Material(Material::diffusion, ColorDBL(0.2, 0.2, 0.4))));
-        // Roof over floor
-        Objects.push_back(new Triangle(glm::vec3(10.0f, 6.0f, -3.0f), glm::vec3(10.0f, -6.0f, -3.0f), glm::vec3(13.0f, 0.0f, -3.0f), Material(Material::diffusion, ColorDBL(0.2, 0.2, 0.4))));
-
-        //add(Tetrahedron(glm::vec3(8.0f, 0.0f, -1.0f), 2.0f, 5.9f));
+         // N upp
+        //Objects.push_back(new Triangle(glm::vec3(10.0f, 6.0f, -3.0f), glm::vec3(13.0f, 0.0f, -3.0f), glm::vec3(10.0f, -6.0f, -3.0f), Material(Material::diffusion, ColorDBL(0.2, 0.2, 0.4))));
+        // N upp
+        //Objects.push_back(new Triangle(glm::vec3(10.0f, 6.0f, -2.0f), glm::vec3(10.0f, -6.0f, -2.0f), glm::vec3(13.0f, 0.0f, -2.0), Material(Material::diffusion, ColorDBL(0.2, 0.2, 0.4))));
 
         // Roof lamp
-        LightSources.push_back(new LightSource(glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, 0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.9))));
-        LightSources.push_back(new LightSource(glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.9))));
+        LightSources.push_back(new LightSource(glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), glm::vec3(9.0f, -1.5f, 4.9f), Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.9))));
+        LightSources.push_back(new LightSource(glm::vec3(5.0f, -1.5f, 4.9f), glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(9.0f, -1.5f, 4.9f), Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.9))));
         
-        Objects.push_back(new LightSource(glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, 0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), Material(Material::diffusion, ColorDBL(1.0, 1.0, 1.0))));
-        Objects.push_back(new LightSource(glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), Material(Material::diffusion, ColorDBL(1.0, 1.0, 1.0))));
+        Objects.push_back(new LightSource(glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), glm::vec3(9.0f, -1.5f, 4.9f), Material(Material::diffusion, ColorDBL(1.0, 1.0, 1.0))));
+        Objects.push_back(new LightSource(glm::vec3(5.0f, -1.5f, 4.9f), glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(9.0f, -1.5f, 4.9f), Material(Material::diffusion, ColorDBL(1.0, 1.0, 1.0))));
     }
 };

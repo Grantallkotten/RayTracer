@@ -10,8 +10,8 @@ std::uniform_real_distribution<float> distribution(0.0f, 1.0f);
 double LightSource::CheckShadowRays(Scene* scene, Object* objectX, const glm::vec3& x) {
 
 	float sum = 0.0;
-	int N = 100;
-	float A = glm::length(E1) * glm::length(E2) / 2;
+	int N = 50;
+	float A = glm::length(E1) * glm::length(E2) / 2; // Kolla så denna är tänkt rätt med punkter
 	glm::vec3 Ny = getNormal();
 	glm::vec3 Nx = objectX->getNormal();
 
@@ -30,11 +30,10 @@ double LightSource::CheckShadowRays(Scene* scene, Object* objectX, const glm::ve
 
 		glm::vec3 yi = getP0() + s * E1 + t* E2;
 		glm::vec3 di = yi - x;
-
-		// @TODO Check if no collission V(x,y_i)
-		// Skippa att kolla om objektet blockar för sig själv mot ett ljus
-
-		if (!Ray(x, di).ShadowRay(scene)) continue;
+		//std::cout << "\n\n\n";
+		//std::cout << "d_i: " << di.x << " " << di.y << " " << di.z << "\n\n\n";
+		// @TODO Check if no collission V(x,y_i) and do it right
+		if (!Ray(x, di).ShadowRay(scene)) { continue; }
 
 		float cosX = glm::dot(Ny, di/glm::length(di));
 		float cosY = -glm::dot(Nx, di / glm::length(di));
@@ -43,9 +42,8 @@ double LightSource::CheckShadowRays(Scene* scene, Object* objectX, const glm::ve
 
 	}
 	float BRDF = 1.0f / _PI;
-	sum = (float)(A * BRDF * radiance / N * sum);
 
-	return sum;
+	return (float)(A * BRDF * radiance / N * sum);
 }
 
 

@@ -25,9 +25,11 @@ bool Triangle::Collision(Ray* ray, glm::vec3& intersectionPoint) {
     if (u + v > 1.0f || u < 0.0f || v < 0.0f) {// Maybe use EPSILON?
         return false;
     }
-        float t = (glm::dot(Q, E2) / glm::dot(P, E1));
-
-        intersectionPoint = ray->getOrig() + t * ray->getDir(); // Changes the value on the vec3
+    float t = (glm::dot(Q, E2) / glm::dot(P, E1));
+        
+    if (t < 0.0f) { return false; }
+        
+    intersectionPoint = ray->getOrig() + t * ray->getDir(); // Changes the value on the vec3
 
     return true;
 }

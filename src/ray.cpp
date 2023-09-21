@@ -19,7 +19,7 @@ ColorDBL Ray::castRay(Scene* scene, Ray* prevRay, float deathProbability) {
 		if (aObject->Collision(this, newIntersectionPoint)) {
 			hitsObject = true;
 
-			newDist = std::abs(glm::length(newIntersectionPoint - orig));
+			newDist = glm::length(newIntersectionPoint - orig);
 			
 			if (newDist <= minDist) {
 
@@ -54,13 +54,16 @@ ColorDBL Ray::castRay(Scene* scene, Ray* prevRay, float deathProbability) {
 
 bool Ray::ShadowRay(Scene* scene) {
 	float dist_x_to_yi = glm::length(dir);
-	glm::vec3 intersectionPoint;
+	float dist_x_to_ip = std::numeric_limits<float>::max();
+	glm::vec3 intersectionPoint = glm::vec3();
+
 	for (Object* obj : scene->Objects) {
 		if (obj->Collision(this, intersectionPoint)) {
-			float dist_x_to_ip = glm::distance(intersectionPoint, orig);
-			if (dist_x_to_ip < dist_x_to_yi) {
-				return false;
+			dist_x_to_ip = glm::length(intersectionPoint - orig);
+			if (dist_x_to_ip < dist_x_to_yi) {// Använda pointers till objekt istället?
+					return false;
 			}
+			//else { return true; }
 		}
 	}
 	return true;
