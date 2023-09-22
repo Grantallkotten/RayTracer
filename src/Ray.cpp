@@ -1,63 +1,78 @@
+#pragma once
 #include "../include/Ray.h"
-#include "../include/LightSource.h"
-#include "../include/Object.h"
 #include "../include/Scene.h"
+#include "../include/Object.h"
+class LightSource;
 
-ColorDBL Ray::castRay(Scene *scene, Ray *prevRay, float deathProbability) {
-  // Är prevRay nödvändig?
 
-  prev = prevRay;
-  float minDist = std::numeric_limits<float>::max();
-  float newDist = std::numeric_limits<float>::max();
-  bool hitsObject = false;
+ColorDBL Ray::castRay(Scene* scene, Ray* prevRay, float deathProbability) {
+	// Är prevRay nödvändig?
 
-  glm::vec3 intersectionPoint = glm::vec3();
-  glm::vec3 newIntersectionPoint = glm::vec3();
+	float minDist = std::numeric_limits<float>::max();
+	float newDist = std::numeric_limits<float>::max();
+	bool hitsObject = false;
 
-  for (Object *aObject : scene->Objects) {
-    if (aObject->Collision(this, newIntersectionPoint)) {
-      hitsObject = true;
+	glm::vec3 intersectionPoint = glm::vec3();
+	glm::vec3 newIntersectionPoint = glm::vec3();
 
-      newDist = std::abs(glm::length(newIntersectionPoint - orig));
+	for (Object* aObject : scene->Objects) {
+		if (aObject->Collision(this, newIntersectionPoint)) {
+			hitsObject = true;
+			newDist = glm::length(newIntersectionPoint - orig);
+			
+			if (newDist <= minDist) {
 
-      if (newDist <= minDist) {
+				minDist = newDist;
+				intersectionPoint = newIntersectionPoint;
+				obj = aObject;
 
-        minDist = newDist;
-        intersectionPoint = newIntersectionPoint;
-        obj = aObject;
-      }
-    }
-  }
-  if (!hitsObject) {
-    return scene->SKYBOXCOLOR;
-  }
+			}
+		}
+	}
 
-  if (((double)rand() / (RAND_MAX)) <= deathProbability) {
-    for (LightSource *aLightSource : scene->LightSources) {
-      aLightSource->CheckShadowRays(scene, obj, intersectionPoint);
-    }
-    return obj->getMaterial()
-        .getColor(); //@TODO * imortance sen och räkna med speculäritet
-  }
+	if (!hitsObject) {
+		return scene->SKYBOXCOLOR;
+	}
+	double lightContribution = 0.0;
+	ColorDBL returnColor = obj->getMaterial().getColor();
 
-  //@TODO Rekursiv formel
+	if (((double)rand() / (RAND_MAX)) <= deathProbability) {
+		
+		for (LightSource* aLightSource : scene->LightSources) {
+			lightContribution = aLightSource->CheckShadowRays(scene, obj, intersectionPoint);
+			// @TODO sätt lightContribution på färgen av objektet
+			returnColor *= lightContribution;
+		}
+		
+		return returnColor; //@TODO * imortance sen och räkna med speculäritet
+	}
 
-  return ColorDBL(0.0f, 0.0f, 0.2f);
+	//@TODO Rekursiv formel
+
+	return ColorDBL(0.0f, 0.0f, 0.2f);
 }
 
-bool Ray::ShadowRay(Scene *scene) {
-  float dist_x_to_yi = glm::length(dir);
-  float dist_x_to_ip = std::numeric_limits<float>::max();
-  glm::vec3 intersectionPoint = glm::vec3();
+bool Ray::ShadowRay(Scene* scene) {
+	// x is on the object and y on the lamp
+	float dist_x_to_yi = glm::length(dir);
+	float dist_x_to_ip = std::numeric_limits<float>::max();
+	glm::vec3 intersectionPoint = glm::vec3();
 
-  for (Object *obj : scene->Objects) {
-    if (obj->Collision(this, intersectionPoint)) {
-      dist_x_to_ip = glm::length(intersectionPoint - orig);
-      if (dist_x_to_ip <
-          dist_x_to_yi) { // Använda pointers till objekt istället?
-        return false;
-      }
-    }
-  }
-  return true;
+	for (Object* obj : scene->Objects) {
+		if (obj->Collision(this, intersectionPoint)) {
+			dist_x_to_ip = glm::length(intersectionPoint - orig);
+
+			if (dist_x_to_ip < dist_x_to_yi) {
+				if (obj == scene->Objects[0]) {
+					//std::cout << "x to s: " << dist_x_to_ip << "  x to L: " << dist_x_to_yi << " :\n";
+					//std::cout << "\n" << newIntersectionPoint.x << ", " << newIntersectionPoint.y << ", " << newIntersectionPoint.z;
+				}
+					return false;
+			}
+			//else { return true; }
+		}
+	}
+	return true;
 }
+
+
