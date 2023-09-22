@@ -1,3 +1,11 @@
 build/
 bin/
 outPPM/
+*.o
+*.cbp
+*.cmake
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+CMakeFiles/
+MakeFile
