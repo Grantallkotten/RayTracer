@@ -10,7 +10,7 @@ class Object {
 
   //Object() {};
 
-  virtual glm::vec3 getNormal() = 0;
+  virtual glm::vec3 getNormal(glm::vec3 point) = 0;
 
   virtual Material getMaterial() = 0;
 

@@ -23,7 +23,7 @@ public:
 		normal = glm::normalize(glm::cross(E1, E2));
 	}
 
-	glm::vec3 getNormal() override{ return normal; }
+	glm::vec3 getNormal(glm::vec3 point = glm::vec3()) override{ return normal; }
 
 	Material getMaterial() override { return material; }
 

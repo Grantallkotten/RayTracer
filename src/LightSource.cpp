@@ -10,10 +10,10 @@ double LightSource::CheckShadowRays(Scene *scene, Object *objectX,
                                     const glm::vec3 &x) {
 
 	float sum = 0.0;
-	int N = 50;
+	int N = 100;
 	float A = glm::length(E1) * glm::length(E2) / 2; // @TODO Kolla så denna är tänkt rätt med punkter
 	glm::vec3 Ny = getNormal();
-	glm::vec3 Nx = objectX->getNormal();// @TODO fix getNormal for spheres
+	glm::vec3 Nx = objectX->getNormal(x);// @TODO fix getNormal for spheres
 
   if (typeid(*objectX) == typeid(LightSource)) {
     return 1.0;
@@ -33,9 +33,7 @@ double LightSource::CheckShadowRays(Scene *scene, Object *objectX,
     // std::cout << "\n\n\n";
     // std::cout << "d_i: " << di.x << " " << di.y << " " << di.z << "\n\n\n";
     //  @TODO Check if no collission V(x,y_i) and do it right
-    if (!Ray(x, di).ShadowRay(scene)) {
-      continue;
-    }
+    if (!Ray(x, di).ShadowRay(scene)) { continue; }
 
     float cosX = glm::dot(Ny, di / glm::length(di));
     float cosY = -glm::dot(Nx, di / glm::length(di));

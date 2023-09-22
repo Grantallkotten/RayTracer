@@ -21,7 +21,6 @@ ColorDBL Ray::castRay(Scene* scene, Ray* prevRay, float deathProbability) {
 			newDist = glm::length(newIntersectionPoint - orig);
 			
 			if (newDist <= minDist) {
-
 				minDist = newDist;
 				intersectionPoint = newIntersectionPoint;
 				obj = aObject;
@@ -55,21 +54,25 @@ ColorDBL Ray::castRay(Scene* scene, Ray* prevRay, float deathProbability) {
 bool Ray::ShadowRay(Scene* scene) {
 	// x is on the object and y on the lamp
 	float dist_x_to_yi = glm::length(dir);
-	float dist_x_to_ip = std::numeric_limits<float>::max();
+	float dist_x_to_ip;
 	glm::vec3 intersectionPoint = glm::vec3();
+	int counter = -1;
 
 	for (Object* obj : scene->Objects) {
+		counter++;
 		if (obj->Collision(this, intersectionPoint)) {
 			dist_x_to_ip = glm::length(intersectionPoint - orig);
 
 			if (dist_x_to_ip < dist_x_to_yi) {
-				if (obj == scene->Objects[0]) {
-					//std::cout << "x to s: " << dist_x_to_ip << "  x to L: " << dist_x_to_yi << " :\n";
-					//std::cout << "\n" << newIntersectionPoint.x << ", " << newIntersectionPoint.y << ", " << newIntersectionPoint.z;
-				}
-					return false;
+
+				return false;
 			}
-			//else { return true; }
+# if 1
+			if (counter == 0) {
+				//std::cout << "\n\nx to s: " << dist_x_to_ip << "  x to L: " << dist_x_to_yi << " #\n";
+				//std::cout << "\n" << intersectionPoint.x << ", " << intersectionPoint.y << ", " << intersectionPoint.z << " :\n";
+			}
+#endif
 		}
 	}
 	return true;
