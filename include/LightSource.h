@@ -1,5 +1,6 @@
 #pragma once
 #include "Triangle.h"
+#include "Sphere.h"
 
 class scene;
 class LightSource : public Triangle {

@@ -5,6 +5,7 @@
 #include "Camera.h"
 #include "LightSource.h"
 #include "Tetrahedron.h"
+#include "Sphere.h"
 
 
 class Scene {
@@ -50,7 +51,9 @@ public:
 
 
     void standardScene() {
-        add(Tetrahedron(glm::vec3(8.0f, -1.0f, -1.0f), 2.0f, 4.0f));
+        //add(Tetrahedron(glm::vec3(8.0f, -1.0f, -1.0f), 2.0f, 4.0f));
+        Objects.push_back(new Sphere(glm::vec3(8.0f, -1.0f, -1.0f), 2.0f));
+
 
         // Wall 1
         Objects.push_back(new Triangle(points[1], points[0], points[7], Material(Material::diffusion, ColorDBL(0.5, 0.0, 0.0))));

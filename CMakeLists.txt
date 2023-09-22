@@ -23,6 +23,7 @@ add_executable(Raytracing
         #src/Cube.cpp
     	src/LightSource.cpp
     	src/Tetrahedron.cpp
+	src/Sphere.cpp
     
 
         include/Ray.h 
@@ -36,6 +37,7 @@ add_executable(Raytracing
         include/Material.h 
     	include/LightSource.h
 	include/Structure.h
+	include/Sphere.h
         #include/Sphere.h 
         include/Tetrahedron.h 
         #include/functions.h 
