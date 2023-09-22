@@ -53,7 +53,7 @@ ColorDBL Ray::castRay(Scene *scene, Ray *prevRay, float deathProbability) {
 bool Ray::ShadowRay(Scene *scene) {
   // x is on the object and y on the lamp
   float dist_x_to_yi = glm::length(dir);
-  float dist_x_to_ip = std::numeric_limits<float>::max();
+  float dist_x_to_ip;
   glm::vec3 intersectionPoint = glm::vec3();
 
   for (Object *obj : scene->Objects) {

@@ -16,7 +16,7 @@ public:
       : centerPoint{centerPoint}, radius{radius}, material{material} {}
 
   glm::vec3 getNormal(const glm::vec3 &intersection_point) override {
-    return glm::normalize(intersection_point - centerPoint);
+    return (intersection_point - centerPoint) / radius;
   }
 
   Material getMaterial() override { return material; }

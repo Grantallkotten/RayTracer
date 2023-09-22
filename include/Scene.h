@@ -3,8 +3,8 @@
 #include "ColorDBL.h"
 #include "LightSource.h"
 #include "Object.h"
-#include "Tetrahedron.h"
 #include "Sphere.h"
+#include "Tetrahedron.h"
 #include "glm/glm.hpp"
 
 class Scene {
@@ -53,9 +53,9 @@ public:
   }
 
   void standardScene() {
-    //add(Tetrahedron(glm::vec3(8.0f, -1.0f, -1.0f), 2.0f, 4.0f));
+    add(Tetrahedron(glm::vec3(7.0f, 3.0f, -1.0f), 2.0f, 4.0f));
 
-    Objects.push_back(new Sphere(glm::vec3(8.0f, -1.0f, -1.0f), 2.0f));
+    Objects.push_back(new Sphere(glm::vec3(5.0f, -1.0f, -2.5f), 1.3f));
 
     // Wall 1
     Objects.push_back(

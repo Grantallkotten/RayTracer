@@ -3,35 +3,36 @@
 bool Sphere::Collision(Ray *ray, glm::vec3 &intersectionPoint) {
   const float EPSILON = 0.000001f;
 
-  glm::vec3 D = ray->getDir();
-  glm::vec3 S = ray->getOrig();
+  glm::vec3 dir = ray->getDir();
+  glm::vec3 start = ray->getOrig();
+  glm::vec3 cs = start - centerPoint;
+  float a = glm::dot(dir, dir);
+  float half_b = glm::dot(cs, dir);
+  float c = glm::dot(cs, cs) - radius * radius;
 
-  float c1 = glm::dot(D, D);
-  float c2 = glm::dot(2.0f * D, (S - centerPoint));
-  float c3 = glm::dot((S - centerPoint), (S - centerPoint)) - radius * radius;
-  float arg = c2 * c2 - 4.0f * c1 * c3;
+  float arg = half_b * half_b - a * c;
 
   if (arg < -EPSILON) {
     return false;
   }
-  float t;
+  if (arg < EPSILON) {
+    intersectionPoint = ray->at(-half_b);
+  }
+  auto sqrt_arg = glm::sqrt(arg);
+  auto t = (-half_b - sqrt_arg) / a;
+  if (t <= Ray::T_MIN || t >= Ray::T_MAX) {
+    t = (-half_b + sqrt_arg) / a;
+    if (t <= Ray::T_MIN || t >= Ray::T_MAX) {
+      return false;
+    }
+  }
 
-  if (arg > -EPSILON && arg < EPSILON) {
-    t = -c2 / (2 * c1);
-  } else {
-    // t = std::min( ( -c2 - std::abs(arg)) / (2 * c1), (-c2 + std::abs(arg)) /
-    // (2 * c1));
-    t = (-c2 - std::abs(arg)) / (2 * c1);
-  }
-  if (t < 0.0f) {
-    return false;
-  }
   // std::cout << "t: " << t << " :\n";
 
-  glm::vec3 x_rt = ray->getOrig() + ray->getDir() * t;
-  // glm::vec3 surfNormal = glm::normalize(x_rt - centerPoint);
+  // glm::vec3 x_rt = ray->getOrig() + ray->getDir() * t;
+  //  glm::vec3 surfNormal = glm::normalize(x_rt - centerPoint);
 
-  intersectionPoint = x_rt;
+  intersectionPoint = ray->at(t);
 
   // std::cout <<  " " << t;
   // std::cout << "\n" << intersectionPoint.x << ", " << intersectionPoint.y <<

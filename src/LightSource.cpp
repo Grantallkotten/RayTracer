@@ -8,17 +8,15 @@ std::uniform_real_distribution<float> distribution(0.0f, 1.0f);
 
 double LightSource::CheckShadowRays(Scene *scene, Object *objectX,
                                     const glm::vec3 &x) {
+  if (typeid(*objectX) == typeid(LightSource)) {
+    return 1.0;
+  }
 
   float sum = 0.0;
   int N = 50;
   float A = glm::length(E1) * glm::length(E2) /
             2; // @TODO Kolla så denna är tänkt rätt med punkter
-  glm::vec3 Ny = getNormal(x);
   glm::vec3 Nx = objectX->getNormal(x); // @TODO fix getNormal for spheres
-
-  if (typeid(*objectX) == typeid(LightSource)) {
-    return 1.0;
-  }
 
   for (int i = 1; i <= N; i++) {
     float s = ((float)rand() / (RAND_MAX));
@@ -31,6 +29,7 @@ double LightSource::CheckShadowRays(Scene *scene, Object *objectX,
 
     glm::vec3 yi = getP0() + s * E1 + t * E2;
     glm::vec3 di = yi - x;
+    glm::vec3 Ny = getNormal(yi);
     // std::cout << "\n\n\n";
     // std::cout << "d_i: " << di.x << " " << di.y << " " << di.z << "\n\n\n";
     //  @TODO Check if no collission V(x,y_i) and do it right

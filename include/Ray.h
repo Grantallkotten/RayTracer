@@ -20,6 +20,8 @@ private:
   ColorDBL color;
   // Remember to normilaze all directions!
 public:
+  static constexpr float T_MIN = 0.0f;
+  static constexpr float T_MAX = 10000.0f;
   Ray(){};
 
   Ray(const glm::vec3 &origin, const glm::vec3 &direction)
@@ -28,6 +30,8 @@ public:
   glm::vec3 getDir() const { return dir; }
 
   glm::vec3 getOrig() const { return orig; }
+
+  glm::vec3 at(float t) { return orig * dir * t; }
 
   ColorDBL castRay(Scene *scene, Ray *prevRay, float deathProbability);
 
