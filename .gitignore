@@ -1,12 +1,19 @@
+outPPM/
+
+# Ignore CMake generated files and directories
+CMakeFiles/
+CMakeCache.txt
+CMakeScripts/
+CMakeScripts/CMake*.cmake
+CMakeScripts/cmake_install.cmake
+CMakeScripts/CTestTestfile.cmake
+CMakeScripts/Makefile
+CMakeScripts/install_manifest.txt
+
+# Ignore build output directories
 build/
 bin/
-outPPM/
-*.o
-*.cbp
-*.cmake
-CMakeCache.txt
-cmake_install.cmake
+lib/
+
 compile_commands.json
-CMakeFiles/
-Makefile
 .cache/
