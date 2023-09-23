@@ -15,6 +15,7 @@ double LightSource::CheckShadowRays(Scene *scene, Object *objectX,
 	glm::vec3 Ny = getNormal();
 	glm::vec3 Nx = objectX->getNormal(x);// @TODO fix getNormal for spheres
 
+
   if (typeid(*objectX) == typeid(LightSource)) {
     return 1.0;
   }
