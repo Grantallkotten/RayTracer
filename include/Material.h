@@ -23,6 +23,8 @@ public:
 
     double getTranslucence() { return translucence; }
 
+    MaterialProperty getMaterialProperty() { return property; }
+
     ColorDBL getColor() { return color;  }
 
 

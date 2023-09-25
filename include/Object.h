@@ -4,6 +4,11 @@
 #include "../include/Ray.h"
 #include "../include/glm/glm.hpp"
 
+struct CollisionInfo {
+	glm::vec3 normal;
+	glm::vec3 point;
+};
+
 class Object {
 private:
 public:
@@ -14,5 +19,5 @@ public:
 
   virtual Material getMaterial() = 0;
 
-  virtual bool Collision(Ray *ray, glm::vec3 &intersectionPoint) = 0;
+  virtual bool Collision(Ray *ray, CollisionInfo &collisionInfo) = 0;
 };

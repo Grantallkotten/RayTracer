@@ -14,10 +14,9 @@ public:
 
 	glm::vec3 getNormal(glm::vec3 point) override { return glm::normalize(point - centerPoint); }
 
-
 	Material getMaterial() override { return material; }
 
-	bool Collision(Ray *ray, glm::vec3 &intersectionPoint) override;
+	bool Collision(Ray *ray, CollisionInfo& collisionInfo) override;
 
 	glm::vec3 getCenterPoint() { return centerPoint; }
 

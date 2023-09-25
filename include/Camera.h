@@ -20,7 +20,7 @@ private:
   const int BAR_WIDTH = 20;
 
 public:
-  Camera(const glm::vec3 &p = glm::vec3(-1.0f, 0.0f, 0.0f), const int &s = 800)
+  Camera(const glm::vec3 &p = glm::vec3(-1.0f, 0.0f, 0.0f), const int & s = 800)
       : CameraPlane{std::vector<std::vector<Pixel>>(s, std::vector<Pixel>(s))},
         pixelLength{2 / float(s - 1)}, size{s}, positionCamera{p},
         positionPlaneCenter{

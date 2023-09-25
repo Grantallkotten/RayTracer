@@ -1,7 +1,7 @@
 #pragma once
 #include "../include/Triangle.h"
 
-bool Triangle::Collision(Ray* ray, glm::vec3& intersectionPoint) {
+bool Triangle::Collision(Ray* ray, CollisionInfo& collisionInfo) {
     const float EPSILON = 0.0000001f;
 
     if (glm::dot(ray->getDir(), normal) > -EPSILON) {// If the scalarproduct betwen the ray and normal is positiv
@@ -29,7 +29,7 @@ bool Triangle::Collision(Ray* ray, glm::vec3& intersectionPoint) {
         
     if (t < 0.0f) { return false; }
         
-    intersectionPoint = ray->getOrig() + t * ray->getDir(); // Changes the value on the vec3
-
+	collisionInfo.point = ray->getOrig() + t * ray->getDir(); // Changes the value on the vec3
+    collisionInfo.normal = getNormal();
     return true;
 }

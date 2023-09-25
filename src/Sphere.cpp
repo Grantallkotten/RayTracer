@@ -1,6 +1,6 @@
 #include "../include/Sphere.h"
 
-bool Sphere::Collision(Ray *ray, glm::vec3 &intersectionPoint) {
+bool Sphere::Collision(Ray *ray, CollisionInfo& collisionInfo) {
   const float EPSILON = 0.000001f;
 #if 1
   glm::vec3 D = ray->getDir();
@@ -27,7 +27,8 @@ bool Sphere::Collision(Ray *ray, glm::vec3 &intersectionPoint) {
     return false;
   }
 
-  intersectionPoint = ray->getOrig() + ray->getDir() * t;
+  collisionInfo.point = ray->getOrig() + ray->getDir() * t;
+  collisionInfo.normal = getNormal(collisionInfo.point);
   // glm::vec3 surfNormal = glm::normalize(intersectionPoint - centerPoint);
 
   //intersectionPoint = x_rt;

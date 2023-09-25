@@ -14,8 +14,6 @@ protected:
   glm::vec3 E1, E2;
 
 public:
-  int test;
-
   Triangle(const glm::vec3 &p0 = glm::vec3(13.0f, 0.0f, 5.0f),
            const glm::vec3 &p1 = glm::vec3(10.0f, -6.0f, 5.0f),
            const glm::vec3 &p2 = glm::vec3(13.0f, 0.0f, -5.0f),
@@ -30,11 +28,11 @@ public:
     normal = glm::normalize(glm::cross(E1, E2));
   }
 
-  glm::vec3 getNormal(glm::vec3 point = glm::vec3()) override{ return normal; }
+  glm::vec3 getNormal(glm::vec3 point = glm::vec3()) override { return normal; }
 
   Material getMaterial() override { return material; }
 
-  bool Collision(Ray *ray, glm::vec3 &intersectionPoint) override;
+  bool Collision(Ray *ray, CollisionInfo& collisionInfo) override;
 
   glm::vec3 getP0() { return point0; }
 
