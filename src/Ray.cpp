@@ -101,7 +101,7 @@ bool Ray::ShadowRay(Scene* scene) {
 
     CollisionInfo ci;
 	for (Object* obj : scene->Objects) {
-		if (obj->Collision(this, ci)) {
+		if (obj->getMaterial().getMaterialProperty() != Material::translucence && obj->Collision(this, ci)) {
 			dist_x_to_ip = glm::length(ci.point - orig);
 
 			if (dist_x_to_ip < dist_x_to_yi) {
