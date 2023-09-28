@@ -36,29 +36,26 @@ ColorDBL Ray::castRay(Scene *scene, Ray *prevRay, float deathProbability) {
   color = obj->getMaterial().getColor();
 
     // Mirror dont need to send shadowrays
-    if(obj->getMaterial().getMaterialProperty() == Material::specularity){ return color; }
+    //if(obj->getMaterial().getMaterialProperty() == Material::specularity){ return color; }
 
     for (LightSource *aLightSource : scene->LightSources) {
-      lightContribution =
-          aLightSource->CheckShadowRays(scene, obj, ci.point);
+      lightContribution = aLightSource->CheckShadowRays(scene, obj, ci.point);
       // @TODO sätt lightContribution på färgen av objektet
       color *= lightContribution;
     }
 
-    if (((double)rand() / (RAND_MAX)) <= deathProbability) {
+    if (((double)rand() / (RAND_MAX)) <= deathProbability && obj->getMaterial().getMaterialProperty() != Material::specularity) {
     return color; //@TODO * imortance sen och räkna med speculäritet
   }
   
   switch (obj->getMaterial().getMaterialProperty()){
   case Material::specularity:
-      /*
-      glm::vec3 nextDir = dir - 2.0f * glm::dot(dir, ci.normal) * ci.normal;//I−2*dot(I,N)*N
-      Ray* nextRay = new Ray(ci.point, nextDir);
-      ColorDBL nextReturncolor = castRay(scene, nextRay, deathProbability);
-      returnColor = nextReturncolor;// = because it is a mirror
-      */
+      color = reflectionLight(scene, prevRay, deathProbability);
+
       break;
   case Material::translucence:
+      //color += inderectLight(scene, prevRay, deathProbability);
+
       /*
       // Probability of bouncing
       if (true) {
@@ -101,6 +98,16 @@ ColorDBL Ray::castRay(Scene *scene, Ray *prevRay, float deathProbability) {
   return color;
 }
 
+ColorDBL Ray::reflectionLight(Scene* scene, Ray* prevRay, float deathProbability) {
+    glm::vec3 objNormal = obj->getNormal(end);
+    
+    glm::vec3 nextDir = dir - 2.0f * glm::dot(dir, objNormal) * objNormal;//I−2*dot(I,N)*N
+    Ray nextRay = Ray(end, nextDir);
+
+    return nextRay.castRay(scene, this, deathProbability);
+
+}
+
 ColorDBL Ray::inderectLight(Scene* scene, Ray* prevRay, float deathProbability) {
 
     float y_i = ((float)rand() / (RAND_MAX));
@@ -132,7 +139,7 @@ ColorDBL Ray::inderectLight(Scene* scene, Ray* prevRay, float deathProbability) 
     newDir.z = x0 * e1.z + y0 * e2.z + z0 * e3.z;
 
     Ray newRay(end, newDir);
-    return getColor() * newRay.castRay(scene, prevRay, deathProbability);
+    return getColor() * newRay.castRay(scene, this, deathProbability);
 }
 
 void creatLocalAxes(glm::vec3& e1, glm::vec3& e2, glm::vec3& e3) {

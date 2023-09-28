@@ -30,20 +30,23 @@ void Camera::castRays(Scene *scene) {
 }
 
 void Camera::renderRangeOfColums(Scene *scene, int start_colum, int end_colum, int threads_done, int num_threads) {
-    for(int i = 0; i < raysPerPixel; i++){
         glm::vec3 pixelPosition = positionCamera + glm::vec3(1.0f, 1.0f, 1.0f);
         pixelPosition.z -= pixelLength * start_colum;
         for (int colum = start_colum; colum < end_colum; colum++) {
             pixelPosition.y = 1.0f;
             for (Pixel &p : CameraPlane[colum]) {
                 Ray r = Ray(positionCamera, glm::normalize(pixelPosition - positionCamera));
-                p.setColor(r.castRay(scene, nullptr, 0.25));
-                //p.setColor(p.getColor() /= raysPerPixel);
+                ColorDBL c(0.0, 0.0, 0.0);
+                for (int i = 0; i < raysPerPixel; i++) {
+                    c += (r.castRay(scene, nullptr, 0.25));
+                }
+                c /= raysPerPixel;
+                p.setColor(c);
                 pixelPosition.y -= pixelLength;
             }
             pixelPosition.z -= pixelLength;
         }
-    }
+    
     std::cout << std::setw(5) << std::fixed << std::setprecision(1) << (1.0 - (double)threads_done / (double)num_threads) * 100.0 << " %\n";
 }
 

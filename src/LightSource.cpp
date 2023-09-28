@@ -10,7 +10,7 @@ double LightSource::CheckShadowRays(Scene *scene, Object *objectX,
                                     const glm::vec3 &x) {
 
 	float sum = 0.0;
-	int N = 100;
+	int N = 5;
 	float A = glm::length(E1) * glm::length(E2) / 2; // @TODO Kolla så denna är tänkt rätt med punkter
 	glm::vec3 Ny = getNormal();
 	glm::vec3 Nx = objectX->getNormal(x);// @TODO fix getNormal for spheres

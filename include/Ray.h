@@ -35,6 +35,8 @@ public:
 
   ColorDBL inderectLight(Scene* scene, Ray* prevRay, float deathProbability);
 
+  ColorDBL reflectionLight(Scene* scene, Ray* prevRay, float deathProbability);
+
   ColorDBL getColor() { return color; }
 
   void rayColor() { std::cout << color; };
