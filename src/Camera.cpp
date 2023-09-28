@@ -30,19 +30,23 @@ void Camera::castRays(Scene *scene) {
 }
 
 void Camera::renderRangeOfColums(Scene *scene, int start_colum, int end_colum) {
-  glm::vec3 pixelPosition = positionCamera + glm::vec3(1.0f, 1.0f, 1.0f);
-  pixelPosition.z -= pixelLength * start_colum;
-  for (int colum = start_colum; colum < end_colum; colum++) {
-    pixelPosition.y = 1.0f;
-    for (Pixel &p : CameraPlane[colum]) {
-      Ray r =
-          Ray(positionCamera, glm::normalize(pixelPosition - positionCamera));
-      p.setColor(r.castRay(scene, nullptr, 1.0));
-      pixelPosition.y -= pixelLength;
+    for(int i = 0; i < raysPerPixel; i++){
+        glm::vec3 pixelPosition = positionCamera + glm::vec3(1.0f, 1.0f, 1.0f);
+        pixelPosition.z -= pixelLength * start_colum;
+        for (int colum = start_colum; colum < end_colum; colum++) {
+            pixelPosition.y = 1.0f;
+            for (Pixel &p : CameraPlane[colum]) {
+                Ray r = Ray(positionCamera, glm::normalize(pixelPosition - positionCamera));
+                p.setColor(r.castRay(scene, nullptr, 1.0));
+                //p.setColor(p.getColor() /= raysPerPixel);
+                pixelPosition.y -= pixelLength;
+            }
+            pixelPosition.z -= pixelLength;
+        }
     }
-    pixelPosition.z -= pixelLength;
-  }
+    std::cout << "---\n";
 }
+
 
 void Camera::render(Scene *scene) {
   unsigned int num_threads = std::thread::hardware_concurrency();

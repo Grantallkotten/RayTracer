@@ -47,6 +47,14 @@ public:
 		c1.B += c2.B;
 	}
 
+	ColorDBL friend operator/=(const ColorDBL& c1,const int& i) {
+		return ColorDBL(c1.R / (double)i, c1.G / (double)i, c1.B / (double)i);
+	}
+
+	ColorDBL friend operator+(const ColorDBL& c1, const ColorDBL& c2) {
+		return ColorDBL(c1.R + c2.R, c1.G + c2.G, c1.B + c2.B);
+	}
+
 	friend bool operator==(const ColorDBL& c1, const ColorDBL& c2) {
 		if (c1.R == c2.R && c1.G == c2.G && c1.B == c2.B) {
 			return true;

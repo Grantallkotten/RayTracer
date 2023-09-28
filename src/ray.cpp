@@ -45,16 +45,18 @@ ColorDBL Ray::castRay(Scene *scene, Ray *prevRay, float deathProbability) {
 
     return returnColor; //@TODO * imortance sen och räkna med speculäritet
   }
-  /*
+  
   switch (obj->getMaterial().getMaterialProperty()){
   case Material::specularity:
+      /*
       glm::vec3 nextDir = dir - 2.0f * glm::dot(dir, ci.normal) * ci.normal;//I−2*dot(I,N)*N
       Ray* nextRay = new Ray(ci.point, nextDir);
       ColorDBL nextReturncolor = castRay(scene, nextRay, deathProbability);
       returnColor = nextReturncolor;// = because it is a mirror
+      */
       break;
-
   case Material::translucence:
+      /*
       // Probability of bouncing
       if (true) {
           glm::vec3 nextDir = dir - 2.0f * glm::dot(dir, ci.normal) * ci.normal;//I−2×(I⋅N)×N
@@ -80,6 +82,7 @@ ColorDBL Ray::castRay(Scene *scene, Ray *prevRay, float deathProbability) {
           ColorDBL nextReturncolor = castRay(scene, nextRay, deathProbability);
           returnColor += nextReturncolor;// @TODO Ska det va +=??
       }
+      */
       break;
 
   case Material::diffusion:
@@ -88,7 +91,7 @@ ColorDBL Ray::castRay(Scene *scene, Ray *prevRay, float deathProbability) {
   default:
 	  break;
   }
-  */
+  
   //@TODO Rekursiv formel
 
   return ColorDBL(0.0f, 0.0f, 0.2f);
@@ -101,7 +104,7 @@ bool Ray::ShadowRay(Scene* scene) {
 
     CollisionInfo ci;
 	for (Object* obj : scene->Objects) {
-		if (obj->Collision(this, ci)) {
+		if (obj->getMaterial().getMaterialProperty() != Material::translucence && obj->Collision(this, ci)) {
 			dist_x_to_ip = glm::length(ci.point - orig);
 
 			if (dist_x_to_ip < dist_x_to_yi) {

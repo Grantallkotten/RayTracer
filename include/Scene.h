@@ -13,7 +13,7 @@ private:
 
   // Draw an image and call all corners "pointX", then you can easy creat a room
   // in Objects
-  std::vector<glm::vec3> points{
+  glm::vec3 points[12] = {
       glm::vec3(0.0f, 6.0f, 5.0f),   // p0
       glm::vec3(10.0f, 6.0f, 5.0f),  // p1
       glm::vec3(13.0f, 0.0f, 5.0f),  // p2
@@ -36,7 +36,7 @@ public:
 
   const ColorDBL SKYBOXCOLOR = ColorDBL(0.21, 0.32, 0.56);
 
-  Scene(Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 360),
+  Scene(Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 800),
         std::vector<Object *> o = std::vector<Object *>())
       : camera{c}, Objects{o} {
     standardScene();
