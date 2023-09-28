@@ -6,6 +6,7 @@
 #include <fstream> // Write a file
 #include <iostream>
 #include <vector>
+#include <iomanip>
 
 class Camera {
 private:
@@ -32,7 +33,7 @@ public:
 
   void castRays(Scene *scene);
 
-  void renderRangeOfColums(Scene *scene, int start_row, int end_row);
+  void renderRangeOfColums(Scene *scene, int start_row, int end_row, int threads_done, int num_threads);
 
   void render(Scene *scene);
 

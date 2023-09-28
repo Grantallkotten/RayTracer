@@ -29,7 +29,7 @@ void Camera::castRays(Scene *scene) {
   }
 }
 
-void Camera::renderRangeOfColums(Scene *scene, int start_colum, int end_colum) {
+void Camera::renderRangeOfColums(Scene *scene, int start_colum, int end_colum, int threads_done, int num_threads) {
     for(int i = 0; i < raysPerPixel; i++){
         glm::vec3 pixelPosition = positionCamera + glm::vec3(1.0f, 1.0f, 1.0f);
         pixelPosition.z -= pixelLength * start_colum;
@@ -37,32 +37,34 @@ void Camera::renderRangeOfColums(Scene *scene, int start_colum, int end_colum) {
             pixelPosition.y = 1.0f;
             for (Pixel &p : CameraPlane[colum]) {
                 Ray r = Ray(positionCamera, glm::normalize(pixelPosition - positionCamera));
-                p.setColor(r.castRay(scene, nullptr, 1.0));
+                p.setColor(r.castRay(scene, nullptr, 0.25));
                 //p.setColor(p.getColor() /= raysPerPixel);
                 pixelPosition.y -= pixelLength;
             }
             pixelPosition.z -= pixelLength;
         }
     }
-    std::cout << "---\n";
+    std::cout << std::setw(5) << std::fixed << std::setprecision(1) << (1.0 - (double)threads_done / (double)num_threads) * 100.0 << " %\n";
 }
 
 
 void Camera::render(Scene *scene) {
+  int threads_done = 0;
   unsigned int num_threads = std::thread::hardware_concurrency();
-  std::cout << "Rendering using " << num_threads << " threads \n";
+  std::cout << "Rendering using " << num_threads << " threads...\n";
   std::vector<std::thread> threads(num_threads);
   int colums_per_thread = CameraPlane.size() / num_threads;
   for (unsigned int i = 0; i < num_threads; i++) {
     threads[i] = std::thread([=]() {
       renderRangeOfColums(scene, i * colums_per_thread,
                           i == num_threads - 1 ? (i + 1) * colums_per_thread
-                                               : CameraPlane.size());
+                                               : CameraPlane.size(), i, num_threads);
     });
   }
   for (unsigned int i = 0; i < num_threads; i++) {
     threads[i].join();
   }
+  std::cout << "Rendering complete!\n";
 }
 
 void Camera::writePPM() {

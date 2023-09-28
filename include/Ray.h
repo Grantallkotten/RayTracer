@@ -33,7 +33,11 @@ public:
 
   bool ShadowRay(Scene *scene);
 
+  ColorDBL inderectLight(Scene* scene, Ray* prevRay, float deathProbability);
+
   ColorDBL getColor() { return color; }
 
   void rayColor() { std::cout << color; };
 };
+
+void creatLocalAxes(glm::vec3& e1, glm::vec3& e2, glm::vec3& e3);
