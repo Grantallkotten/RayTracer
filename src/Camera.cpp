@@ -55,6 +55,7 @@ void Camera::render(Scene *scene) {
   int threads_done = 0;
   unsigned int num_threads = std::thread::hardware_concurrency();
   std::cout << "Rendering using " << num_threads << " threads...\n";
+  std::cout << std::setw(5) << std::fixed << std::setprecision(1) << 0.0 << " %\n";
   std::vector<std::thread> threads(num_threads);
   int colums_per_thread = CameraPlane.size() / num_threads;
   for (unsigned int i = 0; i < num_threads; i++) {

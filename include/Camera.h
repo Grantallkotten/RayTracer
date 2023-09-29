@@ -13,7 +13,7 @@ private:
   std::vector<std::vector<Pixel>> CameraPlane;
   float pixelLength;
   int size;
-  int raysPerPixel = 1;// @TODO dont work
+  int raysPerPixel = 50;
   const int maxColorValue = 255;
   glm::vec3 positionCamera;
   glm::vec3 positionPlaneCenter;

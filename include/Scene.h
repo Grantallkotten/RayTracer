@@ -30,13 +30,16 @@ private:
   };
 
 public:
-  std::vector<Object *> Objects;
+    const ColorDBL WHITE = ColorDBL(0.8f, 0.8f, 0.8f);
+    const ColorDBL FLOORBLUE = ColorDBL(0.2, 0.2, 0.4);
 
-  std::vector<LightSource *> LightSources;
+    std::vector<Object *> Objects;
+
+    std::vector<LightSource *> LightSources;
 
   const ColorDBL SKYBOXCOLOR = ColorDBL(0.21, 0.32, 0.56);
 
-  Scene(Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 800),
+  Scene(Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 200),
         std::vector<Object *> o = std::vector<Object *>())
       : camera{c}, Objects{o} {
     standardScene();
@@ -125,32 +128,20 @@ public:
     // Floor 1
     Objects.push_back(
         new Triangle(points[7], points[9], points[8],
-                     Material(Material::diffusion, ColorDBL(0.2, 0.2, 0.4))));
+                     Material(Material::diffusion, FLOORBLUE)));
 
     // Floor 2
     Objects.push_back(
         new Triangle(points[7], points[10], points[9],
-                     Material(Material::diffusion, ColorDBL(0.2, 0.2, 0.4))));
+                     Material(Material::diffusion, FLOORBLUE)));
     Objects.push_back(
         new Triangle(points[7], points[6], points[10],
-                     Material(Material::diffusion, ColorDBL(0.2, 0.2, 0.4))));
+                     Material(Material::diffusion, FLOORBLUE)));
 
     // Floor 3
     Objects.push_back(
         new Triangle(points[6], points[11], points[10],
                      Material(Material::diffusion, ColorDBL(0.2, 0.2, 0.4))));
-
-    // Triforce
-    // Objects.push_back(new Triangle(glm::vec3(10.0f, 4.8f, 1.0f),
-    // glm::vec3(10.0f, 3.8f, 0.0f), glm::vec3(10.0f, 5.8f, 0.0f),
-    // Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.0))));
-    // Objects.push_back(new Triangle(glm::vec3(10.0f, 2.8f, 1.0f),
-    // glm::vec3(10.0f, 1.8f, 0.0f), glm::vec3(10.0f, 3.8f, 0.0f),
-    // Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.0))));
-    // Objects.push_back(new Triangle(glm::vec3(10.0f, 3.8f, 2.0f),
-    // glm::vec3(10.0f, 2.8f, 1.0f), glm::vec3(10.0f, 4.8f, 1.0f),
-    // Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.0))));
-
 
     // Roof lamp
     LightSources.push_back(new LightSource(
@@ -162,13 +153,7 @@ public:
         glm::vec3(9.0f, -0.5f, 4.9f),
         Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.9))));
 
-    Objects.push_back(new LightSource(
-        glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, 0.5f, 4.9f),
-        glm::vec3(9.0f, -0.5f, 4.9f),
-        Material(Material::diffusion, ColorDBL(1.0, 1.0, 1.0))));
-    Objects.push_back(new LightSource(
-        glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(5.0f, 0.5f, 4.9f),
-        glm::vec3(9.0f, -0.5f, 4.9f),
-        Material(Material::diffusion, ColorDBL(1.0, 1.0, 1.0))));
+    //Objects.push_back(new LightSource(glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, 0.5f, 4.9f),glm::vec3(9.0f, -0.5f, 4.9f),Material(Material::light, ColorDBL(1.0, 1.0, 1.0))));
+    //Objects.push_back(new LightSource(glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), Material(Material::light, ColorDBL(1.0, 1.0, 1.0))));
   }
 };

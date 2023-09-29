@@ -32,20 +32,12 @@ ColorDBL Ray::castRay(Scene *scene, Ray *prevRay, float deathProbability) {
   if (!hitsObject) {
     return scene->SKYBOXCOLOR;
   }
-  double lightContribution = 0.0;
   color = obj->getMaterial().getColor();
+  double lightContribution = 0.0;
 
-    // Mirror dont need to send shadowrays
-    //if(obj->getMaterial().getMaterialProperty() == Material::specularity){ return color; }
-
-    for (LightSource *aLightSource : scene->LightSources) {
-      lightContribution = aLightSource->CheckShadowRays(scene, obj, ci.point);
-      // @TODO sätt lightContribution på färgen av objektet
-      color *= lightContribution;
-    }
-
-    if (((double)rand() / (RAND_MAX)) <= deathProbability && obj->getMaterial().getMaterialProperty() != Material::specularity) {
-    return color; //@TODO * imortance sen och räkna med speculäritet
+  for (LightSource *aLightSource : scene->LightSources) {
+    lightContribution = aLightSource->CheckShadowRays(scene, obj, ci.point);
+    color *= lightContribution;
   }
   
   switch (obj->getMaterial().getMaterialProperty()){
@@ -53,9 +45,11 @@ ColorDBL Ray::castRay(Scene *scene, Ray *prevRay, float deathProbability) {
       color = reflectionLight(scene, prevRay, deathProbability);
 
       break;
+  case Material::glossy:
+      color *= 0.2;
+      color += reflectionLight(scene, prevRay, deathProbability) * 0.8;
+      break;
   case Material::translucence:
-      //color += inderectLight(scene, prevRay, deathProbability);
-
       /*
       // Probability of bouncing
       if (true) {
@@ -84,28 +78,15 @@ ColorDBL Ray::castRay(Scene *scene, Ray *prevRay, float deathProbability) {
       }
       */
       break;
-
   case Material::diffusion:
       color += inderectLight(scene, prevRay, deathProbability);
       break;
-
+  case Material::light:
+      break;
   default:
 	  break;
   }
-  
-  //@TODO Rekursiv formel
-
   return color;
-}
-
-ColorDBL Ray::reflectionLight(Scene* scene, Ray* prevRay, float deathProbability) {
-    glm::vec3 objNormal = obj->getNormal(end);
-    
-    glm::vec3 nextDir = dir - 2.0f * glm::dot(dir, objNormal) * objNormal;//I−2*dot(I,N)*N
-    Ray nextRay = Ray(end, nextDir);
-
-    return nextRay.castRay(scene, this, deathProbability);
-
 }
 
 ColorDBL Ray::inderectLight(Scene* scene, Ray* prevRay, float deathProbability) {
@@ -127,9 +108,9 @@ ColorDBL Ray::inderectLight(Scene* scene, Ray* prevRay, float deathProbability) 
     float y0 = std::sin(phi_i) * std::sin(omega_i);
     float z0 = std::cos(phi_i);
 
-    glm::vec3 e1 = obj->getNormal(end);// Local axis
+    glm::vec3 e1;// Local axis
     glm::vec3 e2;// Local axis
-    glm::vec3 e3;// Local axis
+    glm::vec3 e3 = obj->getNormal(end);// Local axis
 
     creatLocalAxes(e1, e2, e3);
 
@@ -138,18 +119,30 @@ ColorDBL Ray::inderectLight(Scene* scene, Ray* prevRay, float deathProbability) 
     newDir.y = x0 * e1.y + y0 * e2.y + z0 * e3.y;
     newDir.z = x0 * e1.z + y0 * e2.z + z0 * e3.z;
 
+    //    glm::vec3 newDir(x0, y0, z0);
+
     Ray newRay(end, newDir);
-    return getColor() * newRay.castRay(scene, this, deathProbability);
+    ColorDBL inderectLight = newRay.castRay(scene, this, deathProbability);
+    return inderectLight;
+}
+
+ColorDBL Ray::reflectionLight(Scene* scene, Ray* prevRay, float deathProbability) {
+    glm::vec3 objNormal = obj->getNormal(end);
+    
+    glm::vec3 nextDir = dir - 2.0f * glm::dot(dir, objNormal) * objNormal;//I−2*dot(I,N)*N
+    Ray nextRay = Ray(end, nextDir);
+
+    return nextRay.castRay(scene, this, deathProbability);
+
 }
 
 void creatLocalAxes(glm::vec3& e1, glm::vec3& e2, glm::vec3& e3) {
     // Generate a random vector to start the process
-    glm::vec3 arbitrary_vector(1.0f, 1.0f, 1.0f);
-
-    // Gram-Schmidt process to orthogonalize the vectors
-    e2 = glm::normalize(arbitrary_vector - glm::dot(arbitrary_vector, e1) * e1);
-    e3 = glm::normalize(glm::cross(e1, e3));
+    e3 = glm::normalize(e3);
+    e1 = glm::normalize(-e1 + glm::dot(e3, e1) * e3);
+    e2 = glm::normalize(glm::cross(e3, e1));
 }
+ 
 
 bool Ray::ShadowRay(Scene* scene) {
 	// x is on the object and y on the lamp

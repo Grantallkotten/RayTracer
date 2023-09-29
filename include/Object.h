@@ -16,7 +16,6 @@ public:
 
   virtual glm::vec3 getNormal(glm::vec3 point) = 0;
 
-
   virtual Material getMaterial() = 0;
 
   virtual bool Collision(Ray *ray, CollisionInfo &collisionInfo) = 0;

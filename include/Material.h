@@ -6,7 +6,7 @@
 
 class Material {
 public:
-    enum MaterialProperty { diffusion, specularity , translucence };
+    enum MaterialProperty { diffusion, specularity , translucence, glossy, light};
 private:
     MaterialProperty property;
     ColorDBL color;
@@ -16,13 +16,6 @@ public:
         property{ property }, color{color} {
     
     }
-	
-    double getDiffusion() { return diffusion; }
-
-    double getSpecularity() { return specularity; }
-
-    double getTranslucence() { return translucence; }
-
     MaterialProperty getMaterialProperty() { return property; }
 
     ColorDBL getColor() { return color;  }

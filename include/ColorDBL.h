@@ -12,6 +12,11 @@ private:
 public:
 	ColorDBL() {};
 
+	ColorDBL(double d) : R{ std::min(std::max(d, 0.0), 1.0) },
+		G{ std::min(std::max(d, 0.0), 1.0) },
+		B{ std::min(std::max(d, 0.0), 1.0) } {}
+
+
 	ColorDBL(double r, double g, double b): R{ std::min(std::max(r, 0.0), 1.0) },
 											G{ std::min(std::max(g, 0.0), 1.0) }, 
 											B{ std::min(std::max(b, 0.0), 1.0) } {}
@@ -47,8 +52,10 @@ public:
 		c1.B += c2.B;
 	}
 
-	ColorDBL friend operator/=(const ColorDBL& c1,const int& i) {
-		return ColorDBL(c1.R / (double)i, c1.G / (double)i, c1.B / (double)i);
+	friend void operator/=(ColorDBL& c1,const double& d) {
+		c1.R /= d;
+		c1.G /= d;
+		c1.B /= d;
 	}
 
 	ColorDBL friend operator+(const ColorDBL& c1, const ColorDBL& c2) {

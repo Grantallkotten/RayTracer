@@ -6,41 +6,38 @@
 std::default_random_engine seed;
 std::uniform_real_distribution<float> distribution(0.0f, 1.0f);
 
-double LightSource::CheckShadowRays(Scene *scene, Object *objectX,
-                                    const glm::vec3 &x) {
-
+double LightSource::CheckShadowRays(Scene *scene, Object *objectX, const glm::vec3 &x) {
 	float sum = 0.0;
-	int N = 5;
+	int N = 3;
 	float A = glm::length(E1) * glm::length(E2) / 2; // @TODO Kolla så denna är tänkt rätt med punkter
 	glm::vec3 Ny = getNormal();
-	glm::vec3 Nx = objectX->getNormal(x);// @TODO fix getNormal for spheres
+    glm::vec3 Nx = objectX->getNormal(x);
 
-
-  if (typeid(*objectX) == typeid(LightSource)) {
-    return 1.0;
-  }
-
-  for (int i = 1; i <= N; i++) {
-    float s = ((float)rand() / (RAND_MAX));
-    float t = ((float)rand() / (RAND_MAX));
-
-    if (s + t > 1) {
-      s = 1 - s;
-      t = 1 - t;
+    if (typeid(*objectX) == typeid(LightSource)) {
+        return 1.0;
     }
 
-    glm::vec3 yi = getP0() + s * E1 + t * E2;
-    glm::vec3 di = yi - x;
-    // std::cout << "\n\n\n";
-    // std::cout << "d_i: " << di.x << " " << di.y << " " << di.z << "\n\n\n";
-    //  @TODO Check if no collission V(x,y_i) and do it right
-    if (!Ray(x, di).ShadowRay(scene)) { continue; }
+    for (int i = 1; i <= N; i++) {
+        float s = ((float)rand() / (RAND_MAX));
+        float t = ((float)rand() / (RAND_MAX));
 
-    float cosX = glm::dot(Ny, di / glm::length(di));
-    float cosY = -glm::dot(Nx, di / glm::length(di));
+        if (s + t > 1) {
+            s = 1 - s;
+            t = 1 - t;
+        }
 
-    sum += std::max(0.0f, (cosX * cosY) / (glm::length(di) * glm::length(di)));
-  }
+        glm::vec3 yi = getP0() + s * E1 + t * E2;
+        glm::vec3 di = yi - x;
+        
+        if (!Ray(x, di).ShadowRay(scene)) { 
+            continue; 
+        }
+
+        float cosX = glm::dot(Ny, di / glm::length(di));
+        float cosY = -glm::dot(Nx, di / glm::length(di));
+
+        sum += std::max(0.0f, (cosX * cosY) / (glm::length(di) * glm::length(di)));
+    }
   float BRDF = 1.0f / _PI;
 
   return (float)(A * BRDF * radiance / N * sum);
