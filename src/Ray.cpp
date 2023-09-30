@@ -50,36 +50,10 @@ ColorDBL Ray::castRay(Scene *scene, Ray *prevRay, float deathProbability) {
       color += reflectionLight(scene, prevRay, deathProbability) * 0.8;
       break;
   case Material::translucence:
-      /*
-      // Probability of bouncing
-      if (true) {
-          glm::vec3 nextDir = dir - 2.0f * glm::dot(dir, ci.normal) * ci.normal;//I−2×(I⋅N)×N
-          Ray* nextRay = new Ray(ci.point, nextDir);
-          ColorDBL nextReturncolor = castRay(scene, nextRay, deathProbability);
-          returnColor = nextReturncolor;// = because it is a mirror reflection on glass
-      }
-      // Probability of entering the material
-      else {
-          // R = n1/n2 * ( I + (cos(v1) - cos(v2) ) * N )
-          // cos(θ) = norm(dot(I,N))
-          // Glass n = 1.5
-          // Air n = 1
-          float n1 = 1.0f;
-          float n2 = 1.5f;
-          glm::vec3 I = glm::normalize(dir);
-          glm::vec3 N = ci.normal;
-          //@TODO Vad gör vi om vi är påväg ut från glas, då är inte n1 luft och n2 glas
-          //@TODO Ändra så normalerna är baklänges i check kollision för att det ska kunna ske en kollision på väg ut från ett glas objekt
-          float r = n1 / n2;
-          glm::vec3 nextDir = r * dir + (r * glm::dot(I, N) - std::sqrt(1.0f - r * r * (1.0f - glm::dot(I, N) * glm::dot(I,N) ))) * N;
-          Ray* nextRay = new Ray(ci.point, nextDir);
-          ColorDBL nextReturncolor = castRay(scene, nextRay, deathProbability);
-          returnColor += nextReturncolor;// @TODO Ska det va +=??
-      }
-      */
+     
       break;
   case Material::diffusion:
-      color += inderectLight(scene, prevRay, deathProbability);
+      color += inderectLight(scene, prevRay, deathProbability) * obj->getMaterial().getColor() * 0.6;
       break;
   case Material::light:
       break;
@@ -98,7 +72,7 @@ ColorDBL Ray::inderectLight(Scene* scene, Ray* prevRay, float deathProbability) 
         // Ray Should die
     }
 
-    float omega_i = std::acos(std::sqrt(1 - y_i));
+    float omega_i = std::acos(std::sqrt(1.0f - y_i));
     float phi_i = 2.0f * _PI * y_i;
     // r = 1
     // phi = phi
@@ -119,8 +93,6 @@ ColorDBL Ray::inderectLight(Scene* scene, Ray* prevRay, float deathProbability) 
     newDir.y = x0 * e1.y + y0 * e2.y + z0 * e3.y;
     newDir.z = x0 * e1.z + y0 * e2.z + z0 * e3.z;
 
-    //    glm::vec3 newDir(x0, y0, z0);
-
     Ray newRay(end, newDir);
     ColorDBL inderectLight = newRay.castRay(scene, this, deathProbability);
     return inderectLight;
@@ -134,6 +106,38 @@ ColorDBL Ray::reflectionLight(Scene* scene, Ray* prevRay, float deathProbability
 
     return nextRay.castRay(scene, this, deathProbability);
 
+}
+
+
+ColorDBL Ray::reflectionLightTranslucence(Scene* scene, Ray* prevRay, float deathProbability) {
+    /*
+     // Probability of bouncing
+     if (true) {
+         glm::vec3 nextDir = dir - 2.0f * glm::dot(dir, ci.normal) * ci.normal;//I−2×(I⋅N)×N
+         Ray* nextRay = new Ray(ci.point, nextDir);
+         ColorDBL nextReturncolor = castRay(scene, nextRay, deathProbability);
+         returnColor = nextReturncolor;// = because it is a mirror reflection on glass
+     }
+     // Probability of entering the material
+     else {
+         // R = n1/n2 * ( I + (cos(v1) - cos(v2) ) * N )
+         // cos(θ) = norm(dot(I,N))
+         // Glass n = 1.5
+         // Air n = 1
+         float n1 = 1.0f;
+         float n2 = 1.5f;
+         glm::vec3 I = glm::normalize(dir);
+         glm::vec3 N = ci.normal;
+         //@TODO Vad gör vi om vi är påväg ut från glas, då är inte n1 luft och n2 glas
+         //@TODO Ändra så normalerna är baklänges i check kollision för att det ska kunna ske en kollision på väg ut från ett glas objekt
+         float r = n1 / n2;
+         glm::vec3 nextDir = r * dir + (r * glm::dot(I, N) - std::sqrt(1.0f - r * r * (1.0f - glm::dot(I, N) * glm::dot(I,N) ))) * N;
+         Ray* nextRay = new Ray(ci.point, nextDir);
+         ColorDBL nextReturncolor = castRay(scene, nextRay, deathProbability);
+         returnColor += nextReturncolor;// @TODO Ska det va +=??
+     }
+     */
+    return ColorDBL();
 }
 
 void creatLocalAxes(glm::vec3& e1, glm::vec3& e2, glm::vec3& e3) {
