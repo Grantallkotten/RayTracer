@@ -53,7 +53,7 @@ ColorDBL Ray::castRay(Scene *scene, Ray *prevRay, float deathProbability) {
      
       break;
   case Material::diffusion:
-      color += inderectLight(scene, prevRay, deathProbability) * obj->getMaterial().getColor() * 0.6;
+      color += inderectLight(scene, prevRay, deathProbability) * obj->getMaterial().getColor();
       break;
   case Material::light:
       break;
@@ -80,7 +80,7 @@ ColorDBL Ray::inderectLight(Scene* scene, Ray* prevRay, float deathProbability) 
     // See Lecture 2
     float x0 = std::sin(phi_i) * std::cos(omega_i);
     float y0 = std::sin(phi_i) * std::sin(omega_i);
-    float z0 = std::cos(phi_i);
+    float z0 = std::cos(omega_i);
 
     glm::vec3 e1;// Local axis
     glm::vec3 e2;// Local axis

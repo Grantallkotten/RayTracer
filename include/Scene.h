@@ -30,7 +30,7 @@ private:
   };
 
 public:
-    const ColorDBL WHITE = ColorDBL(0.8f, 0.8f, 0.8f);
+    const ColorDBL WHITE = ColorDBL(0.6f, 0.6f, 0.6f);
     const ColorDBL FLOORBLUE = ColorDBL(0.2, 0.2, 0.4);
 
     std::vector<Object *> Objects;
@@ -39,7 +39,7 @@ public:
 
   const ColorDBL SKYBOXCOLOR = ColorDBL(0.21, 0.32, 0.56);
 
-  Scene(Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 200),
+  Scene(Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 800),
         std::vector<Object *> o = std::vector<Object *>())
       : camera{c}, Objects{o} {
     standardScene();
@@ -128,15 +128,15 @@ public:
     // Floor 1
     Objects.push_back(
         new Triangle(points[7], points[9], points[8],
-                     Material(Material::diffusion, FLOORBLUE)));
+                     Material(Material::diffusion, WHITE)));
 
     // Floor 2
     Objects.push_back(
         new Triangle(points[7], points[10], points[9],
-                     Material(Material::diffusion, FLOORBLUE)));
+                     Material(Material::diffusion, WHITE)));
     Objects.push_back(
         new Triangle(points[7], points[6], points[10],
-                     Material(Material::diffusion, FLOORBLUE)));
+                     Material(Material::diffusion, WHITE)));
 
     // Floor 3
     Objects.push_back(
