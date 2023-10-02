@@ -84,9 +84,9 @@ ColorDBL Ray::inderectLight(Scene* scene, Ray* prevRay, float deathProbability) 
 
     glm::vec3 e1;// Local axis
     glm::vec3 e2;// Local axis
-    glm::vec3 e3 = obj->getNormal(end);// Local axis
+    glm::vec3 e3;// Local axis
 
-    creatLocalAxes(e1, e2, e3);
+    creatLocalAxes(e1, e2, e3, obj->getNormal(end));
 
     glm::vec3 newDir;
     newDir.x = x0 * e1.x + y0 * e2.x + z0 * e3.x;
@@ -94,7 +94,7 @@ ColorDBL Ray::inderectLight(Scene* scene, Ray* prevRay, float deathProbability) 
     newDir.z = x0 * e1.z + y0 * e2.z + z0 * e3.z;
 
     Ray newRay(end, newDir);
-    ColorDBL inderectLight = newRay.castRay(scene, this, deathProbability);
+    ColorDBL inderectLight = newRay.castRay(scene, this, deathProbability)*0.8f;
     return inderectLight;
 }
 
@@ -140,11 +140,44 @@ ColorDBL Ray::reflectionLightTranslucence(Scene* scene, Ray* prevRay, float deat
     return ColorDBL();
 }
 
-void creatLocalAxes(glm::vec3& e1, glm::vec3& e2, glm::vec3& e3) {
-    // Generate a random vector to start the process
+void creatLocalAxes(glm::vec3& e1, glm::vec3& e2, glm::vec3& e3, const glm::vec3& normal) {
+   /* glm::vec3 n = glm::normalize(normal);
+
+    // Choose a reference vector that is not collinear with the normal
+    glm::vec3 refVector(0.0f, 1.0f, 0.0f);  // A common choice for a reference vector
+
+    // Check if the reference vector is parallel to the normal
+    if (glm::dot(n, refVector) > 0.99f) {
+        // If it's too close to being parallel, choose a different reference vector
+        refVector = glm::vec3(1.0f, 0.0f, 0.0f);  // Use a different reference vector
+    }
+
+    // Calculate the local x-axis as the normalized normal vector
+    e1 = n;
+
+    // Calculate the local z-axis as the normalized cross product of the normal and the reference vector
+    e3 = (glm::cross(n, refVector));
+    */
+    // Calculate the local y-axis as the normalized cross product of the local z-axis and the local x-axis
+    e1 = (normal);
+    e2 = glm::vec3(e1.z, 0.0f, -e1.x);
+    if (glm::length(e2) < 0.01f) {
+        // If the normal is (0, 1, 0) 
+        e2 = glm::vec3(1.0f, 0.0f, 0.0f);
+    }
+    e3 = glm::cross(e1, e2);
+    //std::cout << "  e1: " << glm::length(e1) << " e2: " << glm::length(e2) << " e3: " << glm::length(e3) << "        ";
+    /*
+    glm::vec3 arbitrary_vector = (glm::abs(glm::dot(normal, glm::vec3(1.0f, 0.0f, 0.0f))) < 0.1f) ? glm::vec3(1.0f, 0.0f, 0.0f) : glm::vec3(0.0f, 1.0f, 0.0f); 
+    e3 = glm::normalize(normal);
+    e1 = glm::normalize(glm::cross(arbitrary_vector, e3));
+    e2 = glm::normalize(glm::cross(e3, e1));
+    */
+    /*
     e3 = glm::normalize(e3);
     e1 = glm::normalize(-e1 + glm::dot(e3, e1) * e3);
     e2 = glm::normalize(glm::cross(e3, e1));
+    */
 }
  
 

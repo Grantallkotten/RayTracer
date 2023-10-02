@@ -41,15 +41,15 @@ public:
 	}
 
 	friend void operator*=(ColorDBL& c1, const ColorDBL& c2) {
-		c1.R *= c2.R;
-		c1.G *= c2.G;
-		c1.B *= c2.B;
+		c1.R *= std::min(c2.R,1.0);
+		c1.G *= std::min(c2.G,1.0);
+		c1.B *= std::min(c2.B,1.0);
 	}
 
 	friend void operator+=(ColorDBL& c1, const ColorDBL& c2) {
-		c1.R += c2.R;
-		c1.G += c2.G;
-		c1.B += c2.B;
+		c1.R += std::min(c2.R, 1.0);
+		c1.G += std::min(c2.G, 1.0);
+		c1.B += std::min(c2.B, 1.0);
 	}
 
 	friend void operator/=(ColorDBL& c1,const double& d) {

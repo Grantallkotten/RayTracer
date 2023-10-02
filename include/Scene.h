@@ -6,6 +6,7 @@
 #include "Tetrahedron.h"
 #include "Sphere.h"
 #include "glm/glm.hpp"
+#include <chrono> // Time rendering
 
 class Scene {
 private:
@@ -21,12 +22,12 @@ private:
       glm::vec3(0.0f, -6.0f, 5.0f),  // p4
       glm::vec3(-3.0f, 0.0f, 5.0f),  // p5
 
-      glm::vec3(0.0f, 6.0f, -5.0f),   // p6
+      glm::vec3(0.0f, 6.0f, -5.0f),   // p6 
       glm::vec3(10.0f, 6.0f, -5.0f),  // p7
       glm::vec3(13.0f, 0.0f, -5.0f),  // p8
       glm::vec3(10.0f, -6.0f, -5.0f), // p9
-      glm::vec3(0.0f, -6.0f, -5.0f),  // p10
-      glm::vec3(-3.0f, 0.0f, -5.0f),  // p11
+      glm::vec3(0.0f, -6.0f, -5.0f),  // p10 
+      glm::vec3(-3.0f, 0.0f, -5.0f),  // p11 
   };
 
 public:
@@ -39,12 +40,18 @@ public:
 
   const ColorDBL SKYBOXCOLOR = ColorDBL(0.21, 0.32, 0.56);
 
-  Scene(Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 800),
-        std::vector<Object *> o = std::vector<Object *>())
+  Scene(Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 800), std::vector<Object *> o = std::vector<Object *>())
       : camera{c}, Objects{o} {
+    auto start = std::chrono::high_resolution_clock::now(); // Before starting rendering
+
     standardScene();
     camera.render(this);
     camera.writePPM();
+
+    std::cout << "Time to render: ";
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+    displayTime((int)duration.count());
   };
 
   void add(Structure s) {
@@ -54,106 +61,132 @@ public:
     }
   }
 
-  void standardScene() {
-    add(Tetrahedron(glm::vec3(8.0f, -1.0f, -1.0f), 2.0f, 4.0f));
+  void add(Object* c) {
+      Objects.push_back(c);
+  }
 
-    Objects.push_back(new Sphere(glm::vec3(8.0f, 3.5f, -2.0f), 1.0f, Material(Material::specularity, ColorDBL(0.0, 0.5, 0.5))));
+  void addLight(LightSource* s) {
+      LightSources.push_back(s);
+  }
+
+  void standardScene() {
+    add(Tetrahedron(glm::vec3(8.0f, -1.0f, -1.0f), 4.0f, 4.0f));
+
+    add(new Sphere(glm::vec3(8.0f, 3.5f, -2.0f), 1.0f, Material(Material::specularity, ColorDBL(0.0, 0.5, 0.5))));
 
     // Wall 1
-    Objects.push_back(
+    add(
         new Triangle(points[1], points[0], points[7],
                      Material(Material::diffusion, ColorDBL(0.5, 0.0, 0.0))));
-    Objects.push_back(
+    add(
         new Triangle(points[0], points[6], points[7],
                      Material(Material::diffusion, ColorDBL(0.5, 0.0, 0.0))));
 
     // Wall 2
-    Objects.push_back(
+    add(
         new Triangle(points[1], points[7], points[2],
                      Material(Material::diffusion, ColorDBL(0.0, 0.5, 0.1))));
-    Objects.push_back(
+    add(
         new Triangle(points[2], points[7], points[8],
                      Material(Material::diffusion, ColorDBL(0.0, 0.5, 0.1))));
 
     // Wall 3
-    Objects.push_back(
+    add(
         new Triangle(points[2], points[8], points[3],
                      Material(Material::diffusion, ColorDBL(0.0, 0.0, 0.5))));
-    Objects.push_back(
+    add(
         new Triangle(points[3], points[8], points[9],
                      Material(Material::diffusion, ColorDBL(0.0, 0.0, 0.5))));
 
     // Roof 1
-    Objects.push_back(
+    add(
         new Triangle(points[1], points[2], points[3],
                      Material(Material::diffusion, ColorDBL(0.1, 0.0, 0.2))));
 
     // Wall 4
-    Objects.push_back(
+    add(
         new Triangle(points[3], points[9], points[4],
-                     Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.8))));
-    Objects.push_back(
+                     Material(Material::diffusion, ColorDBL(0.6, 0.6, 0.0))));
+    add(
         new Triangle(points[4], points[9], points[10],
-                     Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.8))));
+                     Material(Material::diffusion, ColorDBL(0.6, 0.6, 0.0))));
 
     // Roof 2
-    Objects.push_back(
+    add(
         new Triangle(points[0], points[1], points[4],
                      Material(Material::diffusion, ColorDBL(0.1, 0.0, 0.2))));
-    Objects.push_back(
+    add(
         new Triangle(points[1], points[3], points[4],
                      Material(Material::diffusion, ColorDBL(0.1, 0.0, 0.2))));
 
     // Roof 3
-    Objects.push_back(
-        new Triangle(points[10], points[4], points[5],
+    add(
+        new Triangle(points[0], points[4], points[5],
                      Material(Material::diffusion, ColorDBL(0.1, 0.0, 0.2))));
 
     // Wall 5
-    Objects.push_back(
+    add(
         new Triangle(points[4], points[10], points[5],
                      Material(Material::diffusion, ColorDBL(0.0, 0.0, 0.5))));
-    Objects.push_back(
+    add(
         new Triangle(points[5], points[10], points[11],
                      Material(Material::diffusion, ColorDBL(0.0, 0.0, 0.5))));
 
     // Wall 6
-    Objects.push_back(
+    add(
         new Triangle(points[0], points[5], points[11],
                      Material(Material::diffusion, ColorDBL(0.0, 0.8, 0.2))));
-    Objects.push_back(
+    add(
         new Triangle(points[0], points[11], points[6],
                      Material(Material::diffusion, ColorDBL(0.0, 0.8, 0.2))));
 
     // Floor 1
-    Objects.push_back(
+    add(
         new Triangle(points[7], points[9], points[8],
                      Material(Material::diffusion, WHITE)));
 
     // Floor 2
-    Objects.push_back(
+    add(
         new Triangle(points[7], points[10], points[9],
                      Material(Material::diffusion, WHITE)));
-    Objects.push_back(
+    add(
         new Triangle(points[7], points[6], points[10],
                      Material(Material::diffusion, WHITE)));
 
     // Floor 3
-    Objects.push_back(
+    add(
         new Triangle(points[6], points[11], points[10],
                      Material(Material::diffusion, ColorDBL(0.2, 0.2, 0.4))));
 
     // Roof lamp
-    LightSources.push_back(new LightSource(
+    addLight(new LightSource(
         glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, 0.5f, 4.9f),
         glm::vec3(9.0f, -0.5f, 4.9f),
         Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.9))));
-    LightSources.push_back(new LightSource(
+    addLight(new LightSource(
         glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(5.0f, 0.5f, 4.9f),
         glm::vec3(9.0f, -0.5f, 4.9f),
         Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.9))));
 
-    //Objects.push_back(new LightSource(glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, 0.5f, 4.9f),glm::vec3(9.0f, -0.5f, 4.9f),Material(Material::light, ColorDBL(1.0, 1.0, 1.0))));
-    //Objects.push_back(new LightSource(glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), Material(Material::light, ColorDBL(1.0, 1.0, 1.0))));
+    add(new LightSource(glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, 0.5f, 4.9f),glm::vec3(9.0f, -0.5f, 4.9f),Material(Material::light, ColorDBL(1.0, 1.0, 1.0))));
+    add(new LightSource(glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), Material(Material::light, ColorDBL(1.0, 1.0, 1.0))));
   }
+
+  // Display the time in hours, minutes, seconds and milliseconds from seconds
+  void displayTime(int timeMilliseconds) {
+      int seconds = timeMilliseconds / 1000;
+      int minutes = seconds / 60;
+      int hours = minutes / 60;
+
+      int milliseconds = timeMilliseconds % 1000;
+      seconds %= 60;
+      minutes %= 60;
+
+      std::cout << std::setfill('0');
+      if (hours > 0) std::cout << std::setw(2) << hours << ":";
+      if (minutes > 0) std::cout << std::setw(2) << minutes << ":";
+      if (seconds > 0) std::cout << std::setw(2) << seconds << ".";
+      std::cout << std::setw(3) << milliseconds;
+  }
+
 };

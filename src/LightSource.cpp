@@ -8,8 +8,8 @@ std::uniform_real_distribution<float> distribution(0.0f, 1.0f);
 
 double LightSource::CheckShadowRays(Scene *scene, Object *objectX, const glm::vec3 &x) {
 	float sum = 0.0;
-	int N = 5;
-	float A = glm::length(E1) * glm::length(E2) / 2; // @TODO Kolla så denna är tänkt rätt med punkter
+	int N = 3;
+	float A = glm::length(E1) * glm::length(E2) / 2;
 	glm::vec3 Ny = getNormal();
     glm::vec3 Nx = objectX->getNormal(x);
 
@@ -33,12 +33,14 @@ double LightSource::CheckShadowRays(Scene *scene, Object *objectX, const glm::ve
             continue; 
         }
 
-        float cosX = glm::dot(Ny, di / glm::length(di));
-        float cosY = -glm::dot(Nx, di / glm::length(di));
+        float cosY = glm::dot(Ny, di) / glm::length(di);
+        float cosX = glm::dot(-Nx, di) / glm::length(di);
 
         sum += std::max(0.0f, (cosX * cosY) / (glm::length(di) * glm::length(di)));
     }
+
   float BRDF = 1.0f / _PI;
+  // Lambertian reflectors f(x, d_i, teta_O) = 1/pi (Reflectivity roh = 1)
 
   return (float)((A * BRDF * radiance / N) * sum);
 }

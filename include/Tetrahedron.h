@@ -7,6 +7,7 @@
 class Tetrahedron : public Structure {
 private:
 	glm::vec3 point0, point1, point2, point3;
+	Material material;
 public:
 	/// <summary>
 	/// 
@@ -16,8 +17,8 @@ public:
 	/// <param name="p2"></param>
 	/// <param name="p3">Top point</param>
 	/// <param name="m">Material</param>
-	Tetrahedron(const glm::vec3& p0, const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& p3, const Material& m = Material(Material::diffusion, ColorDBL(1.0, 0.0, 0.0))) :
-		point0{ p0 }, point1{ p1 }, point2{ p2 }, point3{ p3 }
+	Tetrahedron(const glm::vec3& p0, const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& p3, const Material& m = Material(Material::diffusion, ColorDBL(0.6, 0.4, 0.8))) :
+		point0{ p0 }, point1{ p1 }, point2{ p2 }, point3{ p3 }, material{m}
 	{
 		add(new Triangle(p0,p1,p2, m));
 		add(new Triangle(p0,p2,p3, m));
@@ -25,7 +26,7 @@ public:
 		add(new Triangle(p0,p3,p1, m));
 	}
 
-	Tetrahedron(const glm::vec3& center, float width = 0.5f, float height = 1.0f, const Material& m = Material(Material::diffusion, ColorDBL(1.0, 0.0, 0.0)))
+	Tetrahedron(const glm::vec3& center, float width = 0.5f, float height = 1.0f, const Material& m = Material(Material::diffusion, ColorDBL(0.6, 0.4, 0.8)))
 	{
 		// Calculate half-width and half-height
 		float halfWidth = width / 2.0f;
@@ -36,11 +37,10 @@ public:
 		point1 = glm::vec3(center.x + halfWidth, center.y + halfWidth, center.z - halfHeight); //Left
 		point2 = glm::vec3(center.x + halfWidth, center.y - halfWidth, center.z - halfHeight); //Right
 		point3 = glm::vec3(center.x, center.y, center.z + halfHeight); //Top
-
-		add( new Triangle(point0, point1, point2, Material(Material::diffusion, ColorDBL(0.0f, 0.0f, 1.0f))));//bottom
+		add( new Triangle(point0, point1, point2, m));//bottom
 		add( new Triangle(point0, point2, point3, m)); //right
-		add( new Triangle(point1, point3, point2, Material(Material::diffusion, ColorDBL(0.0f, 1.0f, 0.0f)))); //back
-		add( new Triangle(point0, point3, point1, Material(Material::diffusion, ColorDBL(1.0f, 0.0f, 1.0f)))); //left
+		add( new Triangle(point1, point3, point2, m)); //back
+		add( new Triangle(point0, point3, point1, m)); //left
 	}
 
 	glm::vec3 getP0() { return point0; }
