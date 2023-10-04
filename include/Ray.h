@@ -18,6 +18,7 @@ private:
   Ray *prev = nullptr;
   Ray *next = nullptr;
   ColorDBL color;
+  bool inObject = false;
   // Remember to normilaze all directions!
 public:
   Ray(){};
@@ -42,6 +43,8 @@ public:
   ColorDBL getColor() { return color; }
 
   void rayColor() { std::cout << color; };
+
+  void setInObject(bool b) { inObject = b; }
 };
 
-void creatLocalAxes(glm::vec3& e1, glm::vec3& e2, glm::vec3& e3, const glm::vec3& normal);
+void creatLocalAxes(glm::vec3& e1, glm::vec3& e2, glm::vec3& e3, const glm::vec3& normal, const glm::vec3& dir);

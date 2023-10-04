@@ -31,8 +31,10 @@ private:
   };
 
 public:
-    const ColorDBL WHITE = ColorDBL(0.6f, 0.6f, 0.6f);
+    const ColorDBL WHITE = ColorDBL(0.4f, 0.4f, 0.4f);
     const ColorDBL FLOORBLUE = ColorDBL(0.2, 0.2, 0.4);
+    const ColorDBL AQUA = ColorDBL(0.0, 0.2, 0.4);
+
 
     std::vector<Object *> Objects;
 
@@ -70,11 +72,14 @@ public:
   }
 
   void standardScene() {
-    add(Tetrahedron(glm::vec3(8.0f, -1.0f, -1.0f), 2.0f, 3.0f));
-    add(Tetrahedron(glm::vec3(8.0f, -3.0f, 1.0f), 2.0f, 4.0f));
+    add(Tetrahedron(glm::vec3(4.0f, -2.0f, -3.0f), 2.0f, 2.0f, Material(Material::diffusion, AQUA)));
+    
+    add(Tetrahedron(glm::vec3(8.0f, -3.0f, 0.0f), 2.0f, 4.0f));
+    
+    add(new Sphere(glm::vec3(7.0f, 3.0f, -2.0f), 2.0f, Material(Material::specularity, WHITE)));
 
 
-    add(new Sphere(glm::vec3(8.0f, 3.5f, -2.0f), 1.0f, Material(Material::specularity, ColorDBL(0.0, 0.5, 0.5))));
+    add(new Sphere(glm::vec3(7.0f, -0.5f, -1.0f), 1.0f, Material(Material::translucence, WHITE)));
 
     // Wall 1
     add(
@@ -129,10 +134,10 @@ public:
     // Wall 5
     add(
         new Triangle(points[4], points[10], points[5],
-                     Material(Material::diffusion, ColorDBL(0.0, 0.0, 0.5))));
+                     Material(Material::diffusion, ColorDBL(0.5, 0.2, 0.5))));
     add(
         new Triangle(points[5], points[10], points[11],
-                     Material(Material::diffusion, ColorDBL(0.0, 0.0, 0.5))));
+                     Material(Material::diffusion, ColorDBL(0.5, 0.2, 0.5))));
 
     // Wall 6
     add(
@@ -162,16 +167,16 @@ public:
 
     // Roof lamp
     addLight(new LightSource(
-        glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, 0.5f, 4.9f),
-        glm::vec3(9.0f, -0.5f, 4.9f),
+        glm::vec3(1.0f, 0.5f, 4.9f), glm::vec3(7.0f, 0.5f, 4.9f),
+        glm::vec3(7.0f, -0.5f, 4.9f),
         Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.9))));
     addLight(new LightSource(
-        glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(5.0f, 0.5f, 4.9f),
-        glm::vec3(9.0f, -0.5f, 4.9f),
+        glm::vec3(1.0f, -0.5f, 4.9f), glm::vec3(1.0f, 0.5f, 4.9f),
+        glm::vec3(7.0f, -0.5f, 4.9f),
         Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.9))));
 
-    add(new LightSource(glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, 0.5f, 4.9f),glm::vec3(9.0f, -0.5f, 4.9f),Material(Material::light, ColorDBL(1.0, 1.0, 1.0))));
-    add(new LightSource(glm::vec3(5.0f, -0.5f, 4.9f), glm::vec3(5.0f, 0.5f, 4.9f), glm::vec3(9.0f, -0.5f, 4.9f), Material(Material::light, ColorDBL(1.0, 1.0, 1.0))));
+    add(new LightSource(glm::vec3(1.0f, 0.5f, 4.9f), glm::vec3(7.0f, 0.5f, 4.9f),glm::vec3(7.0f, -0.5f, 4.9f),Material(Material::light, ColorDBL(1.0, 1.0, 1.0))));
+    add(new LightSource(glm::vec3(1.0f, -0.5f, 4.9f), glm::vec3(1.0f, 0.5f, 4.9f), glm::vec3(7.0f, -0.5f, 4.9f), Material(Material::light, ColorDBL(1.0, 1.0, 1.0))));
   }
 
   // Display the time in hours, minutes, seconds and milliseconds from seconds
