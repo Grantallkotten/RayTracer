@@ -17,7 +17,7 @@ public:
 	/// <param name="p2"></param>
 	/// <param name="p3">Top point</param>
 	/// <param name="m">Material</param>
-	Tetrahedron(const glm::vec3& p0, const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& p3, const Material& m = Material(Material::diffusion, ColorDBL(0.6, 0.4, 0.8))) :
+	Tetrahedron(const glm::vec3& p0, const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& p3, const Material& m = Material(Material::diffusion, ColorDBL(0.4, 0.0, 0.2))) :
 		point0{ p0 }, point1{ p1 }, point2{ p2 }, point3{ p3 }, material{m}
 	{
 		add(new Triangle(p0,p1,p2, m));
@@ -26,7 +26,7 @@ public:
 		add(new Triangle(p0,p3,p1, m));
 	}
 
-	Tetrahedron(const glm::vec3& center, float width = 0.5f, float height = 1.0f, const Material& m = Material(Material::diffusion, ColorDBL(0.6, 0.4, 0.8)))
+	Tetrahedron(const glm::vec3& center, float width = 0.5f, float height = 1.0f, const Material& m = Material(Material::diffusion, ColorDBL(0.4, 0.0, 0.2)))
 	{
 		// Calculate half-width and half-height
 		float halfWidth = width / 2.0f;

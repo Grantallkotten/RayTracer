@@ -70,7 +70,9 @@ public:
   }
 
   void standardScene() {
-    add(Tetrahedron(glm::vec3(8.0f, -1.0f, -1.0f), 4.0f, 4.0f));
+    add(Tetrahedron(glm::vec3(8.0f, -1.0f, -1.0f), 2.0f, 3.0f));
+    add(Tetrahedron(glm::vec3(8.0f, -3.0f, 1.0f), 2.0f, 4.0f));
+
 
     add(new Sphere(glm::vec3(8.0f, 3.5f, -2.0f), 1.0f, Material(Material::specularity, ColorDBL(0.0, 0.5, 0.5))));
 

@@ -39,7 +39,7 @@ ColorDBL Ray::castRay(Scene *scene, Ray *prevRay, float deathProbability) {
     lightContribution = aLightSource->CheckShadowRays(scene, obj, ci.point);
     color *= lightContribution;
   }
-#if 0
+#if 1
   switch (obj->getMaterial().getMaterialProperty()){
   case Material::specularity:
       color = reflectionLight(scene, prevRay, deathProbability);
