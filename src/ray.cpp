@@ -149,14 +149,8 @@ ColorDBL Ray::reflectionLightTranslucence(Scene* scene, Ray* prevRay, float deat
         Ray nextRayT = Ray(end, dirT);
         Ray nextRayR = Ray(end, dirR);
 
-        if (glm::normalize(obj->getNormal(end)) == normal) {
-            nextRayT.setInObject(true);
-            nextRayR.setInObject(false);
-        }
-        else {
-            nextRayT.setInObject(false);
-            nextRayR.setInObject(true);
-        }
+        nextRayT.setInObject(!inObject);
+        nextRayR.setInObject(inObject);
 
         ColorDBL colorT = nextRayT.castRay(scene, this, deathProbability) * transmissionCofT;
         ColorDBL colorR = nextRayR.castRay(scene, this, deathProbability) * reflectCofR;// multiplikationen ger inte rätt
