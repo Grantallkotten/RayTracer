@@ -48,6 +48,8 @@ public:
   void setInObject(bool b) { inObject = b; }
 
   bool getInObject() { return inObject; }
+
+  void creatLocalAxes(glm::vec3& e1, glm::vec3& e2, glm::vec3& e3, const glm::vec3& normal, const glm::vec3& dir);
 };
 
 void creatLocalAxes(glm::vec3& e1, glm::vec3& e2, glm::vec3& e3, const glm::vec3& normal, const glm::vec3& dir);

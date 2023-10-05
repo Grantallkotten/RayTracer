@@ -38,7 +38,7 @@ void Camera::renderRangeOfColums(Scene *scene, int start_colum, int end_colum, i
                 Ray r = Ray(positionCamera, glm::normalize(pixelPosition - positionCamera));
                 ColorDBL c(0.0, 0.0, 0.0);
                 for (int i = 0; i < raysPerPixel; i++) {
-                    c += (r.castRay(scene, nullptr, 0.25));
+                    c += (r.castRay(scene, nullptr, 0.2));
                 }
                 c /= raysPerPixel;
                 p.setColor(c);
