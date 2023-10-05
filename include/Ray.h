@@ -24,8 +24,8 @@ private:
 public:
   Ray(){};
 
-  Ray(const glm::vec3 &origin, const glm::vec3 &direction)
-      : orig(origin), dir(direction) {}
+  Ray(const glm::vec3 &origin, const glm::vec3 &direction, bool inObject = true)
+      : orig(origin), dir(direction), inObject{inObject} {}
 
   glm::vec3 getDir() const { return dir; }
 

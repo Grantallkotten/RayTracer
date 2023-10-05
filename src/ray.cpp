@@ -146,11 +146,8 @@ ColorDBL Ray::reflectionLightTranslucence(Scene* scene, Ray* prevRay, float deat
         // cos(teta_out) = sqrt(1 - ((n1/n2)^2 * (1 - cos^2(teta_in)))
         glm::vec3 dirT = (n1 / n2) * dirLight + ((n1 / n2) * cosTheta_in - sqrt(cosTheta_out))*normal; // - first (n1 + n2)
 
-        Ray nextRayT = Ray(end, dirT);
-        Ray nextRayR = Ray(end, dirR);
-
-        nextRayT.setInObject(!inObject);
-        nextRayR.setInObject(inObject);
+        Ray nextRayT = Ray(end, dirT, !inObject);
+        Ray nextRayR = Ray(end, dirR, inObject);
 
         ColorDBL colorT = nextRayT.castRay(scene, this, deathProbability) * transmissionCofT;
         ColorDBL colorR = nextRayR.castRay(scene, this, deathProbability) * reflectCofR;// multiplikationen ger inte rätt
