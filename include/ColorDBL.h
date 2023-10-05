@@ -5,7 +5,7 @@
 // Behöver kanske ändra så färger är mellan 0 och 1 för att det ska funka med programeringen
 class ColorDBL {
 private:
-	double R = 1.0;
+	double R = 0.0;
 	double G = 0.0;
 	double B = 0.0;
 
@@ -64,6 +64,10 @@ public:
 
 	ColorDBL friend operator*(const ColorDBL& c1, const ColorDBL& c2) {
 		return ColorDBL(c1.R * c2.R, c1.G * c2.G, c1.B * c2.B);
+	}
+
+	ColorDBL operator*(const double& d) {
+		return ColorDBL(R *= d, G *= d, B *= d);
 	}
 
 	friend bool operator==(const ColorDBL& c1, const ColorDBL& c2) {

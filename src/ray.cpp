@@ -117,64 +117,46 @@ ColorDBL Ray::reflectionLightTranslucence(Scene* scene, Ray* prevRay, float deat
     glm::vec3 normal = glm::normalize(obj->getNormal(end));
     glm::vec3 dirLight = glm::normalize(dir);
 
-    if (!inObject) {
+    float cosTheta_in = glm::dot(normal, dirLight);// - dirLight
+
+
+    if (cosTheta_in < 0.0f) {
+        cosTheta_in = -cosTheta_in;
+    }
+    else {
+        normal = -normal;
+        std::swap(n1, n2);
+    }
         //Schlicks law
         // R = R0 + (1 - R0)(1 + cos(teta))^5
         // R0 = ((n_in - n_out)/(n_in + n_out))^2
         // cos(teta) = dot(N,I)
+
         float R0 = pow(((n1 - n2) / (n1 + n2)), 2.0f);
-        float cosTheta = glm::dot(normal, -dirLight);// - dirLight
-        float reflectCofR = R0 + (1 - R0) * pow(1.0f - cosTheta, 5.0f);
+        float reflectCofR = R0 + (1 - R0) * pow(1.0f - cosTheta_in, 5);
         float transmissionCofT = 1.0f - reflectCofR;
-       
-        glm::vec3 dirR = glm::reflect(dir, normal);// = dir - 2.0f * glm::dot(dir, normal) * normal
+        float cosTheta_out = 1.0f - pow((n1 / n2), 2.0f) * (1.0f - pow(cosTheta_in, 2.0f));
+
+        glm::vec3 dirR = glm::reflect(dirLight, normal);// = dir - 2.0f * glm::dot(dir, normal) * normal
         // Snells law gives us the T direction: n1/n2 * I + (n1/n2 - cos(teta_in) - cos(teta_out))*N
         // cos(teta_in) = dot(N,I)
         // Snells law: 
         // sin(teta_out) = n1/n2 * sqrt(1 - cos^2(teta_in))
         // 1 - cos^2(teta_out) = ((n1/n2)^2 * (1 - cos^2(teta_in))
         // cos(teta_out) = sqrt(1 - ((n1/n2)^2 * (1 - cos^2(teta_in)))
-        glm::vec3 dirT = (n1 / n2) * dirLight + (-(n1 / n2) - glm::dot(normal, dirLight) -
-            sqrt(1.0f - pow((n1 / n2), 2.0f) * (1.0f - pow(glm::dot(normal, dirLight), 2.0f))))*normal; // - first (n1 + n2)
+        glm::vec3 dirT = (n1 / n2) * dirLight + ((n1 / n2) * cosTheta_in - sqrt(cosTheta_out))*normal; // - first (n1 + n2)
 
         Ray nextRayT = Ray(end, dirT);
-        nextRayT.setInObject(true);
         Ray nextRayR = Ray(end, dirR);
-
-        ColorDBL colorT = nextRayT.castRay(scene, this, deathProbability)* transmissionCofT;
-        ColorDBL colorR = nextRayR.castRay(scene, this, deathProbability) * reflectCofR;
-
-        return colorT + colorR;
-    }
-    else {
-        normal = -normal;
-
-        float R0 = pow(((n2 - n1) / (n2 + n1)), 2.0f);
-        float cosTheta = glm::dot(-dirLight, normal);// - dirLight
-        float reflectCofR = R0 + (1 - R0) * pow(1.0f - cosTheta, 5.0f);
-        float transmissionCofT = 1.0f - reflectCofR;
-
-        glm::vec3 dirR = glm::reflect(dir, normal);// = dir - 2.0f * glm::dot(dir, normal) * normal
-
-
-        // could look at arcsin(n1 / n2) > theta --> only reflection in glass with a if else
-        
-        glm::vec3 dirT = (n1 / n2) * dirLight + (-(n1 / n2) - glm::dot(normal, dirLight) -
-            sqrt(1.0f - pow((n1 / n2), 2.0f) * (1.0f - pow(glm::dot(normal, dirLight), 2.0f)))) * normal; // - first (n1 + n2)
-        
-
-
-        Ray nextRayT = Ray(end, dirT);
         nextRayT.setInObject(false);
-        Ray nextRayR = Ray(end, dirR);
-
+        nextRayR.setInObject(true);
         ColorDBL colorT = nextRayT.castRay(scene, this, deathProbability) * transmissionCofT;
-        ColorDBL colorR = nextRayR.castRay(scene, this, deathProbability) * reflectCofR;
+        ColorDBL colorR = nextRayR.castRay(scene, this, deathProbability) * reflectCofR;// multiplikationen ger inte rätt
+        // We want low reflect
 
         return colorT + colorR;
-    }
+    
      
-    return ColorDBL();
 }
 
 void creatLocalAxes(glm::vec3& e1, glm::vec3& e2, glm::vec3& e3, const glm::vec3& normal, const glm::vec3& dir) {
@@ -184,18 +166,18 @@ void creatLocalAxes(glm::vec3& e1, glm::vec3& e2, glm::vec3& e3, const glm::vec3
 }
  
 
-bool Ray::ShadowRay(Scene* scene) {
+bool Ray::ShadowRay(Scene* scene, Material::MaterialProperty& objMaterialType) {
 	// x is on the object and y_i a randome point on the lamp
 	float dist_x_to_yi = glm::length(dir);
 	float dist_x_to_ip;
 
     CollisionInfo ci;
 	for (Object* obj : scene->Objects) {
-		if (obj->getMaterial().getMaterialProperty() != Material::translucence && obj->Collision(this, ci)) {
+		if (obj->Collision(this, ci)) {
 			dist_x_to_ip = glm::length(ci.point - orig);
 
 			if (dist_x_to_ip < dist_x_to_yi) {
-
+                objMaterialType = obj->getMaterial().getMaterialProperty();
 				return false;
 			}
 		}

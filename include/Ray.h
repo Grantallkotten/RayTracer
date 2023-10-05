@@ -3,6 +3,7 @@
 #include "glm/glm.hpp"
 #include <iostream>
 #include <vector>
+#include "Material.h"
 
 class Object;
 class Scene;
@@ -32,7 +33,7 @@ public:
 
   ColorDBL castRay(Scene *scene, Ray *prevRay, float deathProbability);
 
-  bool ShadowRay(Scene *scene);
+  bool ShadowRay(Scene *scene, Material::MaterialProperty& objMaterialType);
 
   ColorDBL inderectLight(Scene* scene, Ray* prevRay, float deathProbability);
 
@@ -45,6 +46,8 @@ public:
   void rayColor() { std::cout << color; };
 
   void setInObject(bool b) { inObject = b; }
+
+  bool getInObject() { return inObject; }
 };
 
 void creatLocalAxes(glm::vec3& e1, glm::vec3& e2, glm::vec3& e3, const glm::vec3& normal, const glm::vec3& dir);

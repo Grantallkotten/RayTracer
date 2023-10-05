@@ -29,6 +29,7 @@ bool Sphere::Collision(Ray *ray, CollisionInfo& collisionInfo) {
 
   collisionInfo.point = ray->getOrig() + ray->getDir() * t;
   collisionInfo.normal = getNormal(collisionInfo.point);
+  //if (ray->insideObject()) { collisionInfo.normal - collisionInfo.normal; }
   // glm::vec3 surfNormal = glm::normalize(intersectionPoint - centerPoint);
 
   //intersectionPoint = x_rt;
