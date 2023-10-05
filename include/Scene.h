@@ -79,7 +79,7 @@ public:
     //add(new Sphere(glm::vec3(7.0f, 3.0f, -2.0f), 2.0f, Material(Material::specularity, WHITE)));
 
 
-    add(new Sphere(glm::vec3(4.0f, -0.5f, -0.0f), 1.0f, Material(Material::translucence, WHITE)));
+    add(new Sphere(glm::vec3(7.0f, -0.5f, -0.0f), 1.0f, Material(Material::translucence, WHITE)));
 
     //add(new Sphere(glm::vec3(7.0f, -0.0f, -2.0f), 1.0f, Material(Material::glossy, AQUA)));
 

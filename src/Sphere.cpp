@@ -1,7 +1,7 @@
 #include "../include/Sphere.h"
 
 bool Sphere::Collision(Ray *ray, CollisionInfo& collisionInfo) {
-  const float EPSILON = 0.0001f;
+  const float EPSILON = 0.00001f;
 #if 1
   glm::vec3 D = ray->getDir();
   glm::vec3 S = ray->getOrig();

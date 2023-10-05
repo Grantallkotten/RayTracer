@@ -132,11 +132,11 @@ ColorDBL Ray::reflectionLightTranslucence(Scene* scene, Ray* prevRay, float deat
         // R0 = ((n_in - n_out)/(n_in + n_out))^2
         // cos(teta) = dot(N,I)
 
-        float R0 = pow(((n1 - n2) / (n1 + n2)), 2.0f);
+        float R0 = pow(((n2 - n1) / (n1 + n2)), 2);
         float reflectCofR = R0 + (1 - R0) * pow(1.0f - cosTheta_in, 5);
         float transmissionCofT = 1.0f - reflectCofR;
-        float cosTheta_out = 1.0f - pow((n1 / n2), 2.0f) * (1.0f - pow(cosTheta_in, 2.0f));
-
+        float cosTheta_out = 1.0f - pow((n1 / n2), 2.0f) * (1.0f - pow(cosTheta_in, 2));
+     
         glm::vec3 dirR = glm::reflect(dirLight, normal);// = dir - 2.0f * glm::dot(dir, normal) * normal
         // Snells law gives us the T direction: n1/n2 * I + (n1/n2 - cos(teta_in) - cos(teta_out))*N
         // cos(teta_in) = dot(N,I)
@@ -146,14 +146,19 @@ ColorDBL Ray::reflectionLightTranslucence(Scene* scene, Ray* prevRay, float deat
         // cos(teta_out) = sqrt(1 - ((n1/n2)^2 * (1 - cos^2(teta_in)))
         glm::vec3 dirT = (n1 / n2) * dirLight + ((n1 / n2) * cosTheta_in - sqrt(cosTheta_out))*normal; // - first (n1 + n2)
 
-        Ray nextRayT = Ray(end, dirT, !inObject);
-        Ray nextRayR = Ray(end, dirR, inObject);
+        Ray nextRayT = Ray(end, dirT, inObject);
+        Ray nextRayR = Ray(end, dirR, !inObject);
 
         ColorDBL colorT = nextRayT.castRay(scene, this, deathProbability) * transmissionCofT;
         ColorDBL colorR = nextRayR.castRay(scene, this, deathProbability) * reflectCofR;// multiplikationen ger inte rätt
         // We want low reflect
 
-        return colorT + colorR;
+        float r = ((float)rand() / (RAND_MAX));
+
+        if (r < reflectCofR) {
+            return colorR;
+        }
+        return colorT;
     
      
 }
