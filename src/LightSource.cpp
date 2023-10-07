@@ -32,12 +32,12 @@ double LightSource::CheckShadowRays(Scene* scene, Object* objectX,
         glm::vec3 yi = getP0() + s * E1 + t * E2;
         glm::vec3 di = yi - x;
         float v_i = 1.0f;
-        // std::cout << "\n\n\n";
-        // std::cout << "d_i: " << di.x << " " << di.y << " " << di.z << "\n\n\n";
-        //  @TODO Check if no collission V(x,y_i) and do it right
-        Material::MaterialProperty objMaterialType = Material::diffusion;
-        if (!Ray(x, di).ShadowRay(scene, objMaterialType) && objMaterialType != Material::translucence) { continue; }
-        if (objMaterialType == Material::translucence) { v_i = 0.5; }
+
+        Material::MaterialProperty shadingMaterial = Material::diffusion;
+        bool inShadow = !Ray(x, di).ShadowRay(scene, shadingMaterial);
+
+        if (inShadow && shadingMaterial != Material::translucence) { v_i = 0.3; }// Translucent light
+        if (inShadow && shadingMaterial == Material::translucence) { v_i = 0.5; }// Compensating for indirect light
         
         float cosX = glm::dot(Ny, di / glm::length(di));
         float cosY = -glm::dot(Nx, di / glm::length(di));

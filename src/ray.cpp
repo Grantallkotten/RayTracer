@@ -123,23 +123,29 @@ ColorDBL Ray::reflectionLightTranslucence(Scene* scene, Ray* prevRay, float deat
     // Calculate the Fresnel reflection coefficient (Schlick's approximation)
     float R0 = pow((n1 - n2) / (n1 + n2), 2.0f);
     float reflectCofR = R0 + (1.0f - R0) * pow(1.0f - cosTheta_in, 5.0f);
+    float refractionCofT = 1.0f - reflectCofR;
+
 
     // Determine if total internal reflection occurs
     if (cosTheta_out < 0.0f) {
         return reflectionLight(scene, prevRay, deathProbability);
     }
-
+    /*
     // Determine whether to reflect or refract based on Fresnel reflection probability
     float r = ((float)rand() / (RAND_MAX));
 
     if (r < reflectCofR) {
         return reflectionLight(scene, prevRay, deathProbability);
     }
-
+    */
     Ray nextRayT = Ray(end, dirT, !inObject);
-    ColorDBL colorT = nextRayT.castRay(scene, this, deathProbability);
+    Ray nextRayR = Ray(end, glm::reflect(dirLight, normal), !inObject);
 
-    return colorT;
+    ColorDBL colorT = nextRayT.castRay(scene, this, deathProbability);
+    ColorDBL colorR = nextRayR.castRay(scene, this, deathProbability);
+
+
+    return colorT* refractionCofT + colorR * reflectCofR;
 }
 
 

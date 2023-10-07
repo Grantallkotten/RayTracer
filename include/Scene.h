@@ -31,16 +31,18 @@ private:
   };
 
 public:
+    const ColorDBL SKYBOXCOLOR = ColorDBL(0.21, 0.32, 0.56);
     const ColorDBL WHITE = ColorDBL(0.4f, 0.4f, 0.4f);
     const ColorDBL FLOORBLUE = ColorDBL(0.2, 0.2, 0.4);
     const ColorDBL AQUA = ColorDBL(0.0, 0.2, 0.4);
+    const ColorDBL LIME = ColorDBL(0.0, 0.4, 0.1);
+
 
 
     std::vector<Object *> Objects;
 
     std::vector<LightSource *> LightSources;
 
-  const ColorDBL SKYBOXCOLOR = ColorDBL(0.21, 0.32, 0.56);
 
   Scene(Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 800), std::vector<Object *> o = std::vector<Object *>())
       : camera{c}, Objects{o} {
@@ -72,17 +74,21 @@ public:
   }
 
   void standardScene() {
-    //add(Tetrahedron(glm::vec3(4.0f, -2.0f, -3.0f), 2.0f, 2.0f, Material(Material::diffusion, AQUA)));
+    add(Tetrahedron(glm::vec3(4.0f, -4.2f, -2.0f), 2.0f, 2.0f, Material(Material::diffusion, AQUA)));
     
-    //add(Tetrahedron(glm::vec3(8.0f, -3.0f, 0.0f), 2.0f, 4.0f));
+    add(Tetrahedron(glm::vec3(8.0f, -3.0f, -2.0f), 2.0f, 4.0f));
+
+    //add(new Sphere(glm::vec3(5.2f, -3.0f, 0.0f), 1.0f, Material(Material::translucence, WHITE)));
+
     
-    //add(new Sphere(glm::vec3(7.0f, 3.0f, -2.0f), 2.0f, Material(Material::specularity, WHITE)));
+    add(new Sphere(glm::vec3(7.0f, 3.0f, -2.0f), 2.0f, Material(Material::specularity, WHITE)));
 
 
-    add(new Sphere(glm::vec3(6.0f, -3.0f, 1.0f), 1.0f, Material(Material::translucence, WHITE)));
+    add(new Sphere(glm::vec3(6.0f, -4.0f, 1.0f), 1.0f, Material(Material::translucence, WHITE)));
 
-    //add(new Sphere(glm::vec3(7.0f, -0.0f, -2.0f), 1.0f, Material(Material::glossy, AQUA)));
+    add(new Sphere(glm::vec3(7.0f, -0.1f, -2.0f), 1.0f, Material(Material::glossy, AQUA)));
 
+    add(new Sphere(glm::vec3(8.6f, 3.6f, 1.5f), 1.0f, Material(Material::glossy, WHITE)));
 
     // Wall 1
     add(
@@ -116,10 +122,10 @@ public:
     // Wall 4
     add(
         new Triangle(points[3], points[9], points[4],
-                     Material(Material::diffusion, ColorDBL(0.6, 0.6, 0.0))));
+                     Material(Material::diffusion, ColorDBL(0.4, 0.4, 0.0))));
     add(
         new Triangle(points[4], points[9], points[10],
-                     Material(Material::diffusion, ColorDBL(0.6, 0.6, 0.0))));
+                     Material(Material::diffusion, ColorDBL(0.4, 0.4, 0.0))));
 
     // Roof 2
     add(
@@ -145,10 +151,10 @@ public:
     // Wall 6
     add(
         new Triangle(points[0], points[5], points[11],
-                     Material(Material::diffusion, ColorDBL(0.0, 0.8, 0.2))));
+                     Material(Material::diffusion, ColorDBL(0.0, 0.6, 0.1))));
     add(
         new Triangle(points[0], points[11], points[6],
-                     Material(Material::diffusion, ColorDBL(0.0, 0.8, 0.2))));
+                     Material(Material::diffusion, ColorDBL(0.0, 0.6, 0.1))));
 
     // Floor 1
     add(
@@ -166,7 +172,7 @@ public:
     // Floor 3
     add(
         new Triangle(points[6], points[11], points[10],
-                     Material(Material::diffusion, ColorDBL(0.2, 0.2, 0.4))));
+                     Material(Material::diffusion, WHITE)));
 
     // Roof lamp
     addLight(new LightSource(
