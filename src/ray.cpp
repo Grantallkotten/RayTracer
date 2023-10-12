@@ -88,7 +88,7 @@ ColorDBL Ray::inderectLight(Scene* scene, Ray* prevRay, float deathProbability) 
         x0 * e1.z + y0 * e2.z + z0 * e3.z);
 
     Ray newRay(end, newDir);
-    ColorDBL indirectLight = newRay.castRay(scene, this, deathProbability) * 0.6f;
+    ColorDBL indirectLight = newRay.castRay(scene, this, deathProbability);
     return indirectLight;
 }
 
@@ -145,7 +145,7 @@ ColorDBL Ray::reflectionLightTranslucence(Scene* scene, Ray* prevRay, float deat
     ColorDBL colorR = nextRayR.castRay(scene, this, deathProbability);
 
 
-    return colorT* refractionCofT + colorR * reflectCofR;
+    return colorT* refractionCofT + colorR * reflectCofR*1.2f;
 }
 
 

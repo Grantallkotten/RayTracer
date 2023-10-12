@@ -35,7 +35,11 @@ public:
     const ColorDBL WHITE = ColorDBL(0.4f, 0.4f, 0.4f);
     const ColorDBL FLOORBLUE = ColorDBL(0.2, 0.2, 0.4);
     const ColorDBL AQUA = ColorDBL(0.0, 0.2, 0.4);
-    const ColorDBL LIME = ColorDBL(0.0, 0.4, 0.1);
+    const ColorDBL LIME = ColorDBL(0.3, 0.4, 0.0);
+    const ColorDBL GREY = ColorDBL(0.4, 0.4, 0.4);
+    const ColorDBL OLDROOF = ColorDBL(0.1, 0.0, 0.2);
+    const ColorDBL WALL3 = ColorDBL(0.0, 0.0, 0.5);
+    const ColorDBL WALL2 = ColorDBL(0.0, 0.5, 0.1);
 
 
 
@@ -101,23 +105,23 @@ public:
     // Wall 2
     add(
         new Triangle(points[1], points[7], points[2],
-                     Material(Material::diffusion, ColorDBL(0.0, 0.5, 0.1))));
+                     Material(Material::diffusion, WALL3)));
     add(
         new Triangle(points[2], points[7], points[8],
-                     Material(Material::diffusion, ColorDBL(0.0, 0.5, 0.1))));
+                     Material(Material::diffusion, WALL3)));
 
     // Wall 3
     add(
         new Triangle(points[2], points[8], points[3],
-                     Material(Material::diffusion, ColorDBL(0.0, 0.0, 0.5))));
+                     Material(Material::diffusion, LIME)));
     add(
         new Triangle(points[3], points[8], points[9],
-                     Material(Material::diffusion, ColorDBL(0.0, 0.0, 0.5))));
+                     Material(Material::diffusion, LIME)));
 
     // Roof 1
     add(
         new Triangle(points[1], points[2], points[3],
-                     Material(Material::diffusion, ColorDBL(0.1, 0.0, 0.2))));
+                     Material(Material::diffusion, OLDROOF)));
 
     // Wall 4
     add(
@@ -130,15 +134,15 @@ public:
     // Roof 2
     add(
         new Triangle(points[0], points[1], points[4],
-                     Material(Material::diffusion, ColorDBL(0.1, 0.0, 0.2))));
+                     Material(Material::diffusion, OLDROOF)));
     add(
         new Triangle(points[1], points[3], points[4],
-                     Material(Material::diffusion, ColorDBL(0.1, 0.0, 0.2))));
+                     Material(Material::diffusion, OLDROOF)));
 
     // Roof 3
     add(
         new Triangle(points[0], points[4], points[5],
-                     Material(Material::diffusion, ColorDBL(0.1, 0.0, 0.2))));
+                     Material(Material::diffusion, OLDROOF)));
 
     // Wall 5
     add(
