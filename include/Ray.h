@@ -31,9 +31,11 @@ public:
 
   glm::vec3 getOrig() const { return orig; }
 
-  ColorDBL castRay(Scene *scene, Ray *prevRay, float deathProbability);
+  ColorDBL castRay(Scene* scene, float deathProbability, Ray* prevRay = nullptr);
 
-  bool ShadowRay(Scene *scene, Material::MaterialProperty& objMaterialType);
+  bool ShadowRay(Scene *scene, MaterialProperty& objMaterialType);
+
+  double castPhoton(Scene* scene, Ray* prevRay);
 
   ColorDBL inderectLight(Scene* scene, Ray* prevRay, float deathProbability);
 
@@ -48,8 +50,6 @@ public:
   void setInObject(bool b) { inObject = b; }
 
   bool getInObject() { return inObject; }
-
-  void creatLocalAxes(glm::vec3& e1, glm::vec3& e2, glm::vec3& e3, const glm::vec3& normal, const glm::vec3& dir);
 };
 
 void creatLocalAxes(glm::vec3& e1, glm::vec3& e2, glm::vec3& e3, const glm::vec3& normal, const glm::vec3& dir);

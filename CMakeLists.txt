@@ -24,8 +24,9 @@ add_executable(Raytracing
     	src/LightSource.cpp
     	src/Tetrahedron.cpp
 	src/Sphere.cpp
-    
+	src/PhotonMapper.cpp
 
+	include/kdtree.h
         include/Ray.h 
         include/Camera.h 
         include/Pixel.h 
@@ -42,6 +43,7 @@ add_executable(Raytracing
         include/Tetrahedron.h 
         #include/functions.h 
         #include/Cube.h
+	include/PhotonMapper.h
 
 )
 

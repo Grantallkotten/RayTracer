@@ -19,4 +19,6 @@ public:
   virtual Material getMaterial() = 0;
 
   virtual bool Collision(Ray *ray, CollisionInfo &collisionInfo) = 0;
+
+  virtual glm::vec3 getCenter() = 0;
 };

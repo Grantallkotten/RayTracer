@@ -18,7 +18,8 @@ public:
 
 	bool Collision(Ray *ray, CollisionInfo& collisionInfo) override;
 
-	glm::vec3 getCenterPoint() { return centerPoint; }
+	glm::vec3 getCenter() override { return centerPoint; }
+
 
 	float getRadius() { return radius; }
 };

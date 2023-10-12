@@ -8,6 +8,7 @@ private:
   glm::vec3 point1;
   glm::vec3 point2;
   glm::vec3 normal;
+  glm::vec3 center;
   Material material;
 
 protected:
@@ -17,13 +18,15 @@ public:
   Triangle(const glm::vec3 &p0 = glm::vec3(13.0f, 0.0f, 5.0f),
            const glm::vec3 &p1 = glm::vec3(10.0f, -6.0f, 5.0f),
            const glm::vec3 &p2 = glm::vec3(13.0f, 0.0f, -5.0f),
-           const Material &m = Material(Material::diffusion,
+           const Material &m = Material(diffusion,
                                         ColorDBL(1.0, 0.0, 0.0)))
       : point0{p0}, point1{p1}, point2{p2}, material{m}
   // Måste kolla så alla points lägger sig med högerhandsregeln
   {
     E1 = point1 - point0;
     E2 = point2 - point0;
+
+    center = (point0 + point1 + point2) / 3.0f;
 
     normal = glm::normalize(glm::cross(E1, E2));
   }
@@ -39,4 +42,7 @@ public:
   glm::vec3 getP1() { return point1; }
 
   glm::vec3 getP2() { return point2; }
+
+  glm::vec3 getCenter() override { return center; }
+
 };

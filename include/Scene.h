@@ -72,114 +72,114 @@ public:
   }
 
   void standardScene() {
-    //add(Tetrahedron(glm::vec3(4.0f, -2.0f, -3.0f), 2.0f, 2.0f, Material(Material::diffusion, AQUA)));
+    //add(Tetrahedron(glm::vec3(4.0f, -2.0f, -3.0f), 2.0f, 2.0f, Material(diffusion, AQUA)));
     
     //add(Tetrahedron(glm::vec3(8.0f, -3.0f, 0.0f), 2.0f, 4.0f));
     
-    //add(new Sphere(glm::vec3(7.0f, 3.0f, -2.0f), 2.0f, Material(Material::specularity, WHITE)));
+    //add(new Sphere(glm::vec3(7.0f, 3.0f, -2.0f), 2.0f, Material(specularity, WHITE)));
 
 
-    add(new Sphere(glm::vec3(6.0f, -3.0f, 1.0f), 1.0f, Material(Material::translucence, WHITE)));
+    add(new Sphere(glm::vec3(6.0f, -3.0f, 1.0f), 1.0f, Material(translucence, WHITE)));
 
-    //add(new Sphere(glm::vec3(7.0f, -0.0f, -2.0f), 1.0f, Material(Material::glossy, AQUA)));
+    //add(new Sphere(glm::vec3(7.0f, -0.0f, -2.0f), 1.0f, Material(glossy, AQUA)));
 
 
     // Wall 1
     add(
         new Triangle(points[1], points[0], points[7],
-                     Material(Material::diffusion, ColorDBL(0.5, 0.0, 0.0))));
+                     Material(diffusion, ColorDBL(0.5, 0.0, 0.0))));
     add(
         new Triangle(points[0], points[6], points[7],
-                     Material(Material::diffusion, ColorDBL(0.5, 0.0, 0.0))));
+                     Material(diffusion, ColorDBL(0.5, 0.0, 0.0))));
 
     // Wall 2
     add(
         new Triangle(points[1], points[7], points[2],
-                     Material(Material::diffusion, ColorDBL(0.0, 0.5, 0.1))));
+                     Material(diffusion, ColorDBL(0.0, 0.5, 0.1))));
     add(
         new Triangle(points[2], points[7], points[8],
-                     Material(Material::diffusion, ColorDBL(0.0, 0.5, 0.1))));
+                     Material(diffusion, ColorDBL(0.0, 0.5, 0.1))));
 
     // Wall 3
     add(
         new Triangle(points[2], points[8], points[3],
-                     Material(Material::diffusion, ColorDBL(0.0, 0.0, 0.5))));
+                     Material(diffusion, ColorDBL(0.0, 0.0, 0.5))));
     add(
         new Triangle(points[3], points[8], points[9],
-                     Material(Material::diffusion, ColorDBL(0.0, 0.0, 0.5))));
+                     Material(diffusion, ColorDBL(0.0, 0.0, 0.5))));
 
     // Roof 1
     add(
         new Triangle(points[1], points[2], points[3],
-                     Material(Material::diffusion, ColorDBL(0.1, 0.0, 0.2))));
+                     Material(diffusion, ColorDBL(0.1, 0.0, 0.2))));
 
     // Wall 4
     add(
         new Triangle(points[3], points[9], points[4],
-                     Material(Material::diffusion, ColorDBL(0.6, 0.6, 0.0))));
+                     Material(diffusion, ColorDBL(0.6, 0.6, 0.0))));
     add(
         new Triangle(points[4], points[9], points[10],
-                     Material(Material::diffusion, ColorDBL(0.6, 0.6, 0.0))));
+                     Material(diffusion, ColorDBL(0.6, 0.6, 0.0))));
 
     // Roof 2
     add(
         new Triangle(points[0], points[1], points[4],
-                     Material(Material::diffusion, ColorDBL(0.1, 0.0, 0.2))));
+                     Material(diffusion, ColorDBL(0.1, 0.0, 0.2))));
     add(
         new Triangle(points[1], points[3], points[4],
-                     Material(Material::diffusion, ColorDBL(0.1, 0.0, 0.2))));
+                     Material(diffusion, ColorDBL(0.1, 0.0, 0.2))));
 
     // Roof 3
     add(
         new Triangle(points[0], points[4], points[5],
-                     Material(Material::diffusion, ColorDBL(0.1, 0.0, 0.2))));
+                     Material(diffusion, ColorDBL(0.1, 0.0, 0.2))));
 
     // Wall 5
     add(
         new Triangle(points[4], points[10], points[5],
-                     Material(Material::diffusion, ColorDBL(0.5, 0.2, 0.5))));
+                     Material(diffusion, ColorDBL(0.5, 0.2, 0.5))));
     add(
         new Triangle(points[5], points[10], points[11],
-                     Material(Material::diffusion, ColorDBL(0.5, 0.2, 0.5))));
+                     Material(diffusion, ColorDBL(0.5, 0.2, 0.5))));
 
     // Wall 6
     add(
         new Triangle(points[0], points[5], points[11],
-                     Material(Material::diffusion, ColorDBL(0.0, 0.8, 0.2))));
+                     Material(diffusion, ColorDBL(0.0, 0.8, 0.2))));
     add(
         new Triangle(points[0], points[11], points[6],
-                     Material(Material::diffusion, ColorDBL(0.0, 0.8, 0.2))));
+                     Material(diffusion, ColorDBL(0.0, 0.8, 0.2))));
 
     // Floor 1
     add(
         new Triangle(points[7], points[9], points[8],
-                     Material(Material::diffusion, WHITE)));
+                     Material(diffusion, WHITE)));
 
     // Floor 2
     add(
         new Triangle(points[7], points[10], points[9],
-                     Material(Material::diffusion, WHITE)));
+                     Material(diffusion, WHITE)));
     add(
         new Triangle(points[7], points[6], points[10],
-                     Material(Material::diffusion, WHITE)));
+                     Material(diffusion, WHITE)));
 
     // Floor 3
     add(
         new Triangle(points[6], points[11], points[10],
-                     Material(Material::diffusion, ColorDBL(0.2, 0.2, 0.4))));
+                     Material(diffusion, ColorDBL(0.2, 0.2, 0.4))));
 
     // Roof lamp
     addLight(new LightSource(
         glm::vec3(1.0f, 0.5f, 4.9f), glm::vec3(7.0f, 0.5f, 4.9f),
         glm::vec3(7.0f, -0.5f, 4.9f),
-        Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.9))));
+        Material(diffusion, ColorDBL(0.8, 0.8, 0.9))));
     addLight(new LightSource(
         glm::vec3(1.0f, -0.5f, 4.9f), glm::vec3(1.0f, 0.5f, 4.9f),
         glm::vec3(7.0f, -0.5f, 4.9f),
-        Material(Material::diffusion, ColorDBL(0.8, 0.8, 0.9))));
+        Material(diffusion, ColorDBL(0.8, 0.8, 0.9))));
 
-    add(new LightSource(glm::vec3(1.0f, 0.5f, 4.9f), glm::vec3(7.0f, 0.5f, 4.9f),glm::vec3(7.0f, -0.5f, 4.9f),Material(Material::light, ColorDBL(1.0, 1.0, 1.0))));
-    add(new LightSource(glm::vec3(1.0f, -0.5f, 4.9f), glm::vec3(1.0f, 0.5f, 4.9f), glm::vec3(7.0f, -0.5f, 4.9f), Material(Material::light, ColorDBL(1.0, 1.0, 1.0))));
+    add(new LightSource(glm::vec3(1.0f, 0.5f, 4.9f), glm::vec3(7.0f, 0.5f, 4.9f),glm::vec3(7.0f, -0.5f, 4.9f),Material(light, ColorDBL(1.0, 1.0, 1.0))));
+    add(new LightSource(glm::vec3(1.0f, -0.5f, 4.9f), glm::vec3(1.0f, 0.5f, 4.9f), glm::vec3(7.0f, -0.5f, 4.9f), Material(light, ColorDBL(1.0, 1.0, 1.0))));
   }
 
   // Display the time in hours, minutes, seconds and milliseconds from seconds

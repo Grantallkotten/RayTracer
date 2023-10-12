@@ -4,9 +4,8 @@
 #include "ColorDBL.h"
 #include "glm/glm.hpp"
 
+enum MaterialProperty { diffusion, specularity, translucence, glossy, light };
 class Material {
-public:
-    enum MaterialProperty { diffusion, specularity , translucence, glossy, light};
 private:
     MaterialProperty property;
     ColorDBL color;
@@ -16,10 +15,8 @@ public:
         property{ property }, color{color} {
     
     }
-    MaterialProperty getMaterialProperty() { return property; }
+    MaterialProperty getProperty() { return property; }
 
-    ColorDBL getColor() const { return color;  }
-
-
+    ColorDBL getColor() const { return color; }
 };
 

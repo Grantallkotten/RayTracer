@@ -21,23 +21,15 @@ double LightSource::CheckShadowRays(Scene* scene, Object* objectX,
     }
 
     for (int i = 1; i <= N; i++) {
-        float s = ((float)rand() / (RAND_MAX));
-        float t = ((float)rand() / (RAND_MAX));
-
-        if (s + t > 1) {
-            s = 1 - s;
-            t = 1 - t;
-        }
-
-        glm::vec3 yi = getP0() + s * E1 + t * E2;
+        glm::vec3 yi = GetRandomUniformPoint();
         glm::vec3 di = yi - x;
         float v_i = 1.0f;
         // std::cout << "\n\n\n";
         // std::cout << "d_i: " << di.x << " " << di.y << " " << di.z << "\n\n\n";
         //  @TODO Check if no collission V(x,y_i) and do it right
-        Material::MaterialProperty objMaterialType = Material::diffusion;
-        if (!Ray(x, di).ShadowRay(scene, objMaterialType) && objMaterialType != Material::translucence) { continue; }
-        if (objMaterialType == Material::translucence) { v_i = 0.5; }
+        MaterialProperty objMaterialType = diffusion;
+        if (!Ray(x, di).ShadowRay(scene, objMaterialType) && objMaterialType != translucence) { continue; }
+        if (objMaterialType == translucence) { v_i = 0.5; }
         
         float cosX = glm::dot(Ny, di / glm::length(di));
         float cosY = -glm::dot(Nx, di / glm::length(di));
@@ -47,4 +39,16 @@ double LightSource::CheckShadowRays(Scene* scene, Object* objectX,
     float BRDF = 1.0f / _PI;
 
     return (float)(A * BRDF * radiance / N * sum);
+}
+
+glm::vec3  LightSource::GetRandomUniformPoint() {
+    float s = ((float)rand() / (RAND_MAX));
+    float t = ((float)rand() / (RAND_MAX));
+
+    if(s + t > 1) {
+        s = 1 - s;
+        t = 1 - t;
+    }
+
+    return getP0() + s * E1 + t * E2;
 }
