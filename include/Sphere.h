@@ -9,17 +9,20 @@ private:
   Material material;
 
 public:
-	Sphere(glm::vec3 centerPoint = glm::vec3(8.0f, 0.0f, 0.0f), float radius = 1.0f, Material material = Material(Material::diffusion, ColorDBL(0.2, 0.2, 0.3))) : centerPoint{ centerPoint }, radius{ radius }, material{ material }
-	{}
+  Sphere(glm::vec3 centerPoint = glm::vec3(8.0f, 0.0f, 0.0f),
+         float radius = 1.0f,
+         Material material = Material(diffusion, ColorDBL(0.2, 0.2, 0.3)))
+      : centerPoint{centerPoint}, radius{radius}, material{material} {}
 
-	glm::vec3 getNormal(glm::vec3 point) override { return glm::normalize(point - centerPoint); }
+  glm::vec3 getNormal(glm::vec3 point) override {
+    return glm::normalize(point - centerPoint);
+  }
 
-	Material getMaterial() override { return material; }
+  Material getMaterial() override { return material; }
 
-	bool Collision(Ray *ray, CollisionInfo& collisionInfo) override;
+  bool Collision(Ray *ray, CollisionInfo &collisionInfo) override;
 
-	glm::vec3 getCenter() override { return centerPoint; }
+  glm::vec3 getCenter() override { return centerPoint; }
 
-
-	float getRadius() { return radius; }
+  float getRadius() { return radius; }
 };

@@ -1,9 +1,10 @@
 #pragma once
 #include "ColorDBL.h"
+#include "Material.h"
+#include "PhotonMapper.h"
 #include "glm/glm.hpp"
 #include <iostream>
 #include <vector>
-#include "Material.h"
 
 class Object;
 class Scene;
@@ -24,24 +25,28 @@ private:
 public:
   Ray(){};
 
-  Ray(const glm::vec3 &origin, const glm::vec3 &direction, bool inObject = false)
+  Ray(const glm::vec3 &origin, const glm::vec3 &direction,
+      bool inObject = false)
       : orig(origin), dir(direction), inObject{inObject} {}
 
   glm::vec3 getDir() const { return dir; }
 
   glm::vec3 getOrig() const { return orig; }
 
-  ColorDBL castRay(Scene* scene, float deathProbability, Ray* prevRay = nullptr);
+  ColorDBL castRay(Scene *scene, float deathProbability,
+                   Ray *prevRay = nullptr);
 
-  bool ShadowRay(Scene *scene, MaterialProperty& objMaterialType);
+  bool ShadowRay(Scene *scene, MaterialProperty &objMaterialType);
 
-  double castPhoton(Scene* scene, Ray* prevRay);
+  void castPhoton(Scene *scene, Ray *prevRay, std::vector<Photon> &photons);
+  void reflectPhoton(Scene *scene, std::vector<Photon> &photons);
+  void reflectionLightTranslucence(Scene *scene, std::vector<Photon> &photons);
 
-  ColorDBL inderectLight(Scene* scene, Ray* prevRay, float deathProbability);
+  ColorDBL inderectLight(Scene *scene, Ray *prevRay, float deathProbability);
 
-  ColorDBL reflectionLight(Scene* scene, Ray* prevRay, float deathProbability);
+  ColorDBL reflectionLight(Scene *scene, float deathProbability);
 
-  ColorDBL reflectionLightTranslucence(Scene* scene, Ray* prevRay, float deathProbability);
+  ColorDBL reflectionLightTranslucence(Scene *scene, float deathProbability);
 
   ColorDBL getColor() { return color; }
 
@@ -52,4 +57,5 @@ public:
   bool getInObject() { return inObject; }
 };
 
-void creatLocalAxes(glm::vec3& e1, glm::vec3& e2, glm::vec3& e3, const glm::vec3& normal, const glm::vec3& dir);
+void creatLocalAxes(glm::vec3 &e1, glm::vec3 &e2, glm::vec3 &e3,
+                    const glm::vec3 &normal, const glm::vec3 &dir);

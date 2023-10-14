@@ -12,7 +12,7 @@ void Camera::castRays(Scene *scene) {
 
       Ray r =
           Ray(positionCamera, glm::normalize(pixelPosition - positionCamera));
-      p.setColor(r.castRay(scene, nullptr, 1.0));
+      p.setColor(r.castRay(scene, 1.0));
 #if 0
             if (pixelPosition.z > 0.9) {
                 std::cout << "positive z-axis direction black\n";
@@ -29,40 +29,45 @@ void Camera::castRays(Scene *scene) {
   }
 }
 
-void Camera::renderRangeOfColums(Scene *scene, int start_colum, int end_colum, int threads_done, int num_threads) {
-        glm::vec3 pixelPosition = positionCamera + glm::vec3(1.0f, 1.0f, 1.0f);
-        pixelPosition.z -= pixelLength * start_colum;
-        for (int colum = start_colum; colum < end_colum; colum++) {
-            pixelPosition.y = 1.0f;
-            for (Pixel &p : CameraPlane[colum]) {
-                Ray r = Ray(positionCamera, glm::normalize(pixelPosition - positionCamera));
-                ColorDBL c(0.0, 0.0, 0.0);
-                for (int i = 0; i < raysPerPixel; i++) {
-                    c += (r.castRay(scene, nullptr, 0.2));
-                }
-                c /= raysPerPixel;
-                p.setColor(c);
-                pixelPosition.y -= pixelLength;
-            }
-            pixelPosition.z -= pixelLength;
-        }
-    
-    std::cout << std::setw(5) << std::fixed << std::setprecision(1) << (1.0 - (double)threads_done / (double)num_threads) * 100.0 << " %\n";
-}
+void Camera::renderRangeOfColums(Scene *scene, int start_colum, int end_colum,
+                                 int threads_done, int num_threads) {
+  glm::vec3 pixelPosition = positionCamera + glm::vec3(1.0f, 1.0f, 1.0f);
+  pixelPosition.z -= pixelLength * start_colum;
+  for (int colum = start_colum; colum < end_colum; colum++) {
+    pixelPosition.y = 1.0f;
+    for (Pixel &p : CameraPlane[colum]) {
+      Ray r =
+          Ray(positionCamera, glm::normalize(pixelPosition - positionCamera));
+      ColorDBL c(0.0, 0.0, 0.0);
+      for (int i = 0; i < raysPerPixel; i++) {
+        c += (r.castRay(scene, 0.2));
+      }
+      c /= raysPerPixel;
+      p.setColor(c);
+      pixelPosition.y -= pixelLength;
+    }
+    pixelPosition.z -= pixelLength;
+  }
 
+  std::cout << std::setw(5) << std::fixed << std::setprecision(1)
+            << (1.0 - (double)threads_done / (double)num_threads) * 100.0
+            << " %\n";
+}
 
 void Camera::render(Scene *scene) {
   int threads_done = 0;
   unsigned int num_threads = std::thread::hardware_concurrency();
   std::cout << "Rendering using " << num_threads << " threads...\n";
-  std::cout << std::setw(5) << std::fixed << std::setprecision(1) << 0.0 << " %\n";
+  std::cout << std::setw(5) << std::fixed << std::setprecision(1) << 0.0
+            << " %\n";
   std::vector<std::thread> threads(num_threads);
   int colums_per_thread = CameraPlane.size() / num_threads;
   for (unsigned int i = 0; i < num_threads; i++) {
     threads[i] = std::thread([=]() {
       renderRangeOfColums(scene, i * colums_per_thread,
                           i == num_threads - 1 ? (i + 1) * colums_per_thread
-                                               : CameraPlane.size(), i, num_threads);
+                                               : CameraPlane.size(),
+                          i, num_threads);
     });
   }
   for (unsigned int i = 0; i < num_threads; i++) {
