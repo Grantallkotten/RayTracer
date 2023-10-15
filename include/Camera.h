@@ -4,9 +4,9 @@
 #include "../include/Ray.h"
 #include "../include/glm/glm.hpp"
 #include <fstream> // Write a file
+#include <iomanip>
 #include <iostream>
 #include <vector>
-#include <iomanip>
 
 class Camera {
 private:
@@ -22,7 +22,7 @@ private:
   const int BAR_WIDTH = 20;
 
 public:
-  Camera(const glm::vec3 &p = glm::vec3(-1.0f, 0.0f, 0.0f), const int & s = 800)
+  Camera(const glm::vec3 &p = glm::vec3(-1.0f, 0.0f, 0.0f), const int &s = 800)
       : CameraPlane{std::vector<std::vector<Pixel>>(s, std::vector<Pixel>(s))},
         pixelLength{2 / float(s - 1)}, size{s}, positionCamera{p},
         positionPlaneCenter{
@@ -31,11 +31,12 @@ public:
 
   void writePPM();
 
-  void castRays(Scene *scene);
+  void castRays(Scene *scene, KDTree<Photon> photons);
 
-  void renderRangeOfColums(Scene *scene, int start_row, int end_row, int threads_done, int num_threads);
+  void renderRangeOfColums(Scene *scene, KDTree<Photon> photons, int start_row,
+                           int end_row, int threads_done, int num_threads);
 
-  void render(Scene *scene);
+  void render(Scene *scene, KDTree<Photon> photons);
 
   void progressBar(float percent);
 };

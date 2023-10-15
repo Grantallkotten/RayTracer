@@ -2,6 +2,7 @@
 #include "../include/Object.h"
 #include "../include/Scene.h"
 #include "../include/Sphere.h" // Include any other necessary headers.
+#
 
 #include <limits>
 #include <random> // Include the header for better random number generation.
@@ -9,7 +10,8 @@
 const float PI = 3.14159265358979323846f;
 const float EPSILON = 0.00001f;
 
-ColorDBL Ray::castRay(Scene *scene, float deathProbability, Ray *prevRay) {
+ColorDBL Ray::castRay(Scene *scene, KDTree<Photon> &photons,
+                      float deathProbability, Ray *prevRay) {
   prev = prevRay;
   float minDist = std::numeric_limits<float>::max();
   bool hitsObject = false;
@@ -45,18 +47,18 @@ ColorDBL Ray::castRay(Scene *scene, float deathProbability, Ray *prevRay) {
 
   switch (obj->getMaterial().getProperty()) {
   case specularity:
-    color = reflectionLight(scene, deathProbability);
+    color = reflectionLight(scene, photons, deathProbability);
 
     break;
   case glossy:
     color *= 0.8;
-    color += reflectionLight(scene, deathProbability) * 0.2;
+    color += reflectionLight(scene, photons, deathProbability) * 0.2;
     break;
   case translucence:
-    color = reflectionLightTranslucence(scene, deathProbability);
+    color = reflectionLightTranslucence(scene, photons, deathProbability);
     break;
   case diffusion:
-    color += inderectLight(scene, prevRay, deathProbability) *
+    color += inderectLight(scene, photons, prevRay, deathProbability) *
              obj->getMaterial().getColor();
     break;
   case light:
@@ -64,10 +66,11 @@ ColorDBL Ray::castRay(Scene *scene, float deathProbability, Ray *prevRay) {
   default:
     break;
   }
-  return color;
+
+  return color + PhotonMapper::calculatePhotonContribution(photons, end, 0.1);
 }
 
-ColorDBL Ray::inderectLight(Scene *scene, Ray *prevRay,
+ColorDBL Ray::inderectLight(Scene *scene, KDTree<Photon> &photons, Ray *prevRay,
                             float deathProbability) {
   float y_i = ((float)rand() / (RAND_MAX));
 
@@ -90,18 +93,20 @@ ColorDBL Ray::inderectLight(Scene *scene, Ray *prevRay,
                    x0 * e1.z + y0 * e2.z + z0 * e3.z);
 
   Ray newRay(end, newDir);
-  ColorDBL indirectLight = newRay.castRay(scene, deathProbability, this) * 0.6f;
+  ColorDBL indirectLight =
+      newRay.castRay(scene, photons, deathProbability, this) * 0.6f;
   return indirectLight;
 }
 
-ColorDBL Ray::reflectionLight(Scene *scene, float deathProbability) {
+ColorDBL Ray::reflectionLight(Scene *scene, KDTree<Photon> &photons,
+                              float deathProbability) {
   glm::vec3 normal = obj->getNormal(end);
   glm::vec3 nextDir = glm::reflect(dir, normal);
   Ray nextRay(end, nextDir);
-  return nextRay.castRay(scene, deathProbability, this);
+  return nextRay.castRay(scene, photons, deathProbability, this);
 }
 
-ColorDBL Ray::reflectionLightTranslucence(Scene *scene,
+ColorDBL Ray::reflectionLightTranslucence(Scene *scene, KDTree<Photon> &photons,
                                           float deathProbability) {
   float n1 = 1.0f; // Air index = 1
   float n2 = 1.5f; // Glass index = 1.5
@@ -130,7 +135,7 @@ ColorDBL Ray::reflectionLightTranslucence(Scene *scene,
 
   // Determine if total internal reflection occurs
   if (cosTheta_out < 0.0f) {
-    return reflectionLight(scene, deathProbability);
+    return reflectionLight(scene, photons, deathProbability);
   }
 
   // Determine whether to reflect or refract based on Fresnel reflection
@@ -138,10 +143,10 @@ ColorDBL Ray::reflectionLightTranslucence(Scene *scene,
   float r = ((float)rand() / (RAND_MAX));
 
   if (r < reflectCofR)
-    return reflectionLight(scene, deathProbability);
+    return reflectionLight(scene, photons, deathProbability);
 
   Ray nextRay = Ray(end, dirT, !inObject);
-  return nextRay.castRay(scene, deathProbability, this);
+  return nextRay.castRay(scene, photons, deathProbability, this);
 }
 
 void creatLocalAxes(glm::vec3 &e1, glm::vec3 &e2, glm::vec3 &e3,

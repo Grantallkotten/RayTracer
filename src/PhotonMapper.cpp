@@ -4,13 +4,16 @@
 #include "../include/Scene.h"
 #include "../include/glm/gtc/random.hpp"
 
-void PhotonMapper::Map(Scene *scene, KDTree<Photon> &photonTree) {
+void PhotonMapper::Map(Scene *scene, KDTree<Photon> &photonTree,
+                       unsigned int photons_per_object) {
   std::vector<Object *> transparentObjects;
   for (Object *o : scene->Objects) {
     if (o->getMaterial().getProperty() == MaterialProperty::translucence)
       transparentObjects.push_back(o);
   }
   std::vector<Photon> photons = std::vector<Photon>();
+  std::cout << "Mapping Photons!" << std::endl;
+
   for (Object *o : transparentObjects) {
     for (LightSource *l : scene->LightSources) {
       glm::vec3 planeCenter = o->getCenter();
@@ -29,7 +32,9 @@ void PhotonMapper::Map(Scene *scene, KDTree<Photon> &photonTree) {
       }
     }
   }
+  std::cout << "Building KDTree" << std::endl;
   photonTree.buildTree(photons);
+  std::cout << "Photon Mapping Complete" << std::endl;
 }
 
 // Generate a random point in 3D space within a 2D plane defined by v1 and v2.
@@ -66,4 +71,25 @@ void get2DPlaneBasis(const glm::vec3 &normal, glm::vec3 &v1, glm::vec3 &v2) {
     // Calculate the second orthogonal vector
     v2 = glm::cross(normal, v1);
   }
+}
+
+// Function to calculate the contribution of photons within a radius around each
+// data point
+ColorDBL PhotonMapper::calculatePhotonContribution(KDTree<Photon> &photonTree,
+                                                   glm::vec3 &center,
+                                                   double radius) {
+  ColorDBL totalContribution(0, 0, 0);
+
+  // Query the KD-tree for photons within the specified radius
+  std::vector<Photon> nearbyPhotons = photonTree.rangeSearch(center, radius);
+
+  // Calculate the contribution of each nearby photon and accumulate it
+  for (const Photon &photon : nearbyPhotons) {
+    // Calculate the contribution of this photon based on its properties
+    // You'll need to define how you calculate photon contributions
+
+    // For example, if Photon has a color attribute, you might do:
+    totalContribution += photon.color;
+  }
+  return totalContribution;
 }

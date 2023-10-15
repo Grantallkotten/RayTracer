@@ -33,8 +33,8 @@ public:
 
   glm::vec3 getOrig() const { return orig; }
 
-  ColorDBL castRay(Scene *scene, float deathProbability,
-                   Ray *prevRay = nullptr);
+  ColorDBL castRay(Scene *scene, KDTree<Photon> &photons,
+                   float deathProbability, Ray *prevRay = nullptr);
 
   bool ShadowRay(Scene *scene, MaterialProperty &objMaterialType);
 
@@ -42,11 +42,14 @@ public:
   void reflectPhoton(Scene *scene, std::vector<Photon> &photons);
   void reflectionLightTranslucence(Scene *scene, std::vector<Photon> &photons);
 
-  ColorDBL inderectLight(Scene *scene, Ray *prevRay, float deathProbability);
+  ColorDBL inderectLight(Scene *scene, KDTree<Photon> &photons, Ray *prevRay,
+                         float deathProbability);
 
-  ColorDBL reflectionLight(Scene *scene, float deathProbability);
+  ColorDBL reflectionLight(Scene *scene, KDTree<Photon> &photons,
+                           float deathProbability);
 
-  ColorDBL reflectionLightTranslucence(Scene *scene, float deathProbability);
+  ColorDBL reflectionLightTranslucence(Scene *scene, KDTree<Photon> &photons,
+                                       float deathProbability);
 
   ColorDBL getColor() { return color; }
 

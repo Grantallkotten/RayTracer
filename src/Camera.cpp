@@ -2,7 +2,7 @@
 #include <thread>
 #include <time.h>
 
-void Camera::castRays(Scene *scene) {
+void Camera::castRays(Scene *scene, KDTree<Photon> photons) {
   std::cout << "Casting rays...\n";
   glm::vec3 pixelPosition = positionCamera + glm::vec3(1.0f, 1.0f, 1.0f);
 
@@ -12,7 +12,7 @@ void Camera::castRays(Scene *scene) {
 
       Ray r =
           Ray(positionCamera, glm::normalize(pixelPosition - positionCamera));
-      p.setColor(r.castRay(scene, 1.0));
+      p.setColor(r.castRay(scene, photons, 1.0));
 #if 0
             if (pixelPosition.z > 0.9) {
                 std::cout << "positive z-axis direction black\n";
@@ -29,7 +29,8 @@ void Camera::castRays(Scene *scene) {
   }
 }
 
-void Camera::renderRangeOfColums(Scene *scene, int start_colum, int end_colum,
+void Camera::renderRangeOfColums(Scene *scene, KDTree<Photon> photons,
+                                 int start_colum, int end_colum,
                                  int threads_done, int num_threads) {
   glm::vec3 pixelPosition = positionCamera + glm::vec3(1.0f, 1.0f, 1.0f);
   pixelPosition.z -= pixelLength * start_colum;
@@ -40,7 +41,7 @@ void Camera::renderRangeOfColums(Scene *scene, int start_colum, int end_colum,
           Ray(positionCamera, glm::normalize(pixelPosition - positionCamera));
       ColorDBL c(0.0, 0.0, 0.0);
       for (int i = 0; i < raysPerPixel; i++) {
-        c += (r.castRay(scene, 0.2));
+        c += (r.castRay(scene, photons, 0.2));
       }
       c /= raysPerPixel;
       p.setColor(c);
@@ -54,7 +55,7 @@ void Camera::renderRangeOfColums(Scene *scene, int start_colum, int end_colum,
             << " %\n";
 }
 
-void Camera::render(Scene *scene) {
+void Camera::render(Scene *scene, KDTree<Photon> photons) {
   int threads_done = 0;
   unsigned int num_threads = std::thread::hardware_concurrency();
   std::cout << "Rendering using " << num_threads << " threads...\n";
@@ -64,7 +65,7 @@ void Camera::render(Scene *scene) {
   int colums_per_thread = CameraPlane.size() / num_threads;
   for (unsigned int i = 0; i < num_threads; i++) {
     threads[i] = std::thread([=]() {
-      renderRangeOfColums(scene, i * colums_per_thread,
+      renderRangeOfColums(scene, photons, i * colums_per_thread,
                           i == num_threads - 1 ? (i + 1) * colums_per_thread
                                                : CameraPlane.size(),
                           i, num_threads);

@@ -201,6 +201,30 @@ src/LightSource.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Raytracing.dir/build.make CMakeFiles/Raytracing.dir/src/LightSource.cpp.s
 .PHONY : src/LightSource.cpp.s
 
+src/PhotonMapper.o: src/PhotonMapper.cpp.o
+.PHONY : src/PhotonMapper.o
+
+# target to build an object file
+src/PhotonMapper.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Raytracing.dir/build.make CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.o
+.PHONY : src/PhotonMapper.cpp.o
+
+src/PhotonMapper.i: src/PhotonMapper.cpp.i
+.PHONY : src/PhotonMapper.i
+
+# target to preprocess a source file
+src/PhotonMapper.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Raytracing.dir/build.make CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.i
+.PHONY : src/PhotonMapper.cpp.i
+
+src/PhotonMapper.s: src/PhotonMapper.cpp.s
+.PHONY : src/PhotonMapper.s
+
+# target to generate assembly for a file
+src/PhotonMapper.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Raytracing.dir/build.make CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.s
+.PHONY : src/PhotonMapper.cpp.s
+
 src/Pixel.o: src/Pixel.cpp.o
 .PHONY : src/Pixel.o
 
@@ -248,6 +272,30 @@ src/Ray.s: src/Ray.cpp.s
 src/Ray.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Raytracing.dir/build.make CMakeFiles/Raytracing.dir/src/Ray.cpp.s
 .PHONY : src/Ray.cpp.s
+
+src/Sphere.o: src/Sphere.cpp.o
+.PHONY : src/Sphere.o
+
+# target to build an object file
+src/Sphere.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Raytracing.dir/build.make CMakeFiles/Raytracing.dir/src/Sphere.cpp.o
+.PHONY : src/Sphere.cpp.o
+
+src/Sphere.i: src/Sphere.cpp.i
+.PHONY : src/Sphere.i
+
+# target to preprocess a source file
+src/Sphere.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Raytracing.dir/build.make CMakeFiles/Raytracing.dir/src/Sphere.cpp.i
+.PHONY : src/Sphere.cpp.i
+
+src/Sphere.s: src/Sphere.cpp.s
+.PHONY : src/Sphere.s
+
+# target to generate assembly for a file
+src/Sphere.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Raytracing.dir/build.make CMakeFiles/Raytracing.dir/src/Sphere.cpp.s
+.PHONY : src/Sphere.cpp.s
 
 src/Tetrahedron.o: src/Tetrahedron.cpp.o
 .PHONY : src/Tetrahedron.o
@@ -339,12 +387,18 @@ help:
 	@echo "... src/LightSource.o"
 	@echo "... src/LightSource.i"
 	@echo "... src/LightSource.s"
+	@echo "... src/PhotonMapper.o"
+	@echo "... src/PhotonMapper.i"
+	@echo "... src/PhotonMapper.s"
 	@echo "... src/Pixel.o"
 	@echo "... src/Pixel.i"
 	@echo "... src/Pixel.s"
 	@echo "... src/Ray.o"
 	@echo "... src/Ray.i"
 	@echo "... src/Ray.s"
+	@echo "... src/Sphere.o"
+	@echo "... src/Sphere.i"
+	@echo "... src/Sphere.s"
 	@echo "... src/Tetrahedron.o"
 	@echo "... src/Tetrahedron.i"
 	@echo "... src/Tetrahedron.s"

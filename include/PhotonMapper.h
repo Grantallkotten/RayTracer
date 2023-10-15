@@ -8,18 +8,16 @@ struct Photon {
   glm::vec3 pos;
   ColorDBL color;
 };
-class PhotonMapper {
-  PhotonMapper(unsigned int photons_per_object = 200)
-      : photons_per_object{photons_per_object} {};
 
+class PhotonMapper {
 public:
-  void Map(Scene *scene, KDTree<Photon> &photonTree);
+  static void Map(Scene *scene, KDTree<Photon> &photonTree,
+                  unsigned int photons_per_object = 200);
+  static ColorDBL calculatePhotonContribution(KDTree<Photon> &photonTree,
+                                              glm::vec3 &center, double radius);
 
 private:
-  unsigned int photons_per_object;
-  Photon castPhoton();
 };
-
 glm::vec3 randomPointIn2DPlane(const glm::vec3 &origin, const glm::vec3 &v1,
                                const glm::vec3 &v2, float radius);
 

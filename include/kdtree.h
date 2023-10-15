@@ -27,6 +27,12 @@ public:
     root = buildTreeRecursiveParallel(data, 0, data.size(), 0);
   }
 
+  std::vector<Data> rangeSearch(const glm::vec3 &center, double radius) {
+    std::vector<Data> result;
+    rangeSearchRecursive(root, center, radius, 0, result);
+    return result;
+  }
+
 private:
   KDNode<Data> *root;
 
@@ -68,5 +74,34 @@ private:
     leftThread.join(); // Wait for the left thread to finish
 
     return node;
+  }
+
+  void rangeSearchRecursive(KDNode<Data> *node, const glm::vec3 &center,
+                            double radius, int depth,
+                            std::vector<Data> &result) {
+    if (node == nullptr) {
+      return;
+    }
+
+    // Calculate the squared distance between the point and the data in the node
+    double distSq = 0.0;
+    for (int i = 0; i < 3; i++) {
+      double d = center[i] - node->data.pos[i];
+      distSq += d * d;
+    }
+
+    if (distSq <= radius * radius) {
+      // Data in this node is within the radius
+      result.push_back(node->data);
+    }
+
+    // Check which side of the current splitting plane the point is on
+    int axis = depth % 3;
+    if (center[axis] - radius <= node->data.pos[axis]) {
+      rangeSearchRecursive(node->left, center, radius, depth + 1, result);
+    }
+    if (center[axis] + radius >= node->data.pos[axis]) {
+      rangeSearchRecursive(node->right, center, radius, depth + 1, result);
+    }
   }
 };
