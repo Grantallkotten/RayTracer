@@ -17,10 +17,14 @@ template <typename Data> class KDTree {
                 "KDTree Data must implement a 'glm::vec3 pos()' member.");
 
 public:
+  unsigned int size() { return m_size; }
   KDTree() : root(nullptr) {}
 
   // Function to insert data into the KD-Tree
-  void insert(const Data &data) { insertRecursive(root, data, 0); }
+  void insert(const Data &data) {
+    insertRecursive(root, data, 0);
+    m_size++;
+  }
 
   // Function to build the KD-Tree from a vector of data
   void buildTree(std::vector<Data> &data) {
@@ -35,6 +39,7 @@ public:
 
 private:
   KDNode<Data> *root;
+  unsigned int m_size = 0;
 
   // Helper function to insert data recursively
   void insertRecursive(KDNode<Data> *&node, const Data &data, int depth) {
@@ -57,25 +62,37 @@ private:
     int axis = depth % 3;
     int mid = (start + end) / 2;
 
-    std::nth_element(data.begin() + start, data.begin() + mid,
-                     data.begin() + end, [axis](const Data &a, const Data &b) {
-                       return a.pos[axis] < b.pos[axis];
-                     });
+    try {
+      std::nth_element(data.begin() + start, data.begin() + mid,
+                       data.begin() + end,
+                       [axis](const Data &a, const Data &b) {
+                         return a.pos[axis] < b.pos[axis];
+                       });
+    } catch (const std::exception &e) {
+      std::cerr << "Exception during nth_element: " << e.what() << std::endl;
+      throw; // Re-throw the exception to terminate the program or handle it as
+             // needed.
+    }
 
     KDNode<Data> *node = new KDNode<Data>(data[mid]);
 
-    // Parallelize left and right subtree construction
-    std::thread leftThread([&]() {
-      node->left = buildTreeRecursiveParallel(data, start, mid, depth + 1);
-    });
+    // std::thread leftThread([&]() {
+    // try {
+    // node->left = buildTreeRecursiveParallel(data, start, mid, depth + 1);
+    //} catch (const std::exception &e) {
+    // std::cerr << "Exception during left subtree construction: " << e.what()
+    //<< std::endl;
+    //// Handle the exception or re-throw as needed.
+    //}
+    //});
 
+    node->left = buildTreeRecursiveParallel(data, start, mid, depth + 1);
     node->right = buildTreeRecursiveParallel(data, mid + 1, end, depth + 1);
 
-    leftThread.join(); // Wait for the left thread to finish
-
+    // leftThread.join(); // Wait for the left thread to finish
+    m_size++;
     return node;
   }
-
   void rangeSearchRecursive(KDNode<Data> *node, const glm::vec3 &center,
                             double radius, int depth,
                             std::vector<Data> &result) {

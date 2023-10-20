@@ -58,7 +58,7 @@ ColorDBL Ray::castRay(Scene *scene, KDTree<Photon> &photons,
     color = reflectionLightTranslucence(scene, photons, deathProbability);
     break;
   case diffusion:
-    color += inderectLight(scene, photons, prevRay, deathProbability) *
+    color += inderectLight(scene, photons, deathProbability) *
              obj->getMaterial().getColor();
     break;
   case light:
@@ -67,10 +67,10 @@ ColorDBL Ray::castRay(Scene *scene, KDTree<Photon> &photons,
     break;
   }
 
-  return color + PhotonMapper::calculatePhotonContribution(photons, end, 0.1);
+  return color + PhotonMapper::calculatePhotonContribution(photons, end, 2);
 }
 
-ColorDBL Ray::inderectLight(Scene *scene, KDTree<Photon> &photons, Ray *prevRay,
+ColorDBL Ray::inderectLight(Scene *scene, KDTree<Photon> &photons,
                             float deathProbability) {
   float y_i = ((float)rand() / (RAND_MAX));
 
@@ -198,7 +198,7 @@ void Ray::castPhoton(Scene *scene, Ray *prevRay, std::vector<Photon> &photons) {
   if (!hitsObject)
     return;
   if (obj->getMaterial().getProperty() == translucence) {
-    reflectionLightTranslucence(scene, photons);
+    photonTranslucent(scene, photons);
   } else {
     color *= obj->getMaterial().getColor();
     Photon photon;
@@ -215,8 +215,7 @@ void Ray::reflectPhoton(Scene *scene, std::vector<Photon> &photons) {
   return nextRay.castPhoton(scene, this, photons);
 }
 
-void Ray::reflectionLightTranslucence(Scene *scene,
-                                      std::vector<Photon> &photons) {
+void Ray::photonTranslucent(Scene *scene, std::vector<Photon> &photons) {
   float n1 = 1.0f; // Air index = 1
   float n2 = 1.5f; // Glass index = 1.5
   glm::vec3 normal = glm::normalize(obj->getNormal(end));

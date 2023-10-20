@@ -1,4 +1,3 @@
-#pragma once
 #include "../include/PhotonMapper.h"
 #include "../include/Ray.h"
 #include "../include/Scene.h"
@@ -13,7 +12,7 @@ void PhotonMapper::Map(Scene *scene, KDTree<Photon> &photonTree,
   }
   std::vector<Photon> photons = std::vector<Photon>();
   std::cout << "Mapping Photons!" << std::endl;
-
+  std::cout << photons_per_object << ": Photons per object!" << std::endl;
   for (Object *o : transparentObjects) {
     for (LightSource *l : scene->LightSources) {
       glm::vec3 planeCenter = o->getCenter();
@@ -24,14 +23,17 @@ void PhotonMapper::Map(Scene *scene, KDTree<Photon> &photonTree,
         glm::vec3 p = l->GetRandomUniformPoint();
         if (Sphere *s = dynamic_cast<Sphere *>(o)) {
           Ray *ray = new Ray(
-              p, glm::normalize(p - randomPointIn2DPlane(planeCenter, v1, v2,
-                                                         s->getRadius())));
+              p, glm::normalize(
+                     randomPointIn2DPlane(planeCenter, v1, v2, s->getRadius()) -
+                     p));
+          ray->setColor(ColorDBL(1, 1, 1));
           ray->castPhoton(scene, ray, photons);
           delete ray;
         }
       }
     }
   }
+  std::cout << "Photon count: " << photons.size() << std::endl;
   std::cout << "Building KDTree" << std::endl;
   photonTree.buildTree(photons);
   std::cout << "Photon Mapping Complete" << std::endl;
@@ -85,10 +87,6 @@ ColorDBL PhotonMapper::calculatePhotonContribution(KDTree<Photon> &photonTree,
 
   // Calculate the contribution of each nearby photon and accumulate it
   for (const Photon &photon : nearbyPhotons) {
-    // Calculate the contribution of this photon based on its properties
-    // You'll need to define how you calculate photon contributions
-
-    // For example, if Photon has a color attribute, you might do:
     totalContribution += photon.color;
   }
   return totalContribution;

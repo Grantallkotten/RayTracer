@@ -40,9 +40,9 @@ public:
 
   void castPhoton(Scene *scene, Ray *prevRay, std::vector<Photon> &photons);
   void reflectPhoton(Scene *scene, std::vector<Photon> &photons);
-  void reflectionLightTranslucence(Scene *scene, std::vector<Photon> &photons);
+  void photonTranslucent(Scene *scene, std::vector<Photon> &photons);
 
-  ColorDBL inderectLight(Scene *scene, KDTree<Photon> &photons, Ray *prevRay,
+  ColorDBL inderectLight(Scene *scene, KDTree<Photon> &photons,
                          float deathProbability);
 
   ColorDBL reflectionLight(Scene *scene, KDTree<Photon> &photons,
@@ -52,6 +52,8 @@ public:
                                        float deathProbability);
 
   ColorDBL getColor() { return color; }
+
+  void setColor(ColorDBL c) { color = c; }
 
   void rayColor() { std::cout << color; };
 

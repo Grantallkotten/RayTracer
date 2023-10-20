@@ -56,7 +56,6 @@ void Camera::renderRangeOfColums(Scene *scene, KDTree<Photon> photons,
 }
 
 void Camera::render(Scene *scene, KDTree<Photon> photons) {
-  int threads_done = 0;
   unsigned int num_threads = std::thread::hardware_concurrency();
   std::cout << "Rendering using " << num_threads << " threads...\n";
   std::cout << std::setw(5) << std::fixed << std::setprecision(1) << 0.0
@@ -91,26 +90,11 @@ void Camera::writePPM() {
   outFile << size << " " << size << "\n";
   outFile << maxColorValue << "\n";
 
-  int counter = 0;
-
   for (const std::vector<Pixel> &widthVec : CameraPlane) {
-    counter = 0;
     for (const Pixel &p : widthVec) {
       // percentDone += 1.0;
       // progressBar(percentDone/(size*size));
       outFile << p; // Write the pixel data to the file
-
-#if 0
-            // PPM file test code
-            // ========================================================
-            int red = 25;
-            int green = 100;
-            int blue = counter * maxColorValue / size;
-            counter++;
-
-            outFile << red << " " << green << " " << blue << "\n";
-            // ========================================================
-#endif
     }
   }
 

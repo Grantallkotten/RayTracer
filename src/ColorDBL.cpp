@@ -1,4 +1,1 @@
-﻿#pragma once
-#include "../include/ColorDBL.h"
-
-
+﻿#include "../include/ColorDBL.h"
