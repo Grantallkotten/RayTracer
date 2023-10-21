@@ -69,38 +69,10 @@ include CMakeFiles/Raytracing.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Raytracing.dir/flags.make
 
-CMakeFiles/Raytracing.dir/src/main.cpp.o: CMakeFiles/Raytracing.dir/flags.make
-CMakeFiles/Raytracing.dir/src/main.cpp.o: src/main.cpp
-CMakeFiles/Raytracing.dir/src/main.cpp.o: CMakeFiles/Raytracing.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Raytracing.dir/src/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Raytracing.dir/src/main.cpp.o -MF CMakeFiles/Raytracing.dir/src/main.cpp.o.d -o CMakeFiles/Raytracing.dir/src/main.cpp.o -c /home/ziagord/dev/school/RayTracer/src/main.cpp
-
-CMakeFiles/Raytracing.dir/src/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Raytracing.dir/src/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ziagord/dev/school/RayTracer/src/main.cpp > CMakeFiles/Raytracing.dir/src/main.cpp.i
-
-CMakeFiles/Raytracing.dir/src/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Raytracing.dir/src/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ziagord/dev/school/RayTracer/src/main.cpp -o CMakeFiles/Raytracing.dir/src/main.cpp.s
-
-CMakeFiles/Raytracing.dir/src/Ray.cpp.o: CMakeFiles/Raytracing.dir/flags.make
-CMakeFiles/Raytracing.dir/src/Ray.cpp.o: src/Ray.cpp
-CMakeFiles/Raytracing.dir/src/Ray.cpp.o: CMakeFiles/Raytracing.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Raytracing.dir/src/Ray.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Raytracing.dir/src/Ray.cpp.o -MF CMakeFiles/Raytracing.dir/src/Ray.cpp.o.d -o CMakeFiles/Raytracing.dir/src/Ray.cpp.o -c /home/ziagord/dev/school/RayTracer/src/Ray.cpp
-
-CMakeFiles/Raytracing.dir/src/Ray.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Raytracing.dir/src/Ray.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ziagord/dev/school/RayTracer/src/Ray.cpp > CMakeFiles/Raytracing.dir/src/Ray.cpp.i
-
-CMakeFiles/Raytracing.dir/src/Ray.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Raytracing.dir/src/Ray.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ziagord/dev/school/RayTracer/src/Ray.cpp -o CMakeFiles/Raytracing.dir/src/Ray.cpp.s
-
 CMakeFiles/Raytracing.dir/src/Camera.cpp.o: CMakeFiles/Raytracing.dir/flags.make
 CMakeFiles/Raytracing.dir/src/Camera.cpp.o: src/Camera.cpp
 CMakeFiles/Raytracing.dir/src/Camera.cpp.o: CMakeFiles/Raytracing.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Raytracing.dir/src/Camera.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Raytracing.dir/src/Camera.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Raytracing.dir/src/Camera.cpp.o -MF CMakeFiles/Raytracing.dir/src/Camera.cpp.o.d -o CMakeFiles/Raytracing.dir/src/Camera.cpp.o -c /home/ziagord/dev/school/RayTracer/src/Camera.cpp
 
 CMakeFiles/Raytracing.dir/src/Camera.cpp.i: cmake_force
@@ -111,24 +83,10 @@ CMakeFiles/Raytracing.dir/src/Camera.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Raytracing.dir/src/Camera.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ziagord/dev/school/RayTracer/src/Camera.cpp -o CMakeFiles/Raytracing.dir/src/Camera.cpp.s
 
-CMakeFiles/Raytracing.dir/src/Pixel.cpp.o: CMakeFiles/Raytracing.dir/flags.make
-CMakeFiles/Raytracing.dir/src/Pixel.cpp.o: src/Pixel.cpp
-CMakeFiles/Raytracing.dir/src/Pixel.cpp.o: CMakeFiles/Raytracing.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Raytracing.dir/src/Pixel.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Raytracing.dir/src/Pixel.cpp.o -MF CMakeFiles/Raytracing.dir/src/Pixel.cpp.o.d -o CMakeFiles/Raytracing.dir/src/Pixel.cpp.o -c /home/ziagord/dev/school/RayTracer/src/Pixel.cpp
-
-CMakeFiles/Raytracing.dir/src/Pixel.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Raytracing.dir/src/Pixel.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ziagord/dev/school/RayTracer/src/Pixel.cpp > CMakeFiles/Raytracing.dir/src/Pixel.cpp.i
-
-CMakeFiles/Raytracing.dir/src/Pixel.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Raytracing.dir/src/Pixel.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ziagord/dev/school/RayTracer/src/Pixel.cpp -o CMakeFiles/Raytracing.dir/src/Pixel.cpp.s
-
 CMakeFiles/Raytracing.dir/src/ColorDBL.cpp.o: CMakeFiles/Raytracing.dir/flags.make
 CMakeFiles/Raytracing.dir/src/ColorDBL.cpp.o: src/ColorDBL.cpp
 CMakeFiles/Raytracing.dir/src/ColorDBL.cpp.o: CMakeFiles/Raytracing.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Raytracing.dir/src/ColorDBL.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Raytracing.dir/src/ColorDBL.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Raytracing.dir/src/ColorDBL.cpp.o -MF CMakeFiles/Raytracing.dir/src/ColorDBL.cpp.o.d -o CMakeFiles/Raytracing.dir/src/ColorDBL.cpp.o -c /home/ziagord/dev/school/RayTracer/src/ColorDBL.cpp
 
 CMakeFiles/Raytracing.dir/src/ColorDBL.cpp.i: cmake_force
@@ -139,24 +97,10 @@ CMakeFiles/Raytracing.dir/src/ColorDBL.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Raytracing.dir/src/ColorDBL.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ziagord/dev/school/RayTracer/src/ColorDBL.cpp -o CMakeFiles/Raytracing.dir/src/ColorDBL.cpp.s
 
-CMakeFiles/Raytracing.dir/src/Triangle.cpp.o: CMakeFiles/Raytracing.dir/flags.make
-CMakeFiles/Raytracing.dir/src/Triangle.cpp.o: src/Triangle.cpp
-CMakeFiles/Raytracing.dir/src/Triangle.cpp.o: CMakeFiles/Raytracing.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Raytracing.dir/src/Triangle.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Raytracing.dir/src/Triangle.cpp.o -MF CMakeFiles/Raytracing.dir/src/Triangle.cpp.o.d -o CMakeFiles/Raytracing.dir/src/Triangle.cpp.o -c /home/ziagord/dev/school/RayTracer/src/Triangle.cpp
-
-CMakeFiles/Raytracing.dir/src/Triangle.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Raytracing.dir/src/Triangle.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ziagord/dev/school/RayTracer/src/Triangle.cpp > CMakeFiles/Raytracing.dir/src/Triangle.cpp.i
-
-CMakeFiles/Raytracing.dir/src/Triangle.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Raytracing.dir/src/Triangle.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ziagord/dev/school/RayTracer/src/Triangle.cpp -o CMakeFiles/Raytracing.dir/src/Triangle.cpp.s
-
 CMakeFiles/Raytracing.dir/src/LightSource.cpp.o: CMakeFiles/Raytracing.dir/flags.make
 CMakeFiles/Raytracing.dir/src/LightSource.cpp.o: src/LightSource.cpp
 CMakeFiles/Raytracing.dir/src/LightSource.cpp.o: CMakeFiles/Raytracing.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Raytracing.dir/src/LightSource.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Raytracing.dir/src/LightSource.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Raytracing.dir/src/LightSource.cpp.o -MF CMakeFiles/Raytracing.dir/src/LightSource.cpp.o.d -o CMakeFiles/Raytracing.dir/src/LightSource.cpp.o -c /home/ziagord/dev/school/RayTracer/src/LightSource.cpp
 
 CMakeFiles/Raytracing.dir/src/LightSource.cpp.i: cmake_force
@@ -167,38 +111,10 @@ CMakeFiles/Raytracing.dir/src/LightSource.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Raytracing.dir/src/LightSource.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ziagord/dev/school/RayTracer/src/LightSource.cpp -o CMakeFiles/Raytracing.dir/src/LightSource.cpp.s
 
-CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o: CMakeFiles/Raytracing.dir/flags.make
-CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o: src/Tetrahedron.cpp
-CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o: CMakeFiles/Raytracing.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o -MF CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o.d -o CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o -c /home/ziagord/dev/school/RayTracer/src/Tetrahedron.cpp
-
-CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ziagord/dev/school/RayTracer/src/Tetrahedron.cpp > CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.i
-
-CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ziagord/dev/school/RayTracer/src/Tetrahedron.cpp -o CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.s
-
-CMakeFiles/Raytracing.dir/src/Sphere.cpp.o: CMakeFiles/Raytracing.dir/flags.make
-CMakeFiles/Raytracing.dir/src/Sphere.cpp.o: src/Sphere.cpp
-CMakeFiles/Raytracing.dir/src/Sphere.cpp.o: CMakeFiles/Raytracing.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Raytracing.dir/src/Sphere.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Raytracing.dir/src/Sphere.cpp.o -MF CMakeFiles/Raytracing.dir/src/Sphere.cpp.o.d -o CMakeFiles/Raytracing.dir/src/Sphere.cpp.o -c /home/ziagord/dev/school/RayTracer/src/Sphere.cpp
-
-CMakeFiles/Raytracing.dir/src/Sphere.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Raytracing.dir/src/Sphere.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ziagord/dev/school/RayTracer/src/Sphere.cpp > CMakeFiles/Raytracing.dir/src/Sphere.cpp.i
-
-CMakeFiles/Raytracing.dir/src/Sphere.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Raytracing.dir/src/Sphere.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ziagord/dev/school/RayTracer/src/Sphere.cpp -o CMakeFiles/Raytracing.dir/src/Sphere.cpp.s
-
 CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.o: CMakeFiles/Raytracing.dir/flags.make
 CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.o: src/PhotonMapper.cpp
 CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.o: CMakeFiles/Raytracing.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.o -MF CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.o.d -o CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.o -c /home/ziagord/dev/school/RayTracer/src/PhotonMapper.cpp
 
 CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.i: cmake_force
@@ -209,35 +125,135 @@ CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ziagord/dev/school/RayTracer/src/PhotonMapper.cpp -o CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.s
 
+CMakeFiles/Raytracing.dir/src/Pixel.cpp.o: CMakeFiles/Raytracing.dir/flags.make
+CMakeFiles/Raytracing.dir/src/Pixel.cpp.o: src/Pixel.cpp
+CMakeFiles/Raytracing.dir/src/Pixel.cpp.o: CMakeFiles/Raytracing.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Raytracing.dir/src/Pixel.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Raytracing.dir/src/Pixel.cpp.o -MF CMakeFiles/Raytracing.dir/src/Pixel.cpp.o.d -o CMakeFiles/Raytracing.dir/src/Pixel.cpp.o -c /home/ziagord/dev/school/RayTracer/src/Pixel.cpp
+
+CMakeFiles/Raytracing.dir/src/Pixel.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Raytracing.dir/src/Pixel.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ziagord/dev/school/RayTracer/src/Pixel.cpp > CMakeFiles/Raytracing.dir/src/Pixel.cpp.i
+
+CMakeFiles/Raytracing.dir/src/Pixel.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Raytracing.dir/src/Pixel.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ziagord/dev/school/RayTracer/src/Pixel.cpp -o CMakeFiles/Raytracing.dir/src/Pixel.cpp.s
+
+CMakeFiles/Raytracing.dir/src/Polygon.cpp.o: CMakeFiles/Raytracing.dir/flags.make
+CMakeFiles/Raytracing.dir/src/Polygon.cpp.o: src/Polygon.cpp
+CMakeFiles/Raytracing.dir/src/Polygon.cpp.o: CMakeFiles/Raytracing.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Raytracing.dir/src/Polygon.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Raytracing.dir/src/Polygon.cpp.o -MF CMakeFiles/Raytracing.dir/src/Polygon.cpp.o.d -o CMakeFiles/Raytracing.dir/src/Polygon.cpp.o -c /home/ziagord/dev/school/RayTracer/src/Polygon.cpp
+
+CMakeFiles/Raytracing.dir/src/Polygon.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Raytracing.dir/src/Polygon.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ziagord/dev/school/RayTracer/src/Polygon.cpp > CMakeFiles/Raytracing.dir/src/Polygon.cpp.i
+
+CMakeFiles/Raytracing.dir/src/Polygon.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Raytracing.dir/src/Polygon.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ziagord/dev/school/RayTracer/src/Polygon.cpp -o CMakeFiles/Raytracing.dir/src/Polygon.cpp.s
+
+CMakeFiles/Raytracing.dir/src/Ray.cpp.o: CMakeFiles/Raytracing.dir/flags.make
+CMakeFiles/Raytracing.dir/src/Ray.cpp.o: src/Ray.cpp
+CMakeFiles/Raytracing.dir/src/Ray.cpp.o: CMakeFiles/Raytracing.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Raytracing.dir/src/Ray.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Raytracing.dir/src/Ray.cpp.o -MF CMakeFiles/Raytracing.dir/src/Ray.cpp.o.d -o CMakeFiles/Raytracing.dir/src/Ray.cpp.o -c /home/ziagord/dev/school/RayTracer/src/Ray.cpp
+
+CMakeFiles/Raytracing.dir/src/Ray.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Raytracing.dir/src/Ray.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ziagord/dev/school/RayTracer/src/Ray.cpp > CMakeFiles/Raytracing.dir/src/Ray.cpp.i
+
+CMakeFiles/Raytracing.dir/src/Ray.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Raytracing.dir/src/Ray.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ziagord/dev/school/RayTracer/src/Ray.cpp -o CMakeFiles/Raytracing.dir/src/Ray.cpp.s
+
+CMakeFiles/Raytracing.dir/src/Sphere.cpp.o: CMakeFiles/Raytracing.dir/flags.make
+CMakeFiles/Raytracing.dir/src/Sphere.cpp.o: src/Sphere.cpp
+CMakeFiles/Raytracing.dir/src/Sphere.cpp.o: CMakeFiles/Raytracing.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Raytracing.dir/src/Sphere.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Raytracing.dir/src/Sphere.cpp.o -MF CMakeFiles/Raytracing.dir/src/Sphere.cpp.o.d -o CMakeFiles/Raytracing.dir/src/Sphere.cpp.o -c /home/ziagord/dev/school/RayTracer/src/Sphere.cpp
+
+CMakeFiles/Raytracing.dir/src/Sphere.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Raytracing.dir/src/Sphere.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ziagord/dev/school/RayTracer/src/Sphere.cpp > CMakeFiles/Raytracing.dir/src/Sphere.cpp.i
+
+CMakeFiles/Raytracing.dir/src/Sphere.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Raytracing.dir/src/Sphere.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ziagord/dev/school/RayTracer/src/Sphere.cpp -o CMakeFiles/Raytracing.dir/src/Sphere.cpp.s
+
+CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o: CMakeFiles/Raytracing.dir/flags.make
+CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o: src/Tetrahedron.cpp
+CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o: CMakeFiles/Raytracing.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o -MF CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o.d -o CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o -c /home/ziagord/dev/school/RayTracer/src/Tetrahedron.cpp
+
+CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ziagord/dev/school/RayTracer/src/Tetrahedron.cpp > CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.i
+
+CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ziagord/dev/school/RayTracer/src/Tetrahedron.cpp -o CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.s
+
+CMakeFiles/Raytracing.dir/src/Triangle.cpp.o: CMakeFiles/Raytracing.dir/flags.make
+CMakeFiles/Raytracing.dir/src/Triangle.cpp.o: src/Triangle.cpp
+CMakeFiles/Raytracing.dir/src/Triangle.cpp.o: CMakeFiles/Raytracing.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Raytracing.dir/src/Triangle.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Raytracing.dir/src/Triangle.cpp.o -MF CMakeFiles/Raytracing.dir/src/Triangle.cpp.o.d -o CMakeFiles/Raytracing.dir/src/Triangle.cpp.o -c /home/ziagord/dev/school/RayTracer/src/Triangle.cpp
+
+CMakeFiles/Raytracing.dir/src/Triangle.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Raytracing.dir/src/Triangle.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ziagord/dev/school/RayTracer/src/Triangle.cpp > CMakeFiles/Raytracing.dir/src/Triangle.cpp.i
+
+CMakeFiles/Raytracing.dir/src/Triangle.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Raytracing.dir/src/Triangle.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ziagord/dev/school/RayTracer/src/Triangle.cpp -o CMakeFiles/Raytracing.dir/src/Triangle.cpp.s
+
+CMakeFiles/Raytracing.dir/src/main.cpp.o: CMakeFiles/Raytracing.dir/flags.make
+CMakeFiles/Raytracing.dir/src/main.cpp.o: src/main.cpp
+CMakeFiles/Raytracing.dir/src/main.cpp.o: CMakeFiles/Raytracing.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Raytracing.dir/src/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Raytracing.dir/src/main.cpp.o -MF CMakeFiles/Raytracing.dir/src/main.cpp.o.d -o CMakeFiles/Raytracing.dir/src/main.cpp.o -c /home/ziagord/dev/school/RayTracer/src/main.cpp
+
+CMakeFiles/Raytracing.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Raytracing.dir/src/main.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ziagord/dev/school/RayTracer/src/main.cpp > CMakeFiles/Raytracing.dir/src/main.cpp.i
+
+CMakeFiles/Raytracing.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Raytracing.dir/src/main.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ziagord/dev/school/RayTracer/src/main.cpp -o CMakeFiles/Raytracing.dir/src/main.cpp.s
+
 # Object files for target Raytracing
 Raytracing_OBJECTS = \
-"CMakeFiles/Raytracing.dir/src/main.cpp.o" \
-"CMakeFiles/Raytracing.dir/src/Ray.cpp.o" \
 "CMakeFiles/Raytracing.dir/src/Camera.cpp.o" \
-"CMakeFiles/Raytracing.dir/src/Pixel.cpp.o" \
 "CMakeFiles/Raytracing.dir/src/ColorDBL.cpp.o" \
-"CMakeFiles/Raytracing.dir/src/Triangle.cpp.o" \
 "CMakeFiles/Raytracing.dir/src/LightSource.cpp.o" \
-"CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o" \
+"CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.o" \
+"CMakeFiles/Raytracing.dir/src/Pixel.cpp.o" \
+"CMakeFiles/Raytracing.dir/src/Polygon.cpp.o" \
+"CMakeFiles/Raytracing.dir/src/Ray.cpp.o" \
 "CMakeFiles/Raytracing.dir/src/Sphere.cpp.o" \
-"CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.o"
+"CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o" \
+"CMakeFiles/Raytracing.dir/src/Triangle.cpp.o" \
+"CMakeFiles/Raytracing.dir/src/main.cpp.o"
 
 # External object files for target Raytracing
 Raytracing_EXTERNAL_OBJECTS =
 
-Raytracing: CMakeFiles/Raytracing.dir/src/main.cpp.o
-Raytracing: CMakeFiles/Raytracing.dir/src/Ray.cpp.o
 Raytracing: CMakeFiles/Raytracing.dir/src/Camera.cpp.o
-Raytracing: CMakeFiles/Raytracing.dir/src/Pixel.cpp.o
 Raytracing: CMakeFiles/Raytracing.dir/src/ColorDBL.cpp.o
-Raytracing: CMakeFiles/Raytracing.dir/src/Triangle.cpp.o
 Raytracing: CMakeFiles/Raytracing.dir/src/LightSource.cpp.o
-Raytracing: CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o
-Raytracing: CMakeFiles/Raytracing.dir/src/Sphere.cpp.o
 Raytracing: CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.o
+Raytracing: CMakeFiles/Raytracing.dir/src/Pixel.cpp.o
+Raytracing: CMakeFiles/Raytracing.dir/src/Polygon.cpp.o
+Raytracing: CMakeFiles/Raytracing.dir/src/Ray.cpp.o
+Raytracing: CMakeFiles/Raytracing.dir/src/Sphere.cpp.o
+Raytracing: CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o
+Raytracing: CMakeFiles/Raytracing.dir/src/Triangle.cpp.o
+Raytracing: CMakeFiles/Raytracing.dir/src/main.cpp.o
 Raytracing: CMakeFiles/Raytracing.dir/build.make
 Raytracing: CMakeFiles/Raytracing.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Linking CXX executable Raytracing"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ziagord/dev/school/RayTracer/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable Raytracing"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Raytracing.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

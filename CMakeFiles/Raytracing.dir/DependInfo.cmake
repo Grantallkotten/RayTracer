@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/ziagord/dev/school/RayTracer/src/LightSource.cpp" "CMakeFiles/Raytracing.dir/src/LightSource.cpp.o" "gcc" "CMakeFiles/Raytracing.dir/src/LightSource.cpp.o.d"
   "/home/ziagord/dev/school/RayTracer/src/PhotonMapper.cpp" "CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.o" "gcc" "CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.o.d"
   "/home/ziagord/dev/school/RayTracer/src/Pixel.cpp" "CMakeFiles/Raytracing.dir/src/Pixel.cpp.o" "gcc" "CMakeFiles/Raytracing.dir/src/Pixel.cpp.o.d"
+  "/home/ziagord/dev/school/RayTracer/src/Polygon.cpp" "CMakeFiles/Raytracing.dir/src/Polygon.cpp.o" "gcc" "CMakeFiles/Raytracing.dir/src/Polygon.cpp.o.d"
   "/home/ziagord/dev/school/RayTracer/src/Ray.cpp" "CMakeFiles/Raytracing.dir/src/Ray.cpp.o" "gcc" "CMakeFiles/Raytracing.dir/src/Ray.cpp.o.d"
   "/home/ziagord/dev/school/RayTracer/src/Sphere.cpp" "CMakeFiles/Raytracing.dir/src/Sphere.cpp.o" "gcc" "CMakeFiles/Raytracing.dir/src/Sphere.cpp.o.d"
   "/home/ziagord/dev/school/RayTracer/src/Tetrahedron.cpp" "CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o" "gcc" "CMakeFiles/Raytracing.dir/src/Tetrahedron.cpp.o.d"

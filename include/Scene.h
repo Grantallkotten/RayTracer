@@ -65,7 +65,7 @@ public:
 
     standardScene();
     photon_map = KDTree<Photon>();
-    PhotonMapper::Map(this, photon_map, 2000);
+    PhotonMapper::Map(this, photon_map, 1000);
 
     std::cout << "Photons in KDTree: " << photon_map.size() << std::endl;
 

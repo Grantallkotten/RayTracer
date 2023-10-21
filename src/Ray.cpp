@@ -67,7 +67,7 @@ ColorDBL Ray::castRay(Scene *scene, KDTree<Photon> &photons,
     break;
   }
 
-  return color + PhotonMapper::calculatePhotonContribution(photons, end, 2);
+  return color + PhotonMapper::calculatePhotonContribution(photons, end, 0.01);
 }
 
 ColorDBL Ray::inderectLight(Scene *scene, KDTree<Photon> &photons,

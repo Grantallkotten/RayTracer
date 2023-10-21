@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Raytracing.dir/src/PhotonMapper.cpp.o.d"
   "CMakeFiles/Raytracing.dir/src/Pixel.cpp.o"
   "CMakeFiles/Raytracing.dir/src/Pixel.cpp.o.d"
+  "CMakeFiles/Raytracing.dir/src/Polygon.cpp.o"
+  "CMakeFiles/Raytracing.dir/src/Polygon.cpp.o.d"
   "CMakeFiles/Raytracing.dir/src/Ray.cpp.o"
   "CMakeFiles/Raytracing.dir/src/Ray.cpp.o.d"
   "CMakeFiles/Raytracing.dir/src/Sphere.cpp.o"

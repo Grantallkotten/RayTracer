@@ -8,10 +8,13 @@ template <typename Data> struct KDNode {
   Data data;
   KDNode *left;
   KDNode *right;
+  glm::vec3 minBounds; // Minimum bounding box corner
+  glm::vec3 maxBounds; // Maximum bounding box corner
 
-  KDNode(const Data &d) : data(d), left(nullptr), right(nullptr) {}
+  KDNode(const Data &d) : data(d), left(nullptr), right(nullptr) {
+    minBounds = maxBounds = d.pos;
+  }
 };
-
 template <typename Data> class KDTree {
   static_assert(std::is_member_pointer<decltype(&Data::pos)>::value,
                 "KDTree Data must implement a 'glm::vec3 pos()' member.");
@@ -45,13 +48,17 @@ private:
   void insertRecursive(KDNode<Data> *&node, const Data &data, int depth) {
     if (node == nullptr) {
       node = new KDNode<Data>(data);
-    } else if (data.pos(depth % 3) < node->data.pos(depth % 3)) {
-      insertRecursive(node->left, data, depth + 1);
     } else {
-      insertRecursive(node->right, data, depth + 1);
+      node->minBounds = glm::min(node->minBounds, data.pos);
+      node->maxBounds = glm::max(node->maxBounds, data.pos);
+
+      if (data.pos(depth % 3) < node->data.pos(depth % 3)) {
+        insertRecursive(node->left, data, depth + 1);
+      } else {
+        insertRecursive(node->right, data, depth + 1);
+      }
     }
   }
-
   // Helper function to build the KD-Tree recursively in parallel
   KDNode<Data> *buildTreeRecursiveParallel(std::vector<Data> &data, int start,
                                            int end, int depth) {
@@ -93,10 +100,16 @@ private:
     m_size++;
     return node;
   }
+
   void rangeSearchRecursive(KDNode<Data> *node, const glm::vec3 &center,
                             double radius, int depth,
                             std::vector<Data> &result) {
     if (node == nullptr) {
+      return;
+    }
+
+    // Check if the bounding box of this node is outside the search radius
+    if (isBoundingBoxOutsideSearchRadius(node, center, radius)) {
       return;
     }
 
@@ -120,5 +133,26 @@ private:
     if (center[axis] + radius >= node->data.pos[axis]) {
       rangeSearchRecursive(node->right, center, radius, depth + 1, result);
     }
+  }
+
+  // Function to check if the bounding box of a node is entirely outside the
+  // search radius
+  bool isBoundingBoxOutsideSearchRadius(const KDNode<Data> *node,
+                                        const glm::vec3 &center,
+                                        double radius) {
+    double sqDist = 0.0;
+
+    // Calculate squared distance between the center and the bounding box
+    for (int i = 0; i < 3; i++) {
+      if (center[i] < node->minBounds[i]) {
+        sqDist +=
+            (node->minBounds[i] - center[i]) * (node->minBounds[i] - center[i]);
+      } else if (center[i] > node->maxBounds[i]) {
+        sqDist +=
+            (center[i] - node->maxBounds[i]) * (center[i] - node->maxBounds[i]);
+      }
+    }
+
+    return sqDist > radius * radius;
   }
 };

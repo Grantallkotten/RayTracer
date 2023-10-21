@@ -249,6 +249,30 @@ src/Pixel.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Raytracing.dir/build.make CMakeFiles/Raytracing.dir/src/Pixel.cpp.s
 .PHONY : src/Pixel.cpp.s
 
+src/Polygon.o: src/Polygon.cpp.o
+.PHONY : src/Polygon.o
+
+# target to build an object file
+src/Polygon.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Raytracing.dir/build.make CMakeFiles/Raytracing.dir/src/Polygon.cpp.o
+.PHONY : src/Polygon.cpp.o
+
+src/Polygon.i: src/Polygon.cpp.i
+.PHONY : src/Polygon.i
+
+# target to preprocess a source file
+src/Polygon.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Raytracing.dir/build.make CMakeFiles/Raytracing.dir/src/Polygon.cpp.i
+.PHONY : src/Polygon.cpp.i
+
+src/Polygon.s: src/Polygon.cpp.s
+.PHONY : src/Polygon.s
+
+# target to generate assembly for a file
+src/Polygon.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Raytracing.dir/build.make CMakeFiles/Raytracing.dir/src/Polygon.cpp.s
+.PHONY : src/Polygon.cpp.s
+
 src/Ray.o: src/Ray.cpp.o
 .PHONY : src/Ray.o
 
@@ -393,6 +417,9 @@ help:
 	@echo "... src/Pixel.o"
 	@echo "... src/Pixel.i"
 	@echo "... src/Pixel.s"
+	@echo "... src/Polygon.o"
+	@echo "... src/Polygon.i"
+	@echo "... src/Polygon.s"
 	@echo "... src/Ray.o"
 	@echo "... src/Ray.i"
 	@echo "... src/Ray.s"

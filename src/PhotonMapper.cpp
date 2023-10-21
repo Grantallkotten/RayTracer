@@ -81,13 +81,27 @@ ColorDBL PhotonMapper::calculatePhotonContribution(KDTree<Photon> &photonTree,
                                                    glm::vec3 &center,
                                                    double radius) {
   ColorDBL totalContribution(0, 0, 0);
+  double totalWeight = 0.0;
 
   // Query the KD-tree for photons within the specified radius
   std::vector<Photon> nearbyPhotons = photonTree.rangeSearch(center, radius);
 
   // Calculate the contribution of each nearby photon and accumulate it
   for (const Photon &photon : nearbyPhotons) {
-    totalContribution += photon.color;
+    double distance = glm::length(photon.pos - center);
+    // Calculate a weight based on the distance (might be worth experimenting
+    // with weight function)
+    double weight = 1.0 / (distance + 0.1); // Adjust the function as needed
+
+    totalContribution += photon.color * weight;
+    totalWeight += weight;
   }
+
+  // Normalize the total contribution by the sum of weights to get the weighted
+  // average
+  if (totalWeight != 0.0) {
+    totalContribution /= totalWeight;
+  }
+
   return totalContribution;
 }
