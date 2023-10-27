@@ -109,9 +109,9 @@ private:
     }
 
     // Check if the bounding box of this node is outside the search radius
-    if (isBoundingBoxOutsideSearchRadius(node, center, radius)) {
-      return;
-    }
+    //if (isBoundingBoxOutsideSearchRadius(node, center, radius)) {
+    //  return;
+    //}
 
     // Calculate the squared distance between the point and the data in the node
     double distSq = 0.0;

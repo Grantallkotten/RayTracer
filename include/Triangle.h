@@ -35,6 +35,10 @@ public:
     return normal;
   }
 
+  float getArea() {
+      return glm::length(glm::cross(E1, E2)) / 2;
+  }
+
   Material getMaterial() override { return material; }
 
   bool Collision(Ray *ray, CollisionInfo &collisionInfo) override;

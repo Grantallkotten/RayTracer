@@ -7,7 +7,7 @@ class LightSource : public Triangle {
 private:
 	double radiance;
 public:
-	LightSource(const glm::vec3& p0, const glm::vec3& p1, const glm::vec3& p2, const Material& m = Material(diffusion, ColorDBL(1.0, 0.0, 0.0)), double radiance = 80) : Triangle(p0, p1, p2, m), radiance{ radiance } {
+	LightSource(const glm::vec3& p0, const glm::vec3& p1, const glm::vec3& p2, const Material& m = Material(diffusion, ColorDBL(1.0, 0.0, 0.0)), double radiance = 200) : Triangle(p0, p1, p2, m), radiance{ radiance } {
 	}
 	double getRadiance() { return radiance; }
 
