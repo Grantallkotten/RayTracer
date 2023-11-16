@@ -1,9 +1,11 @@
 #pragma once
 #include "ColorDBL.h"
-#include "glm/glm.hpp"
 #include "kdtree.h"
+#include <glm/glm.hpp>
 
 class Scene;
+class Sphere;
+class Object;
 struct Photon {
   glm::vec3 pos;
   ColorDBL color;
@@ -17,7 +19,18 @@ public:
                                               glm::vec3 &center, double radius);
 
 private:
+  static void mapPhotonsForObject(Scene *scene, Object *obj,
+                                  KDTree<Photon> &photonTree,
+                                  unsigned int photons_per_object);
+  static void mapPhotonForSphere(Scene *scene, Sphere *sphere,
+                                 const glm::vec3 &objectCenter,
+                                 const glm::vec3 &lightToObjectDir,
+                                 const glm::vec3 &x_s, const glm::vec3 &y_l,
+                                 const glm::vec3 &x_l, float lightArea,
+                                 KDTree<Photon> &photonTree,
+                                 unsigned int photons_per_object);
 };
+
 glm::vec3 randomPointIn2DPlane(const glm::vec3 &origin, const glm::vec3 &v1,
                                const glm::vec3 &v2, float radius);
 

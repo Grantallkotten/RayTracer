@@ -1,12 +1,14 @@
 #pragma once
-#include "../include/ColorDBL.h"
-#include "../include/Material.h"
-#include "../include/Ray.h"
-#include "../include/glm/glm.hpp"
+#include "ColorDBL.h"
+#include "Material.h"
+#include "Ray.h"
+#include <glm/glm.hpp>
+
+class Ray;
 
 struct CollisionInfo {
-	glm::vec3 normal;
-	glm::vec3 point;
+  glm::vec3 normal;
+  glm::vec3 point;
 };
 
 class Object {

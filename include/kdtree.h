@@ -1,5 +1,6 @@
-#include "glm/glm.hpp"
+#pragma once
 #include <algorithm>
+#include <glm/glm.hpp>
 #include <iostream>
 #include <thread>
 #include <vector>
@@ -52,7 +53,8 @@ private:
       node->minBounds = glm::min(node->minBounds, data.pos);
       node->maxBounds = glm::max(node->maxBounds, data.pos);
 
-      if (data.pos(depth % 3) < node->data.pos(depth % 3)) {
+      int axis = depth % 3;
+      if (data.pos[axis] < node->data.pos[axis]) {
         insertRecursive(node->left, data, depth + 1);
       } else {
         insertRecursive(node->right, data, depth + 1);
@@ -109,7 +111,7 @@ private:
     }
 
     // Check if the bounding box of this node is outside the search radius
-    //if (isBoundingBoxOutsideSearchRadius(node, center, radius)) {
+    // if (isBoundingBoxOutsideSearchRadius(node, center, radius)) {
     //  return;
     //}
 

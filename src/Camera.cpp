@@ -30,8 +30,10 @@ void Camera::castRays(Scene *scene, KDTree<Photon> photons) {
 }
 
 void Camera::renderRangeOfColums(Scene *scene, KDTree<Photon> photons,
-                                 int start_colum, int end_colum,
-                                 int threads_done, int num_threads) {
+                                 unsigned int rays_per_pixel,
+                                 float death_probability, int start_colum,
+                                 int end_colum, int threads_done,
+                                 int num_threads) {
   glm::vec3 pixelPosition = positionCamera + glm::vec3(1.0f, 1.0f, 1.0f);
   pixelPosition.z -= pixelLength * start_colum;
   for (int colum = start_colum; colum < end_colum; colum++) {
@@ -40,8 +42,8 @@ void Camera::renderRangeOfColums(Scene *scene, KDTree<Photon> photons,
       Ray r =
           Ray(positionCamera, glm::normalize(pixelPosition - positionCamera));
       ColorDBL c(0.0, 0.0, 0.0);
-      for (int i = 0; i < raysPerPixel; i++) {
-        c += (r.castRay(scene, photons, 0.2));
+      for (unsigned int i = 0; i < rays_per_pixel; i++) {
+        c += (r.castRay(scene, photons, death_probability));
       }
       c /= raysPerPixel;
       p.setColor(c);
@@ -55,7 +57,8 @@ void Camera::renderRangeOfColums(Scene *scene, KDTree<Photon> photons,
             << " %\n";
 }
 
-void Camera::render(Scene *scene, KDTree<Photon> photons) {
+void Camera::render(Scene *scene, KDTree<Photon> photons,
+                    unsigned int rays_per_pixel, float death_probability) {
   unsigned int num_threads = std::thread::hardware_concurrency();
   std::cout << "Rendering using " << num_threads << " threads...\n";
   std::cout << std::setw(5) << std::fixed << std::setprecision(1) << 0.0
@@ -64,7 +67,8 @@ void Camera::render(Scene *scene, KDTree<Photon> photons) {
   int colums_per_thread = CameraPlane.size() / num_threads;
   for (unsigned int i = 0; i < num_threads; i++) {
     threads[i] = std::thread([=]() {
-      renderRangeOfColums(scene, photons, i * colums_per_thread,
+      renderRangeOfColums(scene, photons, rays_per_pixel, death_probability,
+                          i * colums_per_thread,
                           i == num_threads - 1 ? (i + 1) * colums_per_thread
                                                : CameraPlane.size(),
                           i, num_threads);

@@ -2,7 +2,7 @@
 #include "Material.h"
 #include "Structure.h"
 #include "Triangle.h"
-#include "glm/glm.hpp"
+#include <glm/glm.hpp>
 
 class Tetrahedron : public Structure {
 private:
