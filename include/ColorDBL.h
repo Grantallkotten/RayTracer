@@ -78,7 +78,7 @@ public:
 	}
 
 	friend std::ostream& operator<<(std::ostream& os, const ColorDBL& c) {
-		os << c.R * 255.0 << " " << c.G * 255 << " " << c.B * 255.0 << "\n";
+		os << std::min(1.0,c.R) * 255.0 << " " << std::min(1.0,c.G) * 255 << " " << std::min(1.0, c.B) * 255.0 << "\n";
 		return os;
 	}
 

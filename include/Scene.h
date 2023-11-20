@@ -58,7 +58,7 @@ public:
 
   std::vector<LightSource *> LightSources;
 
-  Scene(Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 300),
+  Scene(Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 600),
         std::vector<Object *> o = std::vector<Object *>())
       : camera{c}, Objects{o} {
     auto start =
@@ -66,7 +66,7 @@ public:
 
     standardScene();
     photon_map = KDTree<Photon>();
-    PhotonMapper::Map(this, photon_map, 10000);
+    PhotonMapper::Map(this, photon_map, 200000);
 
     std::cout << "Photons in KDTree: " << photon_map.size() << std::endl;
 
@@ -173,14 +173,14 @@ public:
                         glm::vec3(7.0f, -0.5f, 4.9f),
                         Material(diffusion, ColorDBL(0.8, 0.8, 0.9))));
 
-    add(new LightSource(glm::vec3(1.0f, 0.5f, 4.9f),
-                        glm::vec3(7.0f, 0.5f, 4.9f),
-                        glm::vec3(7.0f, -0.5f, 4.9f),
-                        Material(light, ColorDBL(1.0, 1.0, 1.0))));
-    add(new LightSource(glm::vec3(1.0f, -0.5f, 4.9f),
-                        glm::vec3(1.0f, 0.5f, 4.9f),
-                        glm::vec3(7.0f, -0.5f, 4.9f),
-                        Material(light, ColorDBL(1.0, 1.0, 1.0))));
+    /*add(new Triangle(glm::vec3(1.0f, 0.5f, 4.9f),
+        glm::vec3(7.0f, 0.5f, 4.9f),
+        glm::vec3(7.0f, -0.5f, 4.9f),
+        Material(diffusion, ColorDBL(0.8, 0.8, 0.9))));
+    add(new Triangle(glm::vec3(1.0f, -0.5f, 4.9f),
+        glm::vec3(1.0f, 0.5f, 4.9f),
+        glm::vec3(7.0f, -0.5f, 4.9f),
+        Material(diffusion, ColorDBL(0.8, 0.8, 0.9))));*/
   }
   // Display the time in hours, minutes, seconds and milliseconds from seconds
   void displayTime(int timeMilliseconds) {
