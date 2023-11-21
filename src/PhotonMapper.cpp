@@ -31,14 +31,12 @@ void PhotonMapper::mapPhotonsForObject(Scene *scene, Object *obj,
     glm::vec3 y_l, x_l;
     get2DPlaneBasis(N_d, y_l, x_l);
 
-    auto testNormal = glm::cross(x_l, y_l);
-
     for (std::size_t i = 0; i < photons_per_object; i++) {
       glm::vec3 x_s = l->GetRandomUniformPoint();
       float lightArea = l->getArea();
       if (Sphere *sphere = dynamic_cast<Sphere *>(obj)) {
-        mapPhotonForSphere(scene, sphere, C, N_d, x_s, y_l, x_l, lightArea,l->getRadiance(),
-                           photonTree, photons_per_object);
+        mapPhotonForSphere(scene, sphere, C, N_d, x_s, y_l, x_l, lightArea,
+                           l->getRadiance(), photonTree, photons_per_object);
       }
     }
   }
@@ -47,7 +45,7 @@ void PhotonMapper::mapPhotonsForObject(Scene *scene, Object *obj,
 void PhotonMapper::mapPhotonForSphere(
     Scene *scene, Sphere *sphere, const glm::vec3 &objectCenter,
     const glm::vec3 &lightToObjectDir, const glm::vec3 &x_s,
-    const glm::vec3 &y_l, const glm::vec3 &x_l, float lightArea,float radiance,
+    const glm::vec3 &y_l, const glm::vec3 &x_l, float lightArea, float radiance,
     KDTree<Photon> &photonTree, unsigned int photons_per_object) {
   float sphereRadius = sphere->getRadius();
   glm::vec3 x_e = randomPointIn2DPlane(objectCenter, y_l, x_l, sphereRadius);
@@ -59,7 +57,7 @@ void PhotonMapper::mapPhotonForSphere(
   float A_s = G_m * PI * sphereRadius * sphereRadius;
   glm::vec3 phi_e = phi_T * G_m * A_s / (2 * PI);
   glm::vec3 flux = phi_e / static_cast<float>(photons_per_object);
-  
+
   Ray *ray = new Ray(x_s, glm::normalize(x_e - x_s));
   ray->setColor(ColorDBL(flux.x, flux.y, flux.z));
   ray->castPhoton(scene, ray, photonTree);
@@ -79,14 +77,15 @@ glm::vec3 randomPointIn2DPlane(const glm::vec3 &C, const glm::vec3 &y_l,
 }
 
 void get2DPlaneBasis(const glm::vec3 &z_l, glm::vec3 &y_l, glm::vec3 &x_l) {
-    // Assuming z_l is normalized
-    glm::vec3 arbitraryVec(1.0f, 0.0f, 0.0f);  // An arbitrary vector perpendicular to z_l
+  // Assuming z_l is normalized
+  glm::vec3 arbitraryVec(1.0f, 0.0f,
+                         0.0f); // An arbitrary vector perpendicular to z_l
 
-    // Calculate x_l as the normalized cross product between z_l and arbitraryVec
-    x_l = glm::normalize(glm::cross(z_l, arbitraryVec));
+  // Calculate x_l as the normalized cross product between z_l and arbitraryVec
+  x_l = glm::normalize(glm::cross(z_l, arbitraryVec));
 
-    // Calculate y_l as the cross product between z_l and x_l
-    y_l = glm::cross(z_l, x_l);
+  // Calculate y_l as the cross product between z_l and x_l
+  y_l = glm::cross(z_l, x_l);
 }
 
 // Function to calculate the contribution of photons within a radius around
@@ -101,8 +100,8 @@ ColorDBL PhotonMapper::calculatePhotonContribution(KDTree<Photon> &photonTree,
 
   // Calculate the contribution of each nearby photon and accumulate it
   for (const Photon &photon : nearbyPhotons) {
-      totalContribution += photon.color;
+    totalContribution += photon.color;
   }
 
-  return totalContribution * (1 / (PI*radius*radius));
+  return totalContribution * (1 / (PI * radius * radius));
 }

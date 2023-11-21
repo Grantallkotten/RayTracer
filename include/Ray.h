@@ -12,7 +12,7 @@ class Scene;
 
 class Ray {
 private:
-  glm::vec3 orig = glm::vec3(); // point of light sorce for photon. Often used
+  glm::vec3 origin = glm::vec3(); // point of light sorce for photon. Often used
   // symbol: po or ps
   glm::vec3 end = glm::vec3(); // Often used symbol: pe
   glm::vec3 dir = glm::vec3(); // pixels postion in the plane - camaras position
@@ -28,14 +28,14 @@ public:
 
   Ray(const glm::vec3 &origin, const glm::vec3 &direction,
       bool inObject = false)
-      : orig(origin), dir(direction), inObject{inObject} {}
+      : origin(origin), dir(direction), inObject{inObject} {}
 
   glm::vec3 getDir() const { return dir; }
 
-  glm::vec3 getOrig() const { return orig; }
+  glm::vec3 getOrig() const { return origin; }
 
   ColorDBL castRay(Scene *scene, KDTree<Photon> &photons,
-                   float deathProbability, Ray *prevRay = nullptr);
+                   float deathProbability);
 
   bool ShadowRay(Scene *scene, MaterialProperty &objMaterialType);
 
@@ -43,14 +43,11 @@ public:
   void reflectPhoton(Scene *scene, KDTree<Photon> &photons);
   void photonTranslucent(Scene *scene, KDTree<Photon> &photons);
 
-  ColorDBL inderectLight(Scene *scene, KDTree<Photon> &photons,
-                         float deathProbability);
+  ColorDBL inderectLight(KDTree<Photon> &photons, float photonRadius = 0.2);
 
-  ColorDBL reflectionLight(Scene *scene, KDTree<Photon> &photons,
-                           float deathProbability);
+  void reflectionLight();
 
-  ColorDBL reflectionLightTranslucence(Scene *scene, KDTree<Photon> &photons,
-                                       float deathProbability);
+  void reflectionLightTranslucence();
 
   ColorDBL getColor() { return color; }
 
