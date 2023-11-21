@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13.0...3.20)
-project(TNCG15)
+project(Raytracing)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -21,6 +21,12 @@ file(GLOB_RECURSE SOURCE_FILES "src/*.cpp")
 # Create a list of header files dynamically
 file(GLOB_RECURSE HEADER_FILES "include/*.h")
 
+include_directories("include")
+include_directories("src")
+
 add_executable(Raytracing ${SOURCE_FILES} ${HEADER_FILES})
 
 enable_warnings(Raytracing)
+
+# Add include directories after creating the executable target
+target_include_directories(Raytracing PUBLIC "libs")

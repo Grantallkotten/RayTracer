@@ -17,9 +17,9 @@ public:
 		B{ std::min(std::max(d, 0.0), 1.0) } {}
 
 
-	ColorDBL(double r, double g, double b): R{ std::min(std::max(r, 0.0), 1.0) },
-											G{ std::min(std::max(g, 0.0), 1.0) }, 
-											B{ std::min(std::max(b, 0.0), 1.0) } {}
+	ColorDBL(double r, double g, double b): R{ std::max(r, 0.0) },
+											G{ std::max(g, 0.0) }, 
+											B{ std::max(b, 0.0)} {}
 
 	double getR() { return R; }
 
@@ -78,7 +78,7 @@ public:
 	}
 
 	friend std::ostream& operator<<(std::ostream& os, const ColorDBL& c) {
-		os << c.R * 255.0 << " " << c.G * 255 << " " << c.B * 255.0 << "\n";
+		os << std::min(1.0,c.R) * 255.0 << " " << std::min(1.0,c.G) * 255 << " " << std::min(1.0, c.B) * 255.0 << "\n";
 		return os;
 	}
 

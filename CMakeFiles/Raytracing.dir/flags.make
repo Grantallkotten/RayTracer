@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -I/home/ziagord/dev/school/RayTracer/include -I/home/ziagord/dev/school/RayTracer/src -I/home/ziagord/dev/school/RayTracer/libs
 
 CXX_FLAGS =  -pg -O3 -DNDEBUG -std=c++17 -Wall -Wextra
 

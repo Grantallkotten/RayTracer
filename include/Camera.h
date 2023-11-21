@@ -1,9 +1,9 @@
 #pragma once
-#include "../include/ColorDBL.h"
-#include "../include/Pixel.h"
-#include "../include/Ray.h"
-#include "../include/glm/glm.hpp"
+#include "ColorDBL.h"
+#include "Pixel.h"
+#include "Ray.h"
 #include <fstream> // Write a file
+#include <glm/glm.hpp>
 #include <iomanip>
 #include <iostream>
 #include <vector>
@@ -33,10 +33,13 @@ public:
 
   void castRays(Scene *scene, KDTree<Photon> photons);
 
-  void renderRangeOfColums(Scene *scene, KDTree<Photon> photons, int start_row,
-                           int end_row, int threads_done, int num_threads);
+  void renderRangeOfColums(Scene *scene, KDTree<Photon> photons,
+                           unsigned int rays_per_pixel, float death_probability,
+                           int start_row, int end_row, int threads_done,
+                           int num_threads);
 
-  void render(Scene *scene, KDTree<Photon> photons);
+  void render(Scene *scene, KDTree<Photon> photons, unsigned int rays_per_pixel,
+              float death_probability);
 
   void progressBar(float percent);
 };

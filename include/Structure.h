@@ -1,16 +1,14 @@
 #pragma once
-#include "../include/glm/glm.hpp"
-#include "../include/ColorDBL.h"
-#include "../include/Ray.h"
-#include "../include/Material.h"
+#include "ColorDBL.h"
+#include "Material.h"
+#include "Ray.h"
+#include <glm/glm.hpp>
 
 class Structure {
 private:
-	  std::vector<Object* > objects;
-  public:
-	  void add(Object* o) {
-		  objects.push_back(o);
-	  }
-	  const std::vector<Object* >& Objects() { return objects; }
+  std::vector<Object *> objects;
 
+public:
+  void add(Object *o) { objects.push_back(o); }
+  const std::vector<Object *> &Objects() { return objects; }
 };
