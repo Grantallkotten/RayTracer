@@ -7,7 +7,8 @@ class Scene;
 class Sphere;
 class Object;
 struct Photon {
-  glm::vec3 pos;
+  glm::vec3 position;
+  glm::vec3 direction;
   ColorDBL color;
 };
 
@@ -26,7 +27,7 @@ private:
                                  const glm::vec3 &objectCenter,
                                  const glm::vec3 &lightToObjectDir,
                                  const glm::vec3 &x_s, const glm::vec3 &y_l,
-                                 const glm::vec3 &x_l, float lightArea,
+                                 const glm::vec3 &x_l, float lightArea,float radiance,
                                  KDTree<Photon> &photonTree,
                                  unsigned int photons_per_object);
 };

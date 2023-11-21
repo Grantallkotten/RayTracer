@@ -3,7 +3,7 @@
 #include <iostream>
 #include <vector>
 
-enum MaterialProperty { diffusion, specularity, translucence, glossy, light };
+enum MaterialProperty { diffusion, reflector, transparent, glossy, light };
 class Material {
 private:
   MaterialProperty property;

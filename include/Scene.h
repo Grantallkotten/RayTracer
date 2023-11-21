@@ -42,7 +42,7 @@ public:
   const ColorDBL LIME = ColorDBL(0.1, 0.2, 0.1);
   const ColorDBL LEMON = ColorDBL(0.3, 0.4, 0.1);
   const ColorDBL OCEAN = ColorDBL(0.05, 0.2, 0.4);
-  const ColorDBL GREY = ColorDBL(0.4, 0.4, 0.4);
+  const ColorDBL GREY = ColorDBL(0.2, 0.2, 0.2);
   const ColorDBL OLDROOF = ColorDBL(0.1, 0.0, 0.2);
   const ColorDBL ROOF = ColorDBL(0.2, 0.0, 0.3);
   const ColorDBL ROOF2 = ColorDBL(0.1, 0.1, 0.1);
@@ -58,7 +58,7 @@ public:
 
   std::vector<LightSource *> LightSources;
 
-  Scene(Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 600),
+  Scene(Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 500),
         std::vector<Object *> o = std::vector<Object *>())
       : camera{c}, Objects{o} {
     auto start =
@@ -66,11 +66,11 @@ public:
 
     standardScene();
     photon_map = KDTree<Photon>();
-    PhotonMapper::Map(this, photon_map, 200000);
+    PhotonMapper::Map(this, photon_map, 5000);
 
     std::cout << "Photons in KDTree: " << photon_map.size() << std::endl;
 
-    camera.render(this, photon_map, 32, 0.4);
+    camera.render(this, photon_map, 24, 0.3);
     camera.writePPM();
 
     std::cout << "Time to render: ";
@@ -92,12 +92,26 @@ public:
   void add(LightSource *s) { LightSources.push_back(s); }
 
   void standardScene() {
-    add(new Sphere(glm::vec3(8.0f, 0.0f, -2.0f), 2.0f,
-                   Material(translucence, AQUA)));
-    add(new Sphere(glm::vec3(8.0f, 4.2f, -3.0f), 1.0f,
-                   Material(translucence, AQUA)));
-    add(new Sphere(glm::vec3(8.0f, -4.2f, -3.0f), .5f,
-                   Material(translucence, AQUA)));
+    /*add(new Sphere(glm::vec3(6.0f, 0.0f, -1.0f), 2.0f,
+                   Material(transparent, AQUA)));
+    add(new Sphere(glm::vec3(8.0f, 3.0f, -1.0f), 1.0f,
+        Material(transparent, AQUA)));*/
+
+    add(Tetrahedron(glm::vec3(7.0f, -4.2f, -1.7f), 2.0f, 2.0f, Material(diffusion, AQUA)));
+
+    add(new Sphere(glm::vec3(8.2f, -3.5f, -1.0f), 1.0f, Material(transparent, WHITE)));
+
+    add(new Sphere(glm::vec3(8.0f, -0.1f, -2.0f), 2.0f, Material(transparent, WHITE)));
+
+    add(new Sphere(glm::vec3(8.0f, 3.5f, 1.0f), 0.8f, Material(transparent, BLUSH)));
+
+    add(new Sphere(glm::vec3(6.0f, -2.5f, -3.5f), 1.0f, Material(glossy, BLUSH)));
+
+    add(new Sphere(glm::vec3(6.0f, 2.8f, -1.5f), 1.0f, Material(reflector, AQUA)));
+
+    add(new Sphere(glm::vec3(3.0f, 1.8f, -2.5f), 0.4f, Material(reflector, AQUA)));
+
+ 
 
     // Wall 1
     add(new Triangle(points[1], points[0], points[7],
@@ -129,13 +143,13 @@ public:
 
     // Roof 2
     add(new Triangle(points[0], points[1], points[4],
-                     Material(diffusion, ROOF2)));
+                     Material(diffusion, WHITE)));
     add(new Triangle(points[1], points[3], points[4],
-                     Material(diffusion, ROOF2)));
+                     Material(diffusion, WHITE)));
 
     // Roof 3
     add(new Triangle(points[0], points[4], points[5],
-                     Material(diffusion, ROOF2)));
+                     Material(diffusion, WHITE)));
 
     // Wall 5
     add(new Triangle(points[4], points[10], points[5],
@@ -151,30 +165,39 @@ public:
 
     // Floor 1
     add(new Triangle(points[7], points[9], points[8],
-                     Material(diffusion, WHITE)));
+                     Material(diffusion, GREY)));
 
     // Floor 2
     add(new Triangle(points[7], points[10], points[9],
-                     Material(diffusion, WHITE)));
+                     Material(diffusion, GREY)));
     add(new Triangle(points[7], points[6], points[10],
-                     Material(diffusion, WHITE)));
+                     Material(diffusion, GREY)));
 
     // Floor 3
     add(new Triangle(points[6], points[11], points[10],
-                     Material(diffusion, WHITE)));
+                     Material(diffusion, GREY)));
 
     // Roof lamp
-    add(new LightSource(glm::vec3(1.0f, 0.5f, 4.9f),
-                        glm::vec3(7.0f, 0.5f, 4.9f),
-                        glm::vec3(7.0f, -0.5f, 4.9f),
-                        Material(diffusion, ColorDBL(0.8, 0.8, 0.9))));
-    add(new LightSource(glm::vec3(1.0f, -0.5f, 4.9f),
-                        glm::vec3(1.0f, 0.5f, 4.9f),
-                        glm::vec3(7.0f, -0.5f, 4.9f),
-                        Material(diffusion, ColorDBL(0.8, 0.8, 0.9))));
-
-    /*add(new Triangle(glm::vec3(1.0f, 0.5f, 4.9f),
+    add(new LightSource(glm::vec3(5.0f, 0.5f, 4.9f),
         glm::vec3(7.0f, 0.5f, 4.9f),
+        glm::vec3(7.0f, -0.5f, 4.9f),
+                        Material(diffusion, ColorDBL(0.8, 0.8, 0.9)),550));
+    add(new LightSource(glm::vec3(6.0f, -0.5f, 4.9f),
+        glm::vec3(6.0f, 0.5f, 4.9f),
+        glm::vec3(7.0f, -0.5f, 4.9f),
+                        Material(diffusion, ColorDBL(0.8, 0.8, 0.9)),550));
+
+    add(new Triangle(glm::vec3(5.0f, 0.5f, 4.91f),
+        glm::vec3(7.0f, 0.5f, 4.91f),
+        glm::vec3(7.0f, -0.5f, 4.91f),
+        Material(light, ColorDBL(1, 1, 1))));
+    add(new Triangle(glm::vec3(5.0f, -0.5f, 4.91f),
+        glm::vec3(5.0f, 0.5f, 4.91f),
+        glm::vec3(7.0f, -0.5f, 4.91f),
+        Material(light, ColorDBL(1, 1, 1))));
+
+  /*  add(new Triangle(glm::vec3(1.0f, 0.5f, 4.9f),
+        glm::vec3(2.0f, 0.5f, 4.9f),
         glm::vec3(7.0f, -0.5f, 4.9f),
         Material(diffusion, ColorDBL(0.8, 0.8, 0.9))));
     add(new Triangle(glm::vec3(1.0f, -0.5f, 4.9f),

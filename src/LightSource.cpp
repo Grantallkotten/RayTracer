@@ -28,8 +28,8 @@ double LightSource::CheckShadowRays(Scene* scene, Object* objectX,
         // std::cout << "d_i: " << di.x << " " << di.y << " " << di.z << "\n\n\n";
         //  @TODO Check if no collission V(x,y_i) and do it right
         MaterialProperty objMaterialType = diffusion;
-        if (!Ray(x, di).ShadowRay(scene, objMaterialType) && objMaterialType != translucence) { continue; }
-        if (objMaterialType == translucence) { v_i = 0.5; }
+        if (!Ray(x, di).ShadowRay(scene, objMaterialType) && objMaterialType != transparent) { continue; }
+        if (objMaterialType == transparent) { v_i = 0.5; }
         
         float cosX = glm::dot(Ny, di / glm::length(di));
         float cosY = -glm::dot(Nx, di / glm::length(di));

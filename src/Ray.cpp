@@ -46,15 +46,14 @@ ColorDBL Ray::castRay(Scene *scene, KDTree<Photon> &photons,
   }
 
   switch (obj->getMaterial().getProperty()) {
-  case specularity:
+  case reflector:
     color = reflectionLight(scene, photons, deathProbability);
-
     break;
   case glossy:
     color *= 0.8;
     color += reflectionLight(scene, photons, deathProbability) * 0.2;
     break;
-  case translucence:
+  case transparent:
     color = reflectionLightTranslucence(scene, photons, deathProbability);
     break;
   case diffusion:
@@ -62,6 +61,7 @@ ColorDBL Ray::castRay(Scene *scene, KDTree<Photon> &photons,
              obj->getMaterial().getColor();
     break;
   case light:
+      color += obj->getMaterial().getColor();
     break;
   default:
     break;
@@ -197,13 +197,16 @@ void Ray::castPhoton(Scene *scene, Ray *prevRay, KDTree<Photon> &photons) {
   }
   if (!hitsObject)
     return;
-  if (obj->getMaterial().getProperty() == translucence) {
-    photonTranslucent(scene, photons);
-  } else {
-    color = obj->getMaterial().getColor();
+  if (obj->getMaterial().getProperty() == transparent) {
+      photonTranslucent(scene, photons);
+  }
+  else if (obj->getMaterial().getProperty() == reflector) reflectPhoton(scene, photons);
+  else {
+    color *= obj->getMaterial().getColor();
     Photon photon;
-    photon.pos = end;
+    photon.position = end;
     photon.color = color;
+    photon.direction = -glm::normalize(dir);
     photons.insert(photon);
   }
 }
@@ -212,6 +215,7 @@ void Ray::reflectPhoton(Scene *scene, KDTree<Photon> &photons) {
   glm::vec3 normal = obj->getNormal(end);
   glm::vec3 nextDir = glm::reflect(dir, normal);
   Ray nextRay(end, nextDir);
+  nextRay.setColor(color);
   return nextRay.castPhoton(scene, this, photons);
 }
 
@@ -234,17 +238,17 @@ void Ray::photonTranslucent(Scene *scene, KDTree<Photon> &photons) {
   float ratio = n1 / n2;
   float cosTheta_out =
       sqrt(1.0f - pow(ratio, 2.0f) * (1.0f - pow(cosTheta_in, 2.0f)));
-  glm::vec3 dirT =
-      ratio * dirLight + (ratio * cosTheta_in - cosTheta_out) * normal;
+  glm::vec3 dirT = glm::normalize(ratio * dirLight + (ratio * cosTheta_in - cosTheta_out) * normal);
+
 
   // Calculate the Fresnel reflection coefficient (Schlick's approximation)
   float R0 = pow((n1 - n2) / (n1 + n2), 2.0f);
   float reflectCofR = R0 + (1.0f - R0) * pow(1.0f - cosTheta_in, 5.0f);
 
   // Determine if total internal reflection occurs
-  if (cosTheta_out < 0.0f) {
+ /* if (cosTheta_out < 0.0f) {
     return reflectPhoton(scene, photons);
-  }
+  }*/
 
   // Determine whether to reflect or refract based on Fresnel reflection
   // probability
@@ -254,5 +258,6 @@ void Ray::photonTranslucent(Scene *scene, KDTree<Photon> &photons) {
     return reflectPhoton(scene, photons);
 
   Ray nextRay = Ray(end, dirT, !inObject);
+  nextRay.setColor(color);
   return nextRay.castPhoton(scene, this, photons);
 }

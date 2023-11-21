@@ -17,9 +17,9 @@ public:
 		B{ std::min(std::max(d, 0.0), 1.0) } {}
 
 
-	ColorDBL(double r, double g, double b): R{ std::min(std::max(r, 0.0), 1.0) },
-											G{ std::min(std::max(g, 0.0), 1.0) }, 
-											B{ std::min(std::max(b, 0.0), 1.0) } {}
+	ColorDBL(double r, double g, double b): R{ std::max(r, 0.0) },
+											G{ std::max(g, 0.0) }, 
+											B{ std::max(b, 0.0)} {}
 
 	double getR() { return R; }
 

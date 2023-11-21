@@ -13,12 +13,12 @@ template <typename Data> struct KDNode {
   glm::vec3 maxBounds; // Maximum bounding box corner
 
   KDNode(const Data &d) : data(d), left(nullptr), right(nullptr) {
-    minBounds = maxBounds = d.pos;
+    minBounds = maxBounds = d.position;
   }
 };
 template <typename Data> class KDTree {
-  static_assert(std::is_member_pointer<decltype(&Data::pos)>::value,
-                "KDTree Data must implement a 'glm::vec3 pos()' member.");
+  static_assert(std::is_member_pointer<decltype(&Data::position)>::value,
+                "KDTree Data must implement a 'glm::vec3 position()' member.");
 
 public:
   unsigned int size() { return m_size; }
@@ -50,11 +50,11 @@ private:
     if (node == nullptr) {
       node = new KDNode<Data>(data);
     } else {
-      node->minBounds = glm::min(node->minBounds, data.pos);
-      node->maxBounds = glm::max(node->maxBounds, data.pos);
+      node->minBounds = glm::min(node->minBounds, data.position);
+      node->maxBounds = glm::max(node->maxBounds, data.position);
 
       int axis = depth % 3;
-      if (data.pos[axis] < node->data.pos[axis]) {
+      if (data.position[axis] < node->data.position[axis]) {
         insertRecursive(node->left, data, depth + 1);
       } else {
         insertRecursive(node->right, data, depth + 1);
@@ -75,7 +75,7 @@ private:
       std::nth_element(data.begin() + start, data.begin() + mid,
                        data.begin() + end,
                        [axis](const Data &a, const Data &b) {
-                         return a.pos[axis] < b.pos[axis];
+                         return a.position[axis] < b.position[axis];
                        });
     } catch (const std::exception &e) {
       std::cerr << "Exception during nth_element: " << e.what() << std::endl;
@@ -118,7 +118,7 @@ private:
     // Calculate the squared distance between the point and the data in the node
     double distSq = 0.0;
     for (int i = 0; i < 3; i++) {
-      double d = center[i] - node->data.pos[i];
+      double d = center[i] - node->data.position[i];
       distSq += d * d;
     }
 
@@ -129,10 +129,10 @@ private:
 
     // Check which side of the current splitting plane the point is on
     int axis = depth % 3;
-    if (center[axis] - radius <= node->data.pos[axis]) {
+    if (center[axis] - radius <= node->data.position[axis]) {
       rangeSearchRecursive(node->left, center, radius, depth + 1, result);
     }
-    if (center[axis] + radius >= node->data.pos[axis]) {
+    if (center[axis] + radius >= node->data.position[axis]) {
       rangeSearchRecursive(node->right, center, radius, depth + 1, result);
     }
   }
