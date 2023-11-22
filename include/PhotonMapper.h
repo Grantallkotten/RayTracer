@@ -17,7 +17,7 @@ public:
   static void Map(Scene *scene, KDTree<Photon> &photonTree,
                   unsigned int photons_per_object = 200);
   static ColorDBL calculatePhotonContribution(KDTree<Photon> &photonTree,
-                                              glm::vec3 &center, double radius);
+                                              glm::vec3 &center, float radius);
 
 private:
   static void mapPhotonsForObject(Scene *scene, Object *obj,

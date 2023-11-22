@@ -43,7 +43,7 @@ public:
   void reflectPhoton(Scene *scene, KDTree<Photon> &photons);
   void photonTranslucent(Scene *scene, KDTree<Photon> &photons);
 
-  ColorDBL inderectLight(KDTree<Photon> &photons, float photonRadius = 0.2);
+  ColorDBL inderectLight(KDTree<Photon>& photons, float& pdf, const float photonRadius = 0.2);
 
   void reflectionLight();
 

@@ -92,7 +92,7 @@ void get2DPlaneBasis(const glm::vec3 &z_l, glm::vec3 &y_l, glm::vec3 &x_l) {
 // each data point
 ColorDBL PhotonMapper::calculatePhotonContribution(KDTree<Photon> &photonTree,
                                                    glm::vec3 &center,
-                                                   double radius) {
+                                                   float radius) {
   ColorDBL totalContribution(0, 0, 0);
 
   // Query the KD-tree for photons within the specified radius

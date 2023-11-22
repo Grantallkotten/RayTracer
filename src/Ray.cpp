@@ -8,15 +8,15 @@
 ColorDBL Ray::castRay(Scene *scene, KDTree<Photon> &photons,
                       float deathProbability) {
   bool castNewRay = true;
+  float importance = 1.0f;
+
   while (castNewRay) {
     float minDist = std::numeric_limits<float>::max();
-    bool hitsObject = false;
     CollisionInfo ci;
 
     for (Object *aObject : scene->Objects) {
       CollisionInfo ciNew;
       if (aObject->Collision(this, ciNew)) {
-        hitsObject = true;
         float newDist = glm::length(ciNew.point - origin);
 
         if (newDist <= minDist) {
@@ -28,62 +28,67 @@ ColorDBL Ray::castRay(Scene *scene, KDTree<Photon> &photons,
       }
     }
 
-    if (!hitsObject) {
+    if (minDist == std::numeric_limits<float>::max()) {
       return scene->SKYBOXCOLOR;
     }
 
     double lightContribution = 0.0;
 
     for (LightSource *aLightSource : scene->LightSources) {
-      lightContribution = aLightSource->CheckShadowRays(scene, obj, ci.point);
-      color *= lightContribution;
+      lightContribution += aLightSource->CheckShadowRays(scene, obj, ci.point);
     }
 
+    float pdf = 1.0f;
     switch (obj->getMaterial().getProperty()) {
-    case reflector:
+   case reflector:
       reflectionLight();
       break;
-    case glossy:
+   /* case glossy:
       color *= 0.8;
       reflectionLight();
       break;
     case transparent:
       reflectionLightTranslucence();
-      break;
+      break;*/
     case diffusion:
-      color += inderectLight(photons);
-      if (glm::linearRand(0.0f, 1.0f) < deathProbability)
-        castNewRay = false;
+        color += inderectLight(photons, pdf) * lightContribution * importance;
+        if (glm::linearRand(0.0f, 0.9999f) < deathProbability) {
+            castNewRay = false;
+        }
       break;
     case light:
       color += obj->getMaterial().getColor();
       castNewRay = false;
       break;
     default:
+        color += inderectLight(photons, pdf) * lightContribution * importance;
+        if (glm::linearRand(0.0f, 0.9999f) < deathProbability) {
+            castNewRay = false;
+        }
       break;
     }
+    importance *= pdf;
+    //std::cout << pdf << " ";
   }
   return color;
 }
 
-ColorDBL Ray::inderectLight(KDTree<Photon> &photons, float photonRadius) {
-  glm::vec3 p = rtu::randomPointOnHemisphere();
+ColorDBL Ray::inderectLight(KDTree<Photon> &photons, float& pdf, const float photonRadius) {
+  glm::vec3 p = rtu::randomPointOnHemisphere(pdf);
 
-  glm::vec3 normal = obj->getNormal(end);
   glm::vec3 e1, e2, e3;
-  rtu::creatLocalAxes(e1, e2, e3, normal, dir);
+  rtu::creatLocalAxes(e1, e2, e3, obj->getNormal(end), dir);
 
   dir = glm::vec3(p.x * e1.x + p.y * e2.x + p.z * e3.x,
                   p.x * e1.y + p.y * e2.y + p.z * e3.y,
                   p.x * e1.z + p.y * e2.z + p.z * e3.z);
+
   origin = end;
 
-  float theta = rtu::incomingAngle(dir, normal);
   return (obj->getMaterial().getColor() +
-          PhotonMapper::calculatePhotonContribution(photons, end,
-                                                    photonRadius)) *
-         rtu::hemispherePDF(theta);
-}
+      PhotonMapper::calculatePhotonContribution(photons, end,
+          photonRadius));
+} 
 
 void Ray::reflectionLight() {
   glm::vec3 normal = obj->getNormal(end);

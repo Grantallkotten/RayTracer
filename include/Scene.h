@@ -58,7 +58,7 @@ public:
 
   std::vector<LightSource *> LightSources;
 
-  Scene(Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 500),
+  Scene(Camera c = Camera(glm::vec3(-1.0f, 0.0f, 0.0f), 300),
         std::vector<Object *> o = std::vector<Object *>())
       : camera{c}, Objects{o} {
     auto start =
@@ -70,7 +70,7 @@ public:
 
     std::cout << "Photons in KDTree: " << photon_map.size() << std::endl;
 
-    camera.render(this, photon_map, 24, 0.3);
+    camera.render(this, photon_map, 16, 0.2);
     camera.writePPM();
 
     std::cout << "Time to render: ";
@@ -181,11 +181,11 @@ public:
     add(new LightSource(glm::vec3(5.0f, 0.5f, 4.9f),
         glm::vec3(7.0f, 0.5f, 4.9f),
         glm::vec3(7.0f, -0.5f, 4.9f),
-                        Material(diffusion, ColorDBL(0.8, 0.8, 0.9)),550));
+                        Material(diffusion, ColorDBL(0.8, 0.8, 0.9)),200));
     add(new LightSource(glm::vec3(6.0f, -0.5f, 4.9f),
         glm::vec3(6.0f, 0.5f, 4.9f),
         glm::vec3(7.0f, -0.5f, 4.9f),
-                        Material(diffusion, ColorDBL(0.8, 0.8, 0.9)),550));
+                        Material(diffusion, ColorDBL(0.8, 0.8, 0.9)),200));
 
     add(new Triangle(glm::vec3(5.0f, 0.5f, 4.91f),
         glm::vec3(7.0f, 0.5f, 4.91f),

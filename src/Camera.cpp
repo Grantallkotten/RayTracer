@@ -45,7 +45,7 @@ void Camera::renderRangeOfColums(Scene *scene, KDTree<Photon> photons,
       for (unsigned int i = 0; i < rays_per_pixel; i++) {
         c += (r.castRay(scene, photons, death_probability));
       }
-      c /= raysPerPixel;
+      c /= rays_per_pixel;
       p.setColor(c);
       pixelPosition.y -= pixelLength;
     }
